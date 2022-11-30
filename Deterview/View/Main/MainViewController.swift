@@ -42,7 +42,7 @@ class CardListCell: UICollectionViewCell {
     
     func update(info: CellInfo) {
         cardBtn.setTitle("\(info.name)", for: .normal)
-        cardBtn.titleLabel?.font = UIFont.systemFont(ofSize: 35)
+        cardBtn.titleLabel?.font = .systemFont(ofSize: 35)
         cardBtn.layer.borderColor = UIColor.black.cgColor
         cardBtn.layer.borderWidth = 1
         cardBtn.layer.cornerRadius = 10
@@ -65,7 +65,8 @@ class MainViewModel{
         CellInfo(name: "CS", countOfWord: 24),
         CellInfo(name: "iOS", countOfWord: 25),
         CellInfo(name: "aOS", countOfWord: 26),
-        CellInfo(name: "Front-End", countOfWord: 27)
+        CellInfo(name: "Front-End", countOfWord: 27),
+        CellInfo(name: "Back-End", countOfWord: 28)
     ]
     
     var contOfcardList: Int {
