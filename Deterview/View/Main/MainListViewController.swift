@@ -8,7 +8,7 @@
 import UIKit
 
 class MainListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    let viewModel = TableViewModel()
+    var questionList: [Question] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -16,55 +16,31 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.contOfcardList
+        return questionList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath) as?
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TableCell", for: indexPath) as?
         TableCell else {
             return UITableViewCell()
         }
-        let cellInfo = viewModel.cellInfo(at: indexPath.item)
-        cell.update(info: cellInfo)
-
+        
+        cell.question.text = questionList[indexPath.item].question
         return cell
     }
 }
 
 
 class TableCell: UITableViewCell {
-    @IBOutlet weak var questionList: UILabel!
+    @IBOutlet weak var question: UILabel!
     
-    func update(info: ListCellInfo) {
-        questionList.text = info.question
-    }
+    
+    
+//    func update(info: ListCellInfo) {
+//        questionList.text = info.question
+//    }
 }
 
-struct ListCellInfo {
-    let question: String
-    init(question: String) {
-        self.question = question
-    }
-}
-
-class TableViewModel{
-    let listCellInfoList: [ListCellInfo] = [
-        ListCellInfo(question: "가나다라마바사"),
-        ListCellInfo(question: "아자차카타파하"),
-        ListCellInfo(question: "가나다라마바사"),
-        ListCellInfo(question: "아자차카타파하"),
-        ListCellInfo(question: "가나다라마바사"),
-        ListCellInfo(question: "아자차카타파하")
-    ]
-    
-    var contOfcardList: Int {
-        return listCellInfoList.count
-    }
-    
-    func cellInfo(at index: Int) -> ListCellInfo {
-        return listCellInfoList[index]
-    }
-}
 
 
     /*
@@ -78,3 +54,4 @@ class TableViewModel{
     */
 
 
+ 
