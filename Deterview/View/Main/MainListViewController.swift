@@ -28,6 +28,11 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
         cell.question.text = questionList[indexPath.item].question
         return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let vc = self.storyboard?.instantiateViewController(identifier: "MainDetailViewController") as? MainDetailViewController else { return }
+        vc.question = self.questionList[indexPath.row]
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 

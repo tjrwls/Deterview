@@ -9,9 +9,10 @@ import UIKit
 
 class MainDetailViewController: UIViewController {
     @IBOutlet weak var answerText: UILabel!
+    @IBOutlet weak var questionText: UILabel!
     var isShowingAnswerTextField: Bool = false
     var isShowingAnswerText: Bool = false
-    
+    var question: Question? = nil
     
     @IBOutlet weak var answerTextField: UITextView!
     @IBOutlet weak var saveBtn: UIButton!
@@ -22,7 +23,8 @@ class MainDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        answerText.text = str
+        answerText.text = question?.answer
+        questionText.text = question?.question
         answerText.numberOfLines = 0
 //        answerText.font = .systemFont(ofSize: 35)
         answerText.sizeToFit()

@@ -12,8 +12,6 @@ class MainViewController: UIViewController, UICollectionViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
     }
     // 섹션에 표시 할 셀 갯수를 묻는 메서드
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
