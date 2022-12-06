@@ -28,11 +28,11 @@
             </objects>
             <point key="canvasLocation" x="-671" y="-205"/>
         </scene>
-        <!--Item-->
+        <!--main-->
         <scene sceneID="dYS-2n-P01">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bhF-Vz-mff" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="UDN-jC-Rrj"/>
+                    <tabBarItem key="tabBarItem" title="main" image="rectangle.on.rectangle.angled" catalog="system" selectedImage="rectangle.on.rectangle.angled" id="UDN-jC-Rrj"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rFy-NY-Ok9">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -50,7 +50,7 @@
         <!--deterView-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="Deterview" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" id="BYZ-38-t0r" customClass="MainViewController" customModule="Deterview" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="View">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -72,21 +72,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="350" height="130"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tbt-In-RCH">
-                                                    <rect key="frame" x="229" y="90" width="111" height="30"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" title="문제풀기">
-                                                        <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </state>
-                                                    <buttonConfiguration key="configuration" style="plain" title="문제풀기">
-                                                        <backgroundConfiguration key="background">
-                                                            <color key="backgroundColor" red="0.96476238969999994" green="0.53330188990000005" blue="0.53335255380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </backgroundConfiguration>
-                                                        <fontDescription key="titleFontDescription" type="system" pointSize="15"/>
-                                                        <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </buttonConfiguration>
-                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24개의 질문" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gwx-Gq-WAx">
                                                     <rect key="frame" x="20" y="48" width="103" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -103,6 +88,24 @@
                                                     </state>
                                                     <connections>
                                                         <action selector="tapCardBtn:" destination="Jgx-yW-qqH" eventType="touchUpInside" id="ibU-ZR-bLB"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tbt-In-RCH">
+                                                    <rect key="frame" x="229" y="90" width="111" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" title="문제풀기">
+                                                        <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <buttonConfiguration key="configuration" style="plain" title="문제풀기">
+                                                        <backgroundConfiguration key="background">
+                                                            <color key="backgroundColor" red="0.96476238969999994" green="0.53330188990000005" blue="0.53335255380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </backgroundConfiguration>
+                                                        <fontDescription key="titleFontDescription" type="system" pointSize="15"/>
+                                                        <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </buttonConfiguration>
+                                                    <connections>
+                                                        <action selector="tapQuizBtn:" destination="Jgx-yW-qqH" eventType="touchUpInside" id="yrs-Gc-bDG"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -145,7 +148,7 @@
                             <constraint firstItem="W2M-O7-Lng" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ZL8-uo-R0u"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="nyZ-jc-K6b"/>
+                    <tabBarItem key="tabBarItem" title="Main" id="nyZ-jc-K6b"/>
                     <navigationItem key="navigationItem" title="deterView" id="q4E-d3-RIO"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -165,14 +168,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="TableCell" id="9iS-z4-fwL" customClass="TableCell" customModule="Deterview" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="393" height="42.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="50" width="393" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9iS-z4-fwL" id="01V-GZ-uae">
-                                            <rect key="frame" x="0.0" y="0.0" width="362.66666666666669" height="42.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="362.66666666666669" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jhw-WY-Mcp">
-                                                    <rect key="frame" x="30" y="11.000000000000002" width="294.66666666666669" height="20.666666666666671"/>
+                                                    <rect key="frame" x="30" y="11" width="294.66666666666669" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -209,7 +212,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ea9-zi-O2x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1144" y="2050"/>
+            <point key="canvasLocation" x="-1144" y="2053"/>
         </scene>
         <!--Main Detail View Controller-->
         <scene sceneID="cVV-qR-Dpd">
@@ -339,11 +342,11 @@
             </objects>
             <point key="canvasLocation" x="-1144" y="2727"/>
         </scene>
-        <!--Item-->
+        <!--custom-->
         <scene sceneID="Aea-S8-0Wm">
             <objects>
                 <navigationController id="fN9-Vf-udj" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="nGU-WE-98h"/>
+                    <tabBarItem key="tabBarItem" title="custom" image="rectangle.badge.person.crop" catalog="system" selectedImage="rectangle.badge.person.crop" id="nGU-WE-98h"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Tsa-g4-9Hc">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -381,7 +384,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v1O-BL-Rya">
-                                <rect key="frame" x="0.0" y="139" width="393" height="1"/>
+                                <rect key="frame" x="0.0" y="139.33333333333334" width="393" height="1"/>
                                 <color key="backgroundColor" systemColor="systemGray4Color"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="yXx-0C-6m3"/>
@@ -440,7 +443,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="OoX-yb-ek9"/>
                             </scrollView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jLc-fm-V2i">
-                                <rect key="frame" x="20" y="80" width="393" height="20"/>
+                                <rect key="frame" x="20" y="80" width="393" height="20.333333333333329"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -453,7 +456,7 @@
                                     <color key="baseBackgroundColor" name="mainColor"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="tapNextBtn:" destination="eA0-A5-nod" eventType="touchUpInside" id="9Od-Ua-xLF"/>
+                                    <action selector="nextQuizBtn:" destination="eA0-A5-nod" eventType="touchUpInside" id="Usq-in-gga"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -465,7 +468,6 @@
                             <constraint firstItem="U7u-jK-72x" firstAttribute="bottom" secondItem="9Kb-bd-q1Z" secondAttribute="bottom" constant="95" id="F6z-f4-l1T"/>
                             <constraint firstItem="k5s-BG-cTk" firstAttribute="leading" secondItem="U7u-jK-72x" secondAttribute="leading" constant="20" id="IiN-8w-YBp"/>
                             <constraint firstItem="k5s-BG-cTk" firstAttribute="top" secondItem="9Kb-bd-q1Z" secondAttribute="bottom" constant="35" id="U6Z-B1-296"/>
-                            <constraint firstItem="U7u-jK-72x" firstAttribute="bottom" secondItem="jLc-fm-V2i" secondAttribute="bottom" constant="718" id="aI3-dE-0vq"/>
                             <constraint firstAttribute="trailing" secondItem="v1O-BL-Rya" secondAttribute="trailing" id="chQ-QL-Q9T"/>
                             <constraint firstItem="U7u-jK-72x" firstAttribute="trailing" secondItem="9Kb-bd-q1Z" secondAttribute="trailing" constant="20" id="fxj-IR-dHq"/>
                             <constraint firstItem="9Kb-bd-q1Z" firstAttribute="leading" secondItem="U7u-jK-72x" secondAttribute="leading" constant="20" id="lRu-oe-k6n"/>
@@ -492,10 +494,12 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-2016" y="1315"/>
+            <point key="canvasLocation" x="-1932" y="1315"/>
         </scene>
     </scenes>
     <resources>
+        <image name="rectangle.badge.person.crop" catalog="system" width="128" height="96"/>
+        <image name="rectangle.on.rectangle.angled" catalog="system" width="128" height="98"/>
         <namedColor name="mainColor">
             <color red="0.9660000205039978" green="0.53299999237060547" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

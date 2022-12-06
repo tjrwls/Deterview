@@ -17,8 +17,8 @@ var backEndFolder: QuestionFolder = QuestionFolder(folderName: "Back-End", quest
 
 
 var csQuestion: [Question] = [
-    Question(question: "첫번째 질문", answer: "답변"),
-    Question(question: "두번째 질문", answer: "답변"),
+    Question(question: "1-1", answer: "답변1-1"),
+    Question(question: "1-2", answer: "답변2"),
     Question(question: "세번째 질문", answer: "답변")]
 
 var iosQuestion: [Question] = [

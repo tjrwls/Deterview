@@ -25,9 +25,15 @@ class MainViewController: UIViewController, UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        cell.callBackMethod = {
+        cell.moveToListMethod = {
             let index = indexPath.row
             guard let vc = self.storyboard?.instantiateViewController(identifier: "MainListViewController") as? MainListViewController else { return }
+            vc.questionList = self.templateData[index].questionList
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        cell.moveToQuizMethod = {
+            let index = indexPath.row
+            guard let vc = self.storyboard?.instantiateViewController(identifier: "QuizViewController") as? QuizViewController else { return }
             vc.questionList = self.templateData[index].questionList
             self.navigationController?.pushViewController(vc, animated: true)
         }
@@ -47,10 +53,14 @@ class CardListCell: UICollectionViewCell {
     @IBOutlet weak var movequizBtn: UIButton!
     @IBOutlet weak var countofQuestion: UILabel!
     
-    var callBackMethod: (() -> Void)?
+    var moveToListMethod: (() -> Void)?
+    var moveToQuizMethod: (() -> Void)?
     
     @IBAction func tapCardBtn(_ sender: Any) {
-        callBackMethod?()
+        moveToListMethod?()
+    }
+    @IBAction func tapQuizBtn(_ sender: Any) {
+        moveToQuizMethod?()
     }
     
     func update(info: QuestionFolder) {
@@ -61,9 +71,4 @@ class CardListCell: UICollectionViewCell {
         cardBtn.layer.cornerRadius = 10
         countofQuestion.text = "\(info.questionList.count)개의 질문"
     }
-    
 }
-
-
-
-
