@@ -58,24 +58,24 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="W2M-O7-Lng">
                                 <rect key="frame" x="0.0" y="93" width="393" height="666"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="5" minimumInteritemSpacing="5" id="BX5-rZ-Vqd">
-                                    <size key="itemSize" width="355" height="130"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BX5-rZ-Vqd">
+                                    <size key="itemSize" width="380" height="100"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="Jgx-yW-qqH" customClass="CardListCell" customModule="Deterview" customModuleProvider="target">
-                                        <rect key="frame" x="21.666666666666668" y="0.0" width="350" height="130"/>
+                                        <rect key="frame" x="6.666666666666667" y="0.0" width="380" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="uLr-n1-LEz" customClass="CardListCell" customModule="Deterview" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="350" height="130"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="380" height="100"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="top" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BF7-1h-LaW">
-                                                    <rect key="frame" x="0.0" y="0.0" width="350" height="127"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="35"/>
-                                                    <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="377" height="97"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="35"/>
+                                                    <inset key="titleEdgeInsets" minX="20" minY="13" maxX="0.0" maxY="0.0"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" title="CS">
                                                         <color key="titleColor" systemColor="labelColor"/>
@@ -85,7 +85,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tbt-In-RCH">
-                                                    <rect key="frame" x="229" y="90" width="111" height="30"/>
+                                                    <rect key="frame" x="280" y="35" width="80" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" title="문제풀기">
@@ -96,14 +96,14 @@
                                                             <color key="backgroundColor" red="0.96476238969999994" green="0.53330188990000005" blue="0.53335255380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </backgroundConfiguration>
                                                         <fontDescription key="titleFontDescription" type="system" pointSize="15"/>
-                                                        <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </buttonConfiguration>
                                                     <connections>
                                                         <action selector="tapQuizBtn:" destination="Jgx-yW-qqH" eventType="touchUpInside" id="yrs-Gc-bDG"/>
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24개의 질문" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gwx-Gq-WAx">
-                                                    <rect key="frame" x="20" y="48" width="103" height="18"/>
+                                                    <rect key="frame" x="20" y="57" width="154" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -111,21 +111,21 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="BF7-1h-LaW" firstAttribute="leading" secondItem="uLr-n1-LEz" secondAttribute="leading" id="0gy-9m-O6q"/>
-                                                <constraint firstItem="Gwx-Gq-WAx" firstAttribute="top" secondItem="uLr-n1-LEz" secondAttribute="top" constant="48" id="8vE-v6-X4m"/>
+                                                <constraint firstItem="Gwx-Gq-WAx" firstAttribute="top" secondItem="uLr-n1-LEz" secondAttribute="top" constant="57" id="8vE-v6-X4m"/>
                                                 <constraint firstItem="BF7-1h-LaW" firstAttribute="top" secondItem="uLr-n1-LEz" secondAttribute="top" id="Bw1-Ls-zBb"/>
-                                                <constraint firstAttribute="bottom" secondItem="Gwx-Gq-WAx" secondAttribute="bottom" constant="64" id="CcC-AU-R4X"/>
+                                                <constraint firstAttribute="bottom" secondItem="Gwx-Gq-WAx" secondAttribute="bottom" constant="28" id="CcC-AU-R4X"/>
                                                 <constraint firstItem="Gwx-Gq-WAx" firstAttribute="leading" secondItem="uLr-n1-LEz" secondAttribute="leading" constant="20" id="Oge-h5-LSz"/>
-                                                <constraint firstAttribute="trailing" secondItem="tbt-In-RCH" secondAttribute="trailing" constant="10" id="PKn-Sf-FLV"/>
-                                                <constraint firstItem="tbt-In-RCH" firstAttribute="top" secondItem="uLr-n1-LEz" secondAttribute="top" constant="90" id="Vfd-Vd-OvD"/>
-                                                <constraint firstAttribute="bottom" secondItem="tbt-In-RCH" secondAttribute="bottom" constant="10" id="Ywt-W2-Qp6"/>
+                                                <constraint firstAttribute="trailing" secondItem="tbt-In-RCH" secondAttribute="trailing" constant="20" id="PKn-Sf-FLV"/>
+                                                <constraint firstItem="tbt-In-RCH" firstAttribute="top" secondItem="uLr-n1-LEz" secondAttribute="top" constant="35" id="Vfd-Vd-OvD"/>
+                                                <constraint firstAttribute="bottom" secondItem="tbt-In-RCH" secondAttribute="bottom" constant="35" id="Ywt-W2-Qp6"/>
                                                 <constraint firstAttribute="bottom" secondItem="BF7-1h-LaW" secondAttribute="bottom" constant="3" id="fR3-N4-Q09"/>
-                                                <constraint firstItem="tbt-In-RCH" firstAttribute="leading" secondItem="uLr-n1-LEz" secondAttribute="leading" constant="229" id="gE7-uh-qbp"/>
+                                                <constraint firstItem="tbt-In-RCH" firstAttribute="leading" secondItem="uLr-n1-LEz" secondAttribute="leading" constant="280" id="gE7-uh-qbp"/>
                                                 <constraint firstItem="tbt-In-RCH" firstAttribute="leading" secondItem="Gwx-Gq-WAx" secondAttribute="trailing" constant="106" id="kgE-65-hRr"/>
-                                                <constraint firstAttribute="trailing" secondItem="BF7-1h-LaW" secondAttribute="trailing" id="vSY-9p-fVK"/>
+                                                <constraint firstAttribute="trailing" secondItem="BF7-1h-LaW" secondAttribute="trailing" constant="3" id="vSY-9p-fVK"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <color key="tintColor" systemColor="systemOrangeColor"/>
-                                        <size key="customSize" width="350" height="130"/>
+                                        <size key="customSize" width="380" height="100"/>
                                         <connections>
                                             <outlet property="cardBtn" destination="BF7-1h-LaW" id="eW3-00-GMd"/>
                                             <outlet property="countofQuestion" destination="Gwx-Gq-WAx" id="q1t-MN-77J"/>
@@ -171,14 +171,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="TableCell" id="9iS-z4-fwL" customClass="TableCell" customModule="Deterview" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="50" width="393" height="42.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9iS-z4-fwL" id="01V-GZ-uae">
-                                            <rect key="frame" x="0.0" y="0.0" width="362.66666666666669" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="362.66666666666669" height="42.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jhw-WY-Mcp">
-                                                    <rect key="frame" x="30" y="11.000000000000002" width="294.66666666666669" height="21.666666666666671"/>
+                                                    <rect key="frame" x="30" y="11.000000000000002" width="294.66666666666669" height="20.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>

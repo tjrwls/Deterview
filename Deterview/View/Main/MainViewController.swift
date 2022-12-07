@@ -74,7 +74,8 @@ class CardListCell: UICollectionViewCell {
     
     func update(info: QuestionFolder) {
         cardBtn.setTitle("\(info.folderName)", for: .normal)
-        cardBtn.titleLabel?.font = .systemFont(ofSize: 35)
+        cardBtn.titleLabel?.font = .systemFont(ofSize: 30
+        )
 
         cardBtn.backgroundColor = UIColor.white
         cardBtn.layer.cornerRadius = 5
@@ -82,7 +83,6 @@ class CardListCell: UICollectionViewCell {
 //        cardBtn.layer.shadowOffset = CGSize(width: 0.5, height: 0.1)
         cardBtn.layer.shadowOpacity = 0.3
         cardBtn.layer.shadowRadius = 20
-        
         countofQuestion.text = "\(info.questionList.count)개의 질문"
     }
 }
