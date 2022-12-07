@@ -39,7 +39,6 @@ class QuizViewController: UIViewController {
             let close = UIAlertAction(title: "나가기", style: .cancel) {_ in
                 self.navigationController?.popViewController(animated: true)
             }
-           
             let retry = UIAlertAction(title: "다시 풀기", style: .default) {_ in
                 self.questionArr = self.questionList
                 self.generateRandomQuestion()

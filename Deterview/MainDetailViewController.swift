@@ -17,26 +17,18 @@ class MainDetailViewController: UIViewController {
     @IBOutlet weak var answerTextField: UITextView!
     @IBOutlet weak var saveBtn: UIButton!
     @IBOutlet weak var editBtn: UIButton!
-    
-    var str = "dfdjfidsjkfdslkfjkldsjfklmldfdjfidsjkfdslkfjkldsjfklmldfdjfidsjkfdslkfjkldsjfklmldfdjfidsjkfdslkfjkldsjfklmldfdjfidsjkfdslkfjkldsjfklmldfdjfidsjkfdslkfjkldsjfklmldfdjfidsjkfdslkfjkldsjfklmldfdjfidsjkfdslkfjkldsjfklmldfdjfidsjkfdslkfjkldsjfklmldfdjfidsjkfdslkfjkldsjfklmldfdjfidsjkfdslkfjkldsjfklmldfdjfidsjkfdslkfjkldsjfklmldfdjfidsjkfdslkfjkldsjfklmldfdjfidsjkfdslkfjkldsjfklmldfdjfidsjkfdslkfjkldsjfklmldfdjfidsjkfdslkfjkldsjfklmldfdjfidsjkfdslkfjkldsjfklmldfdjfidsjkfdslkfjkldsjfklmlh"
-
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
+        answerText.numberOfLines = 0
+        answerText.sizeToFit()
         answerText.text = question?.answer
         questionText.text = question?.question
-        answerText.numberOfLines = 0
-//        answerText.font = .systemFont(ofSize: 35)
-        answerText.sizeToFit()
-        //        answerTextField.font = .systemFont(ofSize: 35)
         answerTextField.layer.borderWidth = 1
         answerTextField.layer.isHidden = true
-        answerTextField.text = str
         editBtn.layer.isHidden = false
         saveBtn.layer.isHidden = true
-        // Do any additional setup after loading the view.
     }
-    
     
     @IBAction func tapEditBtn(_ sender: Any) {
         answerText.layer.isHidden.toggle()
@@ -51,7 +43,6 @@ class MainDetailViewController: UIViewController {
         editBtn.layer.isHidden.toggle()
         saveBtn.layer.isHidden.toggle()
         answerTextField.layer.isHidden.toggle()
-        
         answerText.text = answerTextField.text
     }
     
