@@ -103,24 +103,33 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24개의 질문" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gwx-Gq-WAx">
-                                                    <rect key="frame" x="20" y="57" width="154" height="15"/>
+                                                    <rect key="frame" x="20" y="57" width="74" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Roy-sO-Wvb">
+                                                    <rect key="frame" x="94" y="58" width="12.666666666666671" height="14"/>
+                                                    <color key="tintColor" systemColor="systemGray3Color"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="12.666666666666671" id="o1n-6b-QTe"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="Roy-sO-Wvb" secondAttribute="bottom" constant="26.329999999999998" id="0Ko-vY-2UV"/>
                                                 <constraint firstItem="BF7-1h-LaW" firstAttribute="leading" secondItem="uLr-n1-LEz" secondAttribute="leading" id="0gy-9m-O6q"/>
-                                                <constraint firstItem="Gwx-Gq-WAx" firstAttribute="top" secondItem="uLr-n1-LEz" secondAttribute="top" constant="57" id="8vE-v6-X4m"/>
                                                 <constraint firstItem="BF7-1h-LaW" firstAttribute="top" secondItem="uLr-n1-LEz" secondAttribute="top" id="Bw1-Ls-zBb"/>
-                                                <constraint firstAttribute="bottom" secondItem="Gwx-Gq-WAx" secondAttribute="bottom" constant="28" id="CcC-AU-R4X"/>
-                                                <constraint firstItem="Gwx-Gq-WAx" firstAttribute="leading" secondItem="uLr-n1-LEz" secondAttribute="leading" constant="20" id="Oge-h5-LSz"/>
+                                                <constraint firstItem="Gwx-Gq-WAx" firstAttribute="top" secondItem="uLr-n1-LEz" secondAttribute="top" constant="57" id="HFz-Bf-42B"/>
+                                                <constraint firstItem="Roy-sO-Wvb" firstAttribute="top" secondItem="uLr-n1-LEz" secondAttribute="top" constant="56" id="LZR-gv-yMX"/>
                                                 <constraint firstAttribute="trailing" secondItem="tbt-In-RCH" secondAttribute="trailing" constant="20" id="PKn-Sf-FLV"/>
                                                 <constraint firstItem="tbt-In-RCH" firstAttribute="top" secondItem="uLr-n1-LEz" secondAttribute="top" constant="35" id="Vfd-Vd-OvD"/>
                                                 <constraint firstAttribute="bottom" secondItem="tbt-In-RCH" secondAttribute="bottom" constant="35" id="Ywt-W2-Qp6"/>
+                                                <constraint firstItem="Roy-sO-Wvb" firstAttribute="leading" secondItem="Gwx-Gq-WAx" secondAttribute="trailing" id="e4R-BD-iSV"/>
                                                 <constraint firstAttribute="bottom" secondItem="BF7-1h-LaW" secondAttribute="bottom" constant="3" id="fR3-N4-Q09"/>
                                                 <constraint firstItem="tbt-In-RCH" firstAttribute="leading" secondItem="uLr-n1-LEz" secondAttribute="leading" constant="280" id="gE7-uh-qbp"/>
-                                                <constraint firstItem="tbt-In-RCH" firstAttribute="leading" secondItem="Gwx-Gq-WAx" secondAttribute="trailing" constant="106" id="kgE-65-hRr"/>
+                                                <constraint firstAttribute="bottom" secondItem="Gwx-Gq-WAx" secondAttribute="bottom" constant="28" id="o0P-8Y-acA"/>
+                                                <constraint firstItem="Gwx-Gq-WAx" firstAttribute="leading" secondItem="uLr-n1-LEz" secondAttribute="leading" constant="20" id="qAn-n2-T7W"/>
                                                 <constraint firstAttribute="trailing" secondItem="BF7-1h-LaW" secondAttribute="trailing" constant="3" id="vSY-9p-fVK"/>
                                             </constraints>
                                         </collectionViewCellContentView>
@@ -501,6 +510,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="chevron.right" catalog="system" width="97" height="128"/>
         <image name="rectangle.badge.person.crop" catalog="system" width="128" height="96"/>
         <image name="rectangle.on.rectangle.angled" catalog="system" width="128" height="98"/>
         <namedColor name="mainColor">
@@ -511,6 +521,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray3Color">
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

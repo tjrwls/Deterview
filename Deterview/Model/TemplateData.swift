@@ -34,6 +34,15 @@ var aosQuestion: [Question] = [
 var frontendQuestion: [Question] = [
     Question(question: "첫번째 질문", answer: "답변"),
     Question(question: "첫번째 질문", answer: "답변"),
+    Question(question: "첫번째 질문", answer: "답변"),
+    Question(question: "첫번째 질문", answer: "답변"),
+    Question(question: "첫번째 질문", answer: "답변"),
+    Question(question: "첫번째 질문", answer: "답변"),
+    Question(question: "첫번째 질문", answer: "답변"),
+    Question(question: "첫번째 질문", answer: "답변"),
+    Question(question: "첫번째 질문", answer: "답변"),
+    Question(question: "첫번째 질문", answer: "답변"),
+    Question(question: "첫번째 질문", answer: "답변"),
     Question(question: "첫번째 질문", answer: "답변")]
 
 var backendQuestion: [Question] = [
