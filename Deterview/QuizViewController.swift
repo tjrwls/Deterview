@@ -10,6 +10,7 @@ import UIKit
 class QuizViewController: UIViewController {
     var questionList: [Question] = []
     var questionArr: [Question] = []
+    var folderName: String = ""
     @IBOutlet weak var questionText: UILabel!
     @IBOutlet weak var answerText: UILabel!
     @IBOutlet weak var nextQuizBtn: UIButton!
@@ -19,10 +20,23 @@ class QuizViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         questionText.text = questionList[0].question
+        questionText.numberOfLines = 0
+        questionText.font = .systemFont(ofSize: 24
+        )
+        
         answerText.text = questionList[0].answer
         answerText.layer.isHidden = true
+        answerText.font = .systemFont(ofSize: 22, weight:  .light)
+        answerText.numberOfLines = 0
+        answerText.setLineSpacing(spacing: 5)
+        
         placeholderText.isHidden = false
+        placeholderText.font = .systemFont(ofSize: 22)
         questionArr = questionList
+        
+        navigationItem.title = folderName
+        navigationItem.largeTitleDisplayMode = .never
+        
         // Do any additional setup after loading the view.
     }
     

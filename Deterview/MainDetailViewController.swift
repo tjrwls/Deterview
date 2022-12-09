@@ -33,8 +33,7 @@ class MainDetailViewController: UIViewController {
         answerTextField.layer.borderWidth = 1
         answerTextField.layer.borderColor = UIColor.gray.cgColor
         answerTextField.layer.isHidden = true
-        answerTextField.font = .systemFont(ofSize: 22)
-        answerTextField.setLineSpacing(spacing: 2)
+        answerTextField.font = .systemFont(ofSize: 22, weight: .light)
         
         editBtn.layer.isHidden = false
         saveBtn.layer.isHidden = true
@@ -75,20 +74,6 @@ extension UILabel {
     func setLineSpacing(spacing: CGFloat) {
         guard let text = text else { return }
         
-        let attributeString = NSMutableAttributedString(string: text)
-        let style = NSMutableParagraphStyle()
-        style.lineSpacing = spacing
-        attributeString.addAttribute(.paragraphStyle,
-                                     value: style,
-                                     range: NSRange(location: 0, length: attributeString.length))
-        attributedText = attributeString
-    }
-}
-
-extension UITextView {
-    func setLineSpacing(spacing: CGFloat) {
-        guard let text = text else { return }
-
         let attributeString = NSMutableAttributedString(string: text)
         let style = NSMutableParagraphStyle()
         style.lineSpacing = spacing

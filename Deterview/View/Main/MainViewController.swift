@@ -45,6 +45,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
             guard let vc = self.storyboard?.instantiateViewController(identifier: "QuizViewController") as? QuizViewController else { return }
             
             vc.questionList = self.templateData[index].questionList
+            vc.folderName = self.templateData[index].folderName
             self.navigationController?.pushViewController(vc, animated: true)
         }
        

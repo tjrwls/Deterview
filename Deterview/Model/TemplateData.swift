@@ -20,7 +20,7 @@ var aOS2Folder: QuestionFolder = QuestionFolder(folderName: "aOS2", questionList
 var csQuestion: [Question] = [
     Question(question: "1-1", answer: "답변1-1"),
     Question(question: "1-2", answer: "답변2"),
-    Question(question: "네트워크 서버에서 트래픽 과부하가 발생할 경우 어떻게 할 것인가?", answer: "답변")]
+    Question(question: "네트워크 서버에서 트래픽 과부하가 발생할 경우 어떻게 할 것인가?", answer: "네트워크 서버에서 트래픽 과부하가 발생할 경우 어떻게 할 것인가 네트워크 서버에서 트래픽 과부하가 발생할 경우 어떻게 할 것인가 네트워크 서버에서 트래픽 과부하가 발생할 경우 어떻게 할 것인가 네트워크 서버에서 트래픽 과부하가 발생할 경우 어떻게 할 것인가 네트워크 서버에서 트래픽 과부하가 발생할 경우 어떻게 할 것인가 네트워크 서버에서 트래픽 과부하가 발생할 경우 어떻게 할 것인가 네트워크 서버에서 트래픽 과부하가 발생할 경우 어떻게 할 것인가 네트워크 서버에서 트래픽 과부하가 발생할 경우 어떻게 할 것인가 네트워크 서버에서 트래픽 과부하가 발생할 경우 어떻게 할 것인가 네트워크 서버에서 트래픽 과부하가 발생할 경우 어떻게 할 것인가 네트워크 서버에서 트래픽 과부하가 발생할 경우 어떻게 할 것인가 네트워크 서버에서 트래픽 과부하가 발생할 경우 어떻게 할 것인가")]
 
 var iosQuestion: [Question] = [
     Question(question: "첫번째 질문", answer: "답변"),
