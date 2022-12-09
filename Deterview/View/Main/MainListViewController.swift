@@ -8,9 +8,11 @@
 import UIKit
 
 class MainListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    var folderName: String = ""
     var questionList: [Question] = []
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = folderName
         
         // Do any additional setup after loading the view.
     }

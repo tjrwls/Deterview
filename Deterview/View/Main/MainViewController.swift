@@ -17,16 +17,16 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.systemGray6
+        
     }
     // 섹션에 표시 할 셀 갯수를 묻는 메서드
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return templateData.count
     }
-    
     // 콜렉션 뷰의 특정 인덱스에서 표시할 셀을 요청하는 메서드
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as?
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardListCell", for: indexPath) as?
                 CardListCell else {
             return UICollectionViewCell()
         }
@@ -37,6 +37,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
             guard let vc = self.storyboard?.instantiateViewController(identifier: "MainListViewController") as? MainListViewController else { return }
             
             vc.questionList = self.templateData[index].questionList
+            vc.folderName = self.templateData[index].folderName
             self.navigationController?.pushViewController(vc, animated: true)
         }
         cell.moveToQuizMethod = {
