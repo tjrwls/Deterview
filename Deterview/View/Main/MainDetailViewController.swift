@@ -24,7 +24,7 @@ class MainDetailViewController: UIViewController {
     lazy var saveButton: UIBarButtonItem = {
         UIBarButtonItem(title: "저장", style: .done, target: self, action: #selector(tapSaveBtn))
     }()
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = self.editButton
@@ -53,6 +53,12 @@ class MainDetailViewController: UIViewController {
         answerTextField.layer.isHidden.toggle()
         answerTextField.becomeFirstResponder()
         self.navigationItem.rightBarButtonItem = self.saveButton
+        UIView.animate( // 키보드 올라올 때
+            withDuration: 0.4
+            , animations: {
+                self.view.transform = CGAffineTransform(translationX: 0, y: -150) // view 위로 밀림
+            }
+        )
     }
     
     @IBAction func tapSaveBtn() {
@@ -61,6 +67,15 @@ class MainDetailViewController: UIViewController {
         answerText.text = answerTextField.text
         self.navigationItem.rightBarButtonItem = self.editButton
         answerTextField.resignFirstResponder()
+        UIView.animate( // 키보드 내려올 때
+            withDuration: 0.1
+            , animations: {
+                self.view.transform = CGAffineTransform(translationX: 0, y: 0) // view 제자리
+            }
+        )
+    }
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        self.view.transform = CGAffineTransform(translationX: 0, y: 0)
     }
     
     /*

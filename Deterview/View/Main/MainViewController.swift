@@ -14,10 +14,10 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.systemGray6
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.systemGray6
-        
     }
     // 섹션에 표시 할 셀 갯수를 묻는 메서드
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -67,7 +67,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 extension MainViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if (UIDevice.current.orientation.isLandscape) {
-            return CGSize(width: collectionView.bounds.width / 2 - 10, height: 100)
+            return CGSize(width: collectionView.bounds.width / 2 - 20, height: 100)
         } else {
             return CGSize(width: collectionView.bounds.width - 10, height: 100)
         }

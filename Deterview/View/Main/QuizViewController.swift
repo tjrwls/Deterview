@@ -19,11 +19,9 @@ class QuizViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        questionText.text = questionList[0].question
         questionText.numberOfLines = 0
         questionText.font = .systemFont(ofSize: 24)
         
-        answerText.text = questionList[0].answer
         answerText.layer.isHidden = true
         answerText.font = .systemFont(ofSize: 17)
         answerText.numberOfLines = 0
@@ -38,6 +36,8 @@ class QuizViewController: UIViewController {
         
         navigationItem.title = folderName
         navigationItem.largeTitleDisplayMode = .never
+        
+        generateRandomQuestion()
     }
     
     @IBAction func tapAnswerView(_ sender: UIGestureRecognizer) {
@@ -62,13 +62,7 @@ class QuizViewController: UIViewController {
             
             self.present(alert, animated: false)
         }
-        questionText.text = question?.question
-        answerText.text = question?.answer
-       
-        questionArr.removeAll(where: {
-            $0.id == question?.id
-        })
-        
+        generateRandomQuestion()
     }
     
     func generateRandomQuestion() {
