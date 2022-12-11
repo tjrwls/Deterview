@@ -8,12 +8,16 @@
 import UIKit
 
 class MainListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    @IBOutlet weak var questionTableView: UITableView!
     var folderName: String = ""
     var questionList: [Question] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = folderName
-        
+        questionTableView.delegate = self
+        questionTableView.dataSource = self
         // Do any additional setup after loading the view.
     }
     
@@ -30,10 +34,12 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
         cell.question.text = questionList[indexPath.item].question
         return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let vc = self.storyboard?.instantiateViewController(identifier: "MainDetailViewController") as? MainDetailViewController else { return }
         vc.question = self.questionList[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
+        questionTableView.deselectRow(at: indexPath, animated: true)
     }
 }
 

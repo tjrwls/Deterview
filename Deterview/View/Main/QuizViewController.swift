@@ -21,12 +21,11 @@ class QuizViewController: UIViewController {
         super.viewDidLoad()
         questionText.text = questionList[0].question
         questionText.numberOfLines = 0
-        questionText.font = .systemFont(ofSize: 24
-        )
+        questionText.font = .systemFont(ofSize: 24)
         
         answerText.text = questionList[0].answer
         answerText.layer.isHidden = true
-        answerText.font = .systemFont(ofSize: 22, weight:  .light)
+        answerText.font = .systemFont(ofSize: 17)
         answerText.numberOfLines = 0
         answerText.setLineSpacing(spacing: 5)
         
@@ -34,10 +33,11 @@ class QuizViewController: UIViewController {
         placeholderText.font = .systemFont(ofSize: 22)
         questionArr = questionList
         
+        nextQuizBtn.layer.cornerRadius = 5
+        nextQuizBtn.setFontStyle(size: 20, weight: .bold)
+        
         navigationItem.title = folderName
         navigationItem.largeTitleDisplayMode = .never
-        
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func tapAnswerView(_ sender: UIGestureRecognizer) {

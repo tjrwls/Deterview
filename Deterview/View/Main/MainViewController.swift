@@ -57,6 +57,21 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath.row)
     }
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if let flowLayout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.invalidateLayout() // 현재 layout을 무효화하고 layout 업데이트를 작동
+        }
+    }
+}
+
+extension MainViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if (UIDevice.current.orientation.isLandscape) {
+            return CGSize(width: collectionView.bounds.width / 2 - 10, height: 100)
+        } else {
+            return CGSize(width: collectionView.bounds.width - 10, height: 100)
+        }
+    }
 }
 
 class CardListCell: UICollectionViewCell {
