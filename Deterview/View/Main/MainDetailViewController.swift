@@ -53,12 +53,12 @@ class MainDetailViewController: UIViewController {
         answerTextField.layer.isHidden.toggle()
         answerTextField.becomeFirstResponder()
         self.navigationItem.rightBarButtonItem = self.saveButton
-        UIView.animate( // 키보드 올라올 때
-            withDuration: 0.4
-            , animations: {
-                self.view.transform = CGAffineTransform(translationX: 0, y: -150) // view 위로 밀림
-            }
-        )
+//        UIView.animate( // 키보드 올라올 때
+//            withDuration: 0.4
+//            , animations: {
+//                self.view.transform = CGAffineTransform(translationX: 0, y: -150) // view 위로 밀림
+//            }
+//        )
     }
     
     @objc func tapSaveBtn() {

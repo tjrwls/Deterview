@@ -62,11 +62,11 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath.row)
     }
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        if let flowLayout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.invalidateLayout() // 현재 layout을 무효화하고 layout 업데이트를 작동
-        }
-    }
+//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//        if let flowLayout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+//            flowLayout.invalidateLayout() // 현재 layout을 무효화하고 layout 업데이트를 작동
+//        }
+//    }
     @objc func tapMenuBtn() {
         showActionSheet()
     }

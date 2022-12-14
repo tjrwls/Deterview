@@ -68,11 +68,15 @@
             <objects>
                 <viewController storyboardIdentifier="MainViewController" id="BYZ-38-t0r" customClass="MainViewController" customModule="Deterview" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="View">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="749"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="697"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vQH-uU-bBC">
+                                <rect key="frame" x="0.0" y="-60" width="393" height="674"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="W2M-O7-Lng">
-                                <rect key="frame" x="0.0" y="-10" width="393" height="676"/>
+                                <rect key="frame" x="0.0" y="-10" width="393" height="624"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="20" id="BX5-rZ-Vqd">
                                     <size key="itemSize" width="380" height="100"/>
@@ -172,13 +176,17 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="W2M-O7-Lng" secondAttribute="trailing" id="2pn-TA-d8x"/>
+                            <constraint firstItem="vQH-uU-bBC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="5HA-rB-5B4"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="W2M-O7-Lng" secondAttribute="top" constant="10" id="B1O-f9-02A"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vQH-uU-bBC" secondAttribute="trailing" id="EKY-Au-mOH"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="W2M-O7-Lng" secondAttribute="bottom" id="TxF-LU-4j2"/>
                             <constraint firstItem="W2M-O7-Lng" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ZL8-uo-R0u"/>
+                            <constraint firstItem="vQH-uU-bBC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-60" id="dQ1-In-Br8"/>
+                            <constraint firstItem="vQH-uU-bBC" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="fTu-8S-hwa"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Main" id="nyZ-jc-K6b"/>
-                    <navigationItem key="navigationItem" title="deterView" style="browser" id="q4E-d3-RIO"/>
+                    <navigationItem key="navigationItem" title="deterView" id="q4E-d3-RIO"/>
                     <connections>
                         <outlet property="collectionView" destination="W2M-O7-Lng" id="CV9-Iw-IeF"/>
                         <segue destination="Beb-98-pog" kind="show" identifier="MainListViewSegue" id="GtA-Ej-OdM"/>
@@ -205,14 +213,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MainTableCell" id="9iS-z4-fwL" customClass="MainTableCell" customModule="Deterview" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="393" height="42.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="50" width="393" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9iS-z4-fwL" id="01V-GZ-uae">
-                                            <rect key="frame" x="0.0" y="0.0" width="362.66666666666669" height="42.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="362.66666666666669" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jhw-WY-Mcp">
-                                                    <rect key="frame" x="30" y="11.000000000000002" width="294.66666666666669" height="20.666666666666671"/>
+                                                    <rect key="frame" x="30" y="11" width="294.66666666666669" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -297,11 +305,8 @@
                                         </constraints>
                                     </view>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="scrollableAxes" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2cO-Zp-dp9">
-                                        <rect key="frame" x="20" y="5" width="353" height="315"/>
+                                        <rect key="frame" x="20" y="5" width="353" height="413.33333333333331"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="315" id="p91-XD-s4o"/>
-                                        </constraints>
                                         <attributedString key="attributedText">
                                             <fragment content="텍스트필드">
                                                 <attributes>
@@ -351,6 +356,7 @@
                             <constraint firstItem="xkY-Yf-Axt" firstAttribute="trailing" secondItem="fIi-oi-TNr" secondAttribute="trailingMargin" id="KEb-Lj-6Uz"/>
                             <constraint firstItem="zCC-Pg-7ig" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="zRX-pr-ggM" secondAttribute="trailing" constant="20" id="Kvp-na-1w7"/>
                             <constraint firstItem="zCC-Pg-7ig" firstAttribute="bottom" secondItem="d3B-st-GCa" secondAttribute="bottom" constant="51.333333333333258" id="Tvk-hX-srX"/>
+                            <constraint firstItem="zCC-Pg-7ig" firstAttribute="bottom" secondItem="2cO-Zp-dp9" secondAttribute="bottom" constant="280" id="bok-6J-UDC"/>
                             <constraint firstItem="zRX-pr-ggM" firstAttribute="top" secondItem="zCC-Pg-7ig" secondAttribute="top" constant="20" id="eva-MT-FTO"/>
                             <constraint firstItem="xkY-Yf-Axt" firstAttribute="top" secondItem="d3B-st-GCa" secondAttribute="top" id="mME-OM-dL2"/>
                             <constraint firstItem="xkY-Yf-Axt" firstAttribute="leading" secondItem="zCC-Pg-7ig" secondAttribute="leading" constant="20" id="ppd-FP-DT1"/>
@@ -486,14 +492,17 @@
         <!--CustomViewController-->
         <scene sceneID="tfr-3t-g1U">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GCH-3u-Iyg" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="CustomViewController" title="CustomViewController" id="COJ-cc-k1o" customClass="CustomViewController" customModule="Deterview" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="l33-xV-DyE" customClass="View">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="749"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="697"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4vD-Un-xlj">
+                                <rect key="frame" x="0.0" y="-60" width="393" height="674"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="019-bO-wfw">
-                                <rect key="frame" x="0.0" y="-10" width="393" height="676"/>
+                                <rect key="frame" x="0.0" y="-10" width="393" height="624"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="20" id="Bpt-cj-c73">
                                     <size key="itemSize" width="380" height="100"/>
@@ -594,7 +603,11 @@
                         <constraints>
                             <constraint firstItem="019-bO-wfw" firstAttribute="leading" secondItem="olR-xO-pXC" secondAttribute="leading" id="H72-sC-avH"/>
                             <constraint firstItem="olR-xO-pXC" firstAttribute="bottom" secondItem="019-bO-wfw" secondAttribute="bottom" id="NsK-7i-OAL"/>
+                            <constraint firstItem="4vD-Un-xlj" firstAttribute="top" secondItem="olR-xO-pXC" secondAttribute="top" constant="-60" id="Sz2-AE-bcl"/>
+                            <constraint firstItem="olR-xO-pXC" firstAttribute="trailing" secondItem="4vD-Un-xlj" secondAttribute="trailing" id="UL9-E9-TzX"/>
                             <constraint firstItem="olR-xO-pXC" firstAttribute="top" secondItem="019-bO-wfw" secondAttribute="top" constant="10" id="YbE-Rt-3hJ"/>
+                            <constraint firstItem="olR-xO-pXC" firstAttribute="bottom" secondItem="4vD-Un-xlj" secondAttribute="bottom" id="bbc-3V-YKr"/>
+                            <constraint firstItem="4vD-Un-xlj" firstAttribute="leading" secondItem="olR-xO-pXC" secondAttribute="leading" id="ehy-Al-ta2"/>
                             <constraint firstItem="olR-xO-pXC" firstAttribute="trailing" secondItem="019-bO-wfw" secondAttribute="trailing" id="ezL-68-CYx"/>
                         </constraints>
                     </view>
@@ -605,6 +618,7 @@
                         <segue destination="cuM-oH-Ga0" kind="show" identifier="CustomListViewSegue" id="hGd-Aq-0KV"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GCH-3u-Iyg" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-309.16030534351142" y="1304.9295774647887"/>
         </scene>
@@ -717,11 +731,8 @@
                                         </constraints>
                                     </view>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="scrollableAxes" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ScW-r9-uK9">
-                                        <rect key="frame" x="20" y="5" width="353" height="315"/>
+                                        <rect key="frame" x="20" y="5" width="353" height="413.33333333333331"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="315" id="Pky-UK-C27"/>
-                                        </constraints>
                                         <attributedString key="attributedText">
                                             <fragment content="텍스트필드">
                                                 <attributes>
@@ -770,6 +781,7 @@
                             <constraint firstItem="D9n-W9-x3D" firstAttribute="top" secondItem="jwq-DU-Eaz" secondAttribute="top" constant="20" id="U9v-AD-YlO"/>
                             <constraint firstItem="6Ml-Gy-8bA" firstAttribute="leading" secondItem="jwq-DU-Eaz" secondAttribute="leading" id="UUm-JD-EF5"/>
                             <constraint firstItem="D9n-W9-x3D" firstAttribute="leading" secondItem="jwq-DU-Eaz" secondAttribute="leading" constant="20" id="ZVv-Xl-Tcf"/>
+                            <constraint firstItem="jwq-DU-Eaz" firstAttribute="bottom" secondItem="ScW-r9-uK9" secondAttribute="bottom" constant="280" id="fYX-aF-AvK"/>
                             <constraint firstItem="jwq-DU-Eaz" firstAttribute="bottom" secondItem="6Ml-Gy-8bA" secondAttribute="bottom" constant="51.333333333333258" id="j3K-SF-9QN"/>
                             <constraint firstItem="Tqd-WQ-T15" firstAttribute="top" secondItem="6Ml-Gy-8bA" secondAttribute="top" id="l0H-94-3xy"/>
                             <constraint firstItem="Tqd-WQ-T15" firstAttribute="bottom" secondItem="D9n-W9-x3D" secondAttribute="bottom" constant="10" id="mO3-35-OGp"/>
