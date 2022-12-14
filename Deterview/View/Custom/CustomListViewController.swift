@@ -1,14 +1,14 @@
 //
-//  MainListViewController.swift
+//  CustomListViewController.swift
 //  Deterview
 //
-//  Created by 조석진 on 2022/12/01.
+//  Created by MIJU on 2022/12/12.
 //
 
 import UIKit
 
-class MainListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+class CustomListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
     @IBOutlet weak var questionTableView: UITableView!
     var folderName: String = ""
     var questionList: [Question] = []
@@ -26,8 +26,8 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MainTableCell", for: indexPath) as?
-        MainTableCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTableCell", for: indexPath) as?
+        CustomTableCell else {
             return UITableViewCell()
         }
         
@@ -44,7 +44,7 @@ class MainListViewController: UIViewController, UITableViewDelegate, UITableView
 }
 
 
-class MainTableCell: UITableViewCell {
+class CustomTableCell: UITableViewCell {
     @IBOutlet weak var question: UILabel!
     
     
@@ -53,18 +53,3 @@ class MainTableCell: UITableViewCell {
 //        questionList.text = info.question
 //    }
 }
-
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-
- 

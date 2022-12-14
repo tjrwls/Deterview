@@ -46,7 +46,6 @@ class QuizViewController: UIViewController {
     }
     
     @IBAction func nextQuizBtn(_ sender: Any) {
-        let question = questionArr.randomElement()
         
         if questionArr.isEmpty { // 문제 다 풀었으면
             let alert = UIAlertController(title: "완료", message: "문풀완", preferredStyle: .alert)

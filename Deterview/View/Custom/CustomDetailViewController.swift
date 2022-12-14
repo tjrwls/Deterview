@@ -1,13 +1,14 @@
 //
-//  MainDetailViewController.swift
+//  CustomDetailViewController.swift
 //  Deterview
 //
-//  Created by MIJU on 2022/12/03.
+//  Created by MIJU on 2022/12/12.
 //
 
 import UIKit
 
-class MainDetailViewController: UIViewController {
+class CustomDetailViewController: UIViewController {
+
     @IBOutlet weak var answerText: UILabel!
     @IBOutlet weak var questionText: UILabel!
     
@@ -88,4 +89,3 @@ class MainDetailViewController: UIViewController {
     }
     */
 }
-

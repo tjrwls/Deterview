@@ -1,25 +1,28 @@
 //
-//  MainViewController.swift
+//  CustomViewController.swift
 //  Deterview
 //
-//  Created by 조석진 on 2022/11/30.
+//  Created by MIJU on 2022/12/12.
 //
 
 import UIKit
 
-class MainViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class CustomViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+
     var templateData: [QuestionFolder] = TemplateData().templateData
-    
+   
     @IBOutlet weak var collectionView: UICollectionView!
-    
-    
-    
+    lazy var menuBtn: UIBarButtonItem = {
+        UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .done, target: self, action: #selector(tapMenuBtn))
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.systemGray6
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.systemGray6
+        self.navigationItem.rightBarButtonItem = self.menuBtn
+        menuBtn.tintColor = .black
     }
     // 섹션에 표시 할 셀 갯수를 묻는 메서드
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -28,15 +31,15 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     // 콜렉션 뷰의 특정 인덱스에서 표시할 셀을 요청하는 메서드
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainCardListCell", for: indexPath) as?
-                MainCardListCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCardListCell", for: indexPath) as?
+                CustomCardListCell else {
             return UICollectionViewCell()
         }
         cell.layer.cornerRadius = 5
         
         cell.moveToListMethod = {
             let index = indexPath.row
-            guard let vc = self.storyboard?.instantiateViewController(identifier: "MainListViewController") as? MainListViewController else { return }
+            guard let vc = self.storyboard?.instantiateViewController(identifier: "CustomListViewController") as? CustomListViewController else { return }
             
             vc.questionList = self.templateData[index].questionList
             vc.folderName = self.templateData[index].folderName
@@ -64,10 +67,33 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
             flowLayout.invalidateLayout() // 현재 layout을 무효화하고 layout 업데이트를 작동
         }
     }
+    @objc func tapMenuBtn() {
+        showActionSheet()
+    }
+    func showActionSheet() {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let first = UIAlertAction(title: "폴더 추가하기", style: .default) { action in
+            
+        }
+        let second = UIAlertAction(title: "편집하기", style: .default) { action in
+            
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel) { action in
+            
+        }
+        
+        actionSheet.addAction(first)
+        actionSheet.addAction(second)
+        actionSheet.addAction(cancel)
+        
+        present(actionSheet, animated: true, completion: nil)
+    }
     
+    
+   
 }
 
-extension MainViewController: UICollectionViewDelegateFlowLayout {
+extension CustomViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if (UIDevice.current.orientation.isLandscape) {
             return CGSize(width: collectionView.bounds.width / 2 - 20, height: 100)
@@ -77,7 +103,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-class MainCardListCell: UICollectionViewCell {
+class CustomCardListCell: UICollectionViewCell {
     @IBOutlet weak var cardBtn: UIButton!
     @IBOutlet weak var movequizBtn: UIButton!
     @IBOutlet weak var countofQuestion: UILabel!
