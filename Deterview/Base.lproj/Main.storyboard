@@ -614,7 +614,7 @@
                     <tabBarItem key="tabBarItem" title="Main" id="521-Bt-tG6"/>
                     <navigationItem key="navigationItem" title="deterView" style="browser" id="JzO-61-B1t"/>
                     <connections>
-                        <outlet property="collectionView" destination="019-bO-wfw" id="5ag-wk-pcO"/>
+                        <outlet property="CustomCollectionView" destination="019-bO-wfw" id="iBJ-Up-Ifv"/>
                         <segue destination="cuM-oH-Ga0" kind="show" identifier="CustomListViewSegue" id="hGd-Aq-0KV"/>
                     </connections>
                 </viewController>
@@ -629,9 +629,74 @@
                     <view key="view" contentMode="scaleToFill" id="KRe-9f-bqI">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FVR-gI-uU7">
+                                <rect key="frame" x="0.0" y="564" width="393" height="289"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="miN-tL-qVq">
+                                        <rect key="frame" x="40" y="95" width="313" height="40"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nno-QU-fl5">
+                                        <rect key="frame" x="40" y="155" width="313" height="44"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yL7-2i-GNd">
+                                        <rect key="frame" x="40" y="60" width="313" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kot-CG-r6r">
+                                        <rect key="frame" x="0.0" y="8" width="75" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="75" id="aiY-JT-YDy"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                        <connections>
+                                            <action selector="tabCancleBtn:" destination="e8d-js-jB6" eventType="touchUpInside" id="3of-PO-Bo2"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="nno-QU-fl5" firstAttribute="top" secondItem="FVR-gI-uU7" secondAttribute="top" constant="155" id="7i3-iS-7xz"/>
+                                    <constraint firstAttribute="bottom" secondItem="miN-tL-qVq" secondAttribute="bottom" constant="154" id="8m2-OY-icr"/>
+                                    <constraint firstItem="Kot-CG-r6r" firstAttribute="top" secondItem="FVR-gI-uU7" secondAttribute="top" constant="8" id="93p-Yi-W6J"/>
+                                    <constraint firstAttribute="trailing" secondItem="miN-tL-qVq" secondAttribute="trailing" constant="40" id="AZG-jY-4AX"/>
+                                    <constraint firstAttribute="trailing" secondItem="nno-QU-fl5" secondAttribute="trailing" priority="999" constant="40" id="CPz-nA-RrB"/>
+                                    <constraint firstItem="yL7-2i-GNd" firstAttribute="leading" secondItem="FVR-gI-uU7" secondAttribute="leading" priority="999" constant="40" id="D6z-pE-65v"/>
+                                    <constraint firstItem="miN-tL-qVq" firstAttribute="leading" secondItem="FVR-gI-uU7" secondAttribute="leading" constant="40" id="LEP-UN-9o2"/>
+                                    <constraint firstItem="nno-QU-fl5" firstAttribute="leading" secondItem="FVR-gI-uU7" secondAttribute="leading" constant="40" id="PLn-QP-ONp"/>
+                                    <constraint firstAttribute="bottom" secondItem="yL7-2i-GNd" secondAttribute="bottom" constant="200" id="UGz-Nf-iPF"/>
+                                    <constraint firstAttribute="height" constant="289" id="WS5-Qv-NOH"/>
+                                    <constraint firstItem="Kot-CG-r6r" firstAttribute="leading" secondItem="FVR-gI-uU7" secondAttribute="leading" id="XP8-Qt-4HO"/>
+                                    <constraint firstAttribute="bottom" secondItem="Kot-CG-r6r" secondAttribute="bottom" constant="246" id="aNh-pj-dCQ"/>
+                                    <constraint firstItem="miN-tL-qVq" firstAttribute="top" secondItem="FVR-gI-uU7" secondAttribute="top" constant="95" id="bRA-IX-7qK"/>
+                                    <constraint firstItem="yL7-2i-GNd" firstAttribute="top" secondItem="FVR-gI-uU7" secondAttribute="top" constant="60" id="gBj-l6-Xs5"/>
+                                    <constraint firstAttribute="bottom" secondItem="nno-QU-fl5" secondAttribute="bottom" constant="90" id="oJT-6y-nd1"/>
+                                    <constraint firstAttribute="trailing" secondItem="yL7-2i-GNd" secondAttribute="trailing" constant="40" id="pxv-Mw-gEW"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="fJn-M2-Xq8"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="FVR-gI-uU7" firstAttribute="leading" secondItem="fJn-M2-Xq8" secondAttribute="leading" id="1NN-e3-TNs"/>
+                            <constraint firstItem="fJn-M2-Xq8" firstAttribute="bottom" secondItem="FVR-gI-uU7" secondAttribute="bottom" constant="-35" id="KXS-xm-Ly7"/>
+                            <constraint firstItem="fJn-M2-Xq8" firstAttribute="trailing" secondItem="FVR-gI-uU7" secondAttribute="trailing" id="vBn-SS-I2W"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="cancleBtn" destination="Kot-CG-r6r" id="Neh-qz-dgK"/>
+                        <outlet property="folderNameTextField" destination="miN-tL-qVq" id="PSO-nC-dLa"/>
+                        <outlet property="guideText" destination="yL7-2i-GNd" id="qbN-vD-tPp"/>
+                        <outlet property="modalView" destination="FVR-gI-uU7" id="2hA-NO-LMb"/>
+                        <outlet property="saveFolderNameBtn" destination="nno-QU-fl5" id="NsY-Gp-Ueb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fcc-rn-D3c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

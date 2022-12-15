@@ -11,16 +11,16 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
 
     var templateData: [QuestionFolder] = TemplateData().templateData
    
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var CustomCollectionView: UICollectionView!
     lazy var menuBtn: UIBarButtonItem = {
         UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .done, target: self, action: #selector(tapMenuBtn))
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.systemGray6
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.backgroundColor = UIColor.systemGray6
+        CustomCollectionView.delegate = self
+        CustomCollectionView.dataSource = self
+        CustomCollectionView.backgroundColor = UIColor.systemGray6
         self.navigationItem.rightBarButtonItem = self.menuBtn
         menuBtn.tintColor = .black
     }
@@ -62,11 +62,11 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath.row)
     }
-//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//        if let flowLayout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-//            flowLayout.invalidateLayout() // 현재 layout을 무효화하고 layout 업데이트를 작동
-//        }
-//    }
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if let flowLayout = self.CustomCollectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.invalidateLayout() // 현재 layout을 무효화하고 layout 업데이트를 작동
+        }
+    }
     @objc func tapMenuBtn() {
         showActionSheet()
     }
@@ -76,9 +76,7 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
             guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddingFolderViewController") as? AddingFolderViewController else {
                     return
                 }
-                    
             vc.modalPresentationStyle = .formSheet
-                    
                 self.present(vc,animated: true)
         }
         let second = UIAlertAction(title: "편집하기", style: .default) { action in
