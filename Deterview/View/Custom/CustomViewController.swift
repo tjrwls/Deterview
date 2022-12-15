@@ -73,7 +73,13 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
     func showActionSheet() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let first = UIAlertAction(title: "폴더 추가하기", style: .default) { action in
-            
+            guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddingFolderViewController") as? AddingFolderViewController else {
+                    return
+                }
+                    
+            vc.modalPresentationStyle = .formSheet
+                    
+                self.present(vc,animated: true)
         }
         let second = UIAlertAction(title: "편집하기", style: .default) { action in
             
