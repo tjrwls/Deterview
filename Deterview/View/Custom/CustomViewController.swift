@@ -8,9 +8,9 @@
 import UIKit
 
 class CustomViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
-
-    var templateData: [QuestionFolder] = TemplateData().templateData
-   
+//    var templateData: [QuestionFolder] = TemplateData().templateData
+    var questionStore: QuestionFolderStore = QuestionFolderStore()
+    
     @IBOutlet weak var CustomCollectionView: UICollectionView!
     lazy var menuBtn: UIBarButtonItem = {
         UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .done, target: self, action: #selector(tapMenuBtn))
@@ -26,7 +26,7 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
     }
     // 섹션에 표시 할 셀 갯수를 묻는 메서드
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return templateData.count
+        return questionStore.questionFolderStore.count
     }
     // 콜렉션 뷰의 특정 인덱스에서 표시할 셀을 요청하는 메서드
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -41,20 +41,20 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
             let index = indexPath.row
             guard let vc = self.storyboard?.instantiateViewController(identifier: "CustomListViewController") as? CustomListViewController else { return }
             
-            vc.questionList = self.templateData[index].questionList
-            vc.folderName = self.templateData[index].folderName
+            vc.questionList = Array(self.questionStore.questionFolderStore[index].questionList)
+            vc.folderName = self.questionStore.questionFolderStore[index].folderName
             self.navigationController?.pushViewController(vc, animated: true)
         }
         cell.moveToQuizMethod = {
             let index = indexPath.row
             guard let vc = self.storyboard?.instantiateViewController(identifier: "QuizViewController") as? QuizViewController else { return }
-            
-            vc.questionList = self.templateData[index].questionList
-            vc.folderName = self.templateData[index].folderName
+//            
+//            vc.questionList = self.questionFolders[index].questionList
+//            vc.folderName = self.questionFolders[index].folderName
             self.navigationController?.pushViewController(vc, animated: true)
         }
        
-        let cellInfo = templateData[indexPath.item]
+        let cellInfo = questionStore.questionFolderStore[indexPath.item]
         cell.update(info: cellInfo)
         return cell
     }
@@ -67,6 +67,21 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
             flowLayout.invalidateLayout() // 현재 layout을 무효화하고 layout 업데이트를 작동
         }
     }
+    override func viewWillAppear(_ animated: Bool) {
+        questionStore.readQuestionFolder()
+        self.CustomCollectionView.reloadData()
+        print("1")
+        print(questionStore)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        questionStore.readQuestionFolder()
+        self.CustomCollectionView.reloadData()
+        print("2")
+        print(questionStore)
+
+    }
+    
     @objc func tapMenuBtn() {
         showActionSheet()
     }
@@ -85,7 +100,6 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
         let cancel = UIAlertAction(title: "취소", style: .cancel) { action in
             
         }
-        
         actionSheet.addAction(first)
         actionSheet.addAction(second)
         actionSheet.addAction(cancel)
@@ -122,7 +136,7 @@ class CustomCardListCell: UICollectionViewCell {
         moveToQuizMethod?()
     }
     
-    func update(info: QuestionFolder) {
+    func update(info: QuestionFolder2) {
         cardBtn.setTitle("\(info.folderName)", for: .normal)
         cardBtn.titleLabel?.font = .systemFont(ofSize: 30
         )

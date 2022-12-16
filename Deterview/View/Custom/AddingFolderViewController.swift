@@ -8,6 +8,7 @@
 import UIKit
 
 class AddingFolderViewController: UIViewController {
+    var questionStore: QuestionFolderStore = QuestionFolderStore()
     
     @IBOutlet weak var folderNameTextField: UITextField!
     @IBOutlet weak var cancleBtn: UIButton!
@@ -45,6 +46,14 @@ class AddingFolderViewController: UIViewController {
         }
     }
 
+    @IBAction func tapSaveBtn(_ sender: Any) {
+        questionStore.createdQuestionFolder(QuestionFolder(folderName: "\(folderNameTextField!.text ?? "")", questionList: []))
+//        guard let vc = self.storyboard?.instantiateViewController(identifier: "CustomViewController") as? CustomViewController else { return }
+//        vc.CustomCollectionView!.reloadData()
+        self.dismiss(animated: true)
+        
+    }
+    
     @IBAction func tabCancleBtn(_ sender: Any) {
         self.dismiss(animated: true)
     }

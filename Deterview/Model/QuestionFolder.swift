@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 struct QuestionFolder: Identifiable {
     var id = UUID()
@@ -13,3 +14,9 @@ struct QuestionFolder: Identifiable {
     var questionList: [Question]
 }
 
+class QuestionFolder2: Object {
+    @objc dynamic var id: String = ""
+    @objc dynamic var folderName: String = ""
+    var questionList = List<Question2>()
+
+}

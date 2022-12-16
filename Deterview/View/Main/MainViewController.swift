@@ -6,13 +6,13 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MainViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     var templateData: [QuestionFolder] = TemplateData().templateData
-    
+    var itemArray: Results<Question2>?
+
     @IBOutlet weak var collectionView: UICollectionView!
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +20,14 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.systemGray6
+        print("여기에요")
+//        print(getDocumentsDirectory())
+        
+    }
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
     }
     // 섹션에 표시 할 셀 갯수를 묻는 메서드
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

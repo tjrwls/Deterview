@@ -17,7 +17,7 @@ class CustomDetailViewController: UIViewController {
     
     var isShowingAnswerTextField: Bool = false
     var isShowingAnswerText: Bool = false
-    var question: Question? = nil
+    var question: Question2? = nil
     
     lazy var editButton: UIBarButtonItem = {
         UIBarButtonItem(title: "편집", style: .done, target: self, action: #selector(tapEditBtn))

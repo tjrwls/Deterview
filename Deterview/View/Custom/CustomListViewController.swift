@@ -11,7 +11,7 @@ class CustomListViewController: UIViewController, UITableViewDelegate, UITableVi
 
     @IBOutlet weak var questionTableView: UITableView!
     var folderName: String = ""
-    var questionList: [Question] = []
+    var questionList: [Question2] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +36,7 @@ class CustomListViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let vc = self.storyboard?.instantiateViewController(identifier: "MainDetailViewController") as? MainDetailViewController else { return }
+        guard let vc = self.storyboard?.instantiateViewController(identifier: "CustomDetailViewController") as? CustomDetailViewController else { return }
         vc.question = self.questionList[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
         questionTableView.deselectRow(at: indexPath, animated: true)
