@@ -8,7 +8,6 @@
 import UIKit
 
 class CustomViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
-//    var templateData: [QuestionFolder] = TemplateData().templateData
     var questionStore: QuestionFolderStore = QuestionFolderStore()
     
     @IBOutlet weak var CustomCollectionView: UICollectionView!
@@ -48,7 +47,7 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
         cell.moveToQuizMethod = {
             let index = indexPath.row
             guard let vc = self.storyboard?.instantiateViewController(identifier: "QuizViewController") as? QuizViewController else { return }
-//            
+
 //            vc.questionList = self.questionFolders[index].questionList
 //            vc.folderName = self.questionFolders[index].folderName
             self.navigationController?.pushViewController(vc, animated: true)
@@ -67,19 +66,10 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
             flowLayout.invalidateLayout() // 현재 layout을 무효화하고 layout 업데이트를 작동
         }
     }
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         questionStore.readQuestionFolder()
         self.CustomCollectionView.reloadData()
-        print("1")
-        print(questionStore)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        questionStore.readQuestionFolder()
-        self.CustomCollectionView.reloadData()
-        print("2")
-        print(questionStore)
-
+        // viewWillAppear에서 호출시 크래쉬가 자주 날수 있다. View 생성전에 호출시 문제가 생길 수 있다.
     }
     
     @objc func tapMenuBtn() {
@@ -92,7 +82,9 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
                     return
                 }
             vc.modalPresentationStyle = .formSheet
-                self.present(vc,animated: true)
+            vc.viewController = self
+            vc.questionStore = self.questionStore
+            self.present(vc,animated: true)
         }
         let second = UIAlertAction(title: "편집하기", style: .default) { action in
             

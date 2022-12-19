@@ -21,8 +21,11 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.systemGray6
         print("여기에요")
-//        print(getDocumentsDirectory())
+        print(getDocumentsDirectory())
         
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        QuestionFolderStore().updateQuestionFolder()
     }
     func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
