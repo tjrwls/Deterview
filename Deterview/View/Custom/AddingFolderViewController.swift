@@ -24,6 +24,9 @@ class AddingFolderViewController: UIViewController {
         saveFolderNameBtn.setTitle("완료", for: .normal)
         saveFolderNameBtn.tintColor = UIColor(.mainColor)
         
+//        print("\(self.presentedViewController)")
+//        print("\(self.presentingViewController)")
+//        print("\(self.presentingViewController?.viewcont ?? CustomViewController())")
     }
     // MARK: 뷰생성시 키보드 밑 View 올리기
     override func viewWillAppear(_ animated: Bool) {
@@ -50,8 +53,13 @@ class AddingFolderViewController: UIViewController {
     @IBAction func tapSaveBtn(_ sender: Any) {
         questionStore?.createdQuestionFolder(QuestionFolder(folderName: "\(folderNameTextField!.text ?? "")", questionList: []))
         questionStore?.readQuestionFolder()
-    
+//        print("1")
+//        guard let vc = self.presentingViewController?.popoverPresentationController as? CustomViewController else { return }
+//        print("2")
+        
         self.dismiss(animated: true) {
+//            vc.CustomCollectionView.reloadData()
+//            print("3")
             self.viewController?.CustomCollectionView.reloadData()
         }
     }

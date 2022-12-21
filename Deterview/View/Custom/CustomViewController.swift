@@ -7,13 +7,40 @@
 
 import UIKit
 
+enum Mode {
+    case view
+    case select
+}
+
+
 class CustomViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+    
     var questionStore: QuestionFolderStore = QuestionFolderStore()
+    var isEditMode: Bool = false
+    var editMode: Mode = .view {
+        didSet{
+            switch editMode {
+            case .view:
+                self.CustomCollectionView.allowsMultipleSelection = false
+            case .select:
+                self.CustomCollectionView.allowsMultipleSelection = true
+            }
+        }
+    }
     
     @IBOutlet weak var CustomCollectionView: UICollectionView!
     lazy var menuBtn: UIBarButtonItem = {
         UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .done, target: self, action: #selector(tapMenuBtn))
     }()
+    
+    lazy var cancleBtn: UIBarButtonItem = {
+        UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(tapCancleBtn))
+    }()
+    
+    lazy var deleteBtn: UIBarButtonItem = {
+        UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(tapDeleteBtn))
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.systemGray6
@@ -22,6 +49,7 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
         CustomCollectionView.backgroundColor = UIColor.systemGray6
         self.navigationItem.rightBarButtonItem = self.menuBtn
         menuBtn.tintColor = .black
+        CustomCollectionView.allowsMultipleSelection = true
     }
     // 섹션에 표시 할 셀 갯수를 묻는 메서드
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -35,7 +63,6 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
             return UICollectionViewCell()
         }
         cell.layer.cornerRadius = 5
-        
         cell.moveToListMethod = {
             let index = indexPath.row
             guard let vc = self.storyboard?.instantiateViewController(identifier: "CustomListViewController") as? CustomListViewController else { return }
@@ -58,9 +85,8 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
         return cell
     }
     //셀이 선택되었을 때
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.row)
-    }
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//    }
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         if let flowLayout = self.CustomCollectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.invalidateLayout() // 현재 layout을 무효화하고 layout 업데이트를 작동
@@ -75,32 +101,36 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
     @objc func tapMenuBtn() {
         showActionSheet()
     }
+    @objc func tapCancleBtn(){
+        self.navigationItem.rightBarButtonItem = self.menuBtn
+        self.navigationItem.leftBarButtonItem = nil
+        self.editMode = .view
+    }
+    @objc func tapDeleteBtn(){
+        self.editMode = .view
+    }
+    
     func showActionSheet() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let first = UIAlertAction(title: "폴더 추가하기", style: .default) { action in
-            guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddingFolderViewController") as? AddingFolderViewController else {
-                    return
-                }
+            guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddingFolderViewController") as? AddingFolderViewController else { return }
             vc.modalPresentationStyle = .formSheet
             vc.viewController = self
             vc.questionStore = self.questionStore
             self.present(vc,animated: true)
         }
         let second = UIAlertAction(title: "편집하기", style: .default) { action in
-            
+            self.navigationItem.rightBarButtonItem = self.cancleBtn
+            self.navigationItem.leftBarButtonItem = self.deleteBtn
+            self.editMode = .select
         }
-        let cancel = UIAlertAction(title: "취소", style: .cancel) { action in
-            
-        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel) { action in }
         actionSheet.addAction(first)
         actionSheet.addAction(second)
         actionSheet.addAction(cancel)
         
         present(actionSheet, animated: true, completion: nil)
     }
-    
-    
-   
 }
 
 extension CustomViewController: UICollectionViewDelegateFlowLayout {
@@ -118,9 +148,8 @@ class CustomCardListCell: UICollectionViewCell {
     @IBOutlet weak var movequizBtn: UIButton!
     @IBOutlet weak var countofQuestion: UILabel!
     
-    var moveToListMethod: (() -> Void)?
-    var moveToQuizMethod: (() -> Void)?
-    
+    @IBOutlet weak var checkMark: UIImageView!
+    @IBOutlet weak var editView: UIView!
     @IBAction func tapCardBtn(_ sender: Any) {
         moveToListMethod?()
     }
@@ -128,17 +157,33 @@ class CustomCardListCell: UICollectionViewCell {
         moveToQuizMethod?()
     }
     
+    var moveToListMethod: (() -> Void)?
+    var moveToQuizMethod: (() -> Void)?
+    
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                checkMark.image = UIImage(systemName: "checkmark.circle")
+            } else {
+                checkMark.image = UIImage(systemName: "circle")
+            }
+        }
+    }
+    
     func update(info: QuestionFolder2) {
         cardBtn.setTitle("\(info.folderName)", for: .normal)
-        cardBtn.titleLabel?.font = .systemFont(ofSize: 30
-        )
+        cardBtn.titleLabel?.font = .systemFont(ofSize: 30)
 
         cardBtn.backgroundColor = UIColor.white
         cardBtn.layer.cornerRadius = 5
-        
 //        cardBtn.layer.shadowOffset = CGSize(width: 0.5, height: 0.1)
         cardBtn.layer.shadowOpacity = 0.3
         cardBtn.layer.shadowRadius = 20
         countofQuestion.text = "\(info.questionList.count)개의 질문"
+        
+        checkMark.image = UIImage(systemName: "circle")
+        checkMark.tintColor = .gray
+        
+        editView.layer.opacity = 0.1
     }
 }
