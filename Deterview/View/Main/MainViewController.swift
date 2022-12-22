@@ -26,6 +26,8 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     override func viewWillAppear(_ animated: Bool) {
         QuestionFolderStore().updateQuestionFolder()
+//        self.collectionView.reloadData()
+        print("11")
     }
     func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -61,7 +63,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
             vc.folderName = self.templateData[index].folderName
             self.navigationController?.pushViewController(vc, animated: true)
         }
-       
+        
         let cellInfo = templateData[indexPath.item]
         cell.update(info: cellInfo)
         return cell

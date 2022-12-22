@@ -8,9 +8,8 @@
 import Foundation
 import RealmSwift
 
-class QuestionFolderStore: ObservableObject {
-    @Published var questionFolderStore: [QuestionFolder2] = []
-    
+class QuestionFolderStore {
+    var questionFolderStore: [QuestionFolder2] = []
     
     let realm = try! Realm()
     
@@ -21,7 +20,6 @@ class QuestionFolderStore: ObservableObject {
         try! self.realm.write {
             self.realm.add(createFolder)
         }
-//        print(questionFolderStore)
     }
     
     func readQuestionFolder(){
@@ -29,14 +27,14 @@ class QuestionFolderStore: ObservableObject {
         let folderData = self.realm.objects(QuestionFolder2.self)
         questionFolderStore = Array(folderData)
         print(questionFolderStore)
+        print("readQuestionFolder")
     }
     
     func updateQuestionFolder(){
-        if let questionFolder = realm.objects(QuestionFolder2.self).filter(NSPredicate(format: "id = %@", "344D3229-7968-4D69-8B5D-375215B1B335")).first{
+        if let questionFolder = realm.objects(QuestionFolder2.self).filter(NSPredicate(format: "id = %@", "64B1B0AD-4826-4D08-9060-3F049711ECEA")).first{
             let question = Question2()
-
             try! realm.write{
-                questionFolder.folderName = "수정됐나요?"
+                questionFolder.folderName = ""
                 questionFolder.questionList.append(question)
                 self.questionFolderStore.append(questionFolder)
             }

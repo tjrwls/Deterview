@@ -12,11 +12,19 @@ enum Mode {
     case select
 }
 
+protocol SelectModeDelegate {
+    func setSelectMode()
+}
+
+extension CustomCardListCell : SelectModeDelegate {
+    func setSelectMode() {
+        checkMark.isHidden = false
+    }
+}
 
 class CustomViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
-    
     var questionStore: QuestionFolderStore = QuestionFolderStore()
-    var isEditMode: Bool = false
+    var selectDelegate: SelectModeDelegate?
     var editMode: Mode = .view {
         didSet{
             switch editMode {
@@ -27,7 +35,7 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
             }
         }
     }
-    
+    // TODO: 소문자로 수정
     @IBOutlet weak var CustomCollectionView: UICollectionView!
     lazy var menuBtn: UIBarButtonItem = {
         UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .done, target: self, action: #selector(tapMenuBtn))
@@ -50,6 +58,10 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
         self.navigationItem.rightBarButtonItem = self.menuBtn
         menuBtn.tintColor = .black
         CustomCollectionView.allowsMultipleSelection = true
+        questionStore.readQuestionFolder()
+        self.CustomCollectionView.allowsMultipleSelection = false
+        print("viewDidLoad")
+        
     }
     // 섹션에 표시 할 셀 갯수를 묻는 메서드
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -66,7 +78,6 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
         cell.moveToListMethod = {
             let index = indexPath.row
             guard let vc = self.storyboard?.instantiateViewController(identifier: "CustomListViewController") as? CustomListViewController else { return }
-            
             vc.questionList = Array(self.questionStore.questionFolderStore[index].questionList)
             vc.folderName = self.questionStore.questionFolderStore[index].folderName
             self.navigationController?.pushViewController(vc, animated: true)
@@ -74,28 +85,39 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
         cell.moveToQuizMethod = {
             let index = indexPath.row
             guard let vc = self.storyboard?.instantiateViewController(identifier: "QuizViewController") as? QuizViewController else { return }
-
-//            vc.questionList = self.questionFolders[index].questionList
-//            vc.folderName = self.questionFolders[index].folderName
+            //            vc.questionList = self.questionFolders[index].questionList
+            //            vc.folderName = self.questionFolders[index].folderName
             self.navigationController?.pushViewController(vc, animated: true)
         }
-       
-        let cellInfo = questionStore.questionFolderStore[indexPath.item]
+        let cellInfo = questionStore.questionFolderStore[indexPath.row]
         cell.update(info: cellInfo)
+        switch editMode {
+        case .view :
+            cell.checkMark.isHidden = true
+            cell.editView.isHidden = true
+        case .select :
+            cell.editView.isHidden = false
+            cell.checkMark.isHidden = false
+        }
         return cell
     }
-    //셀이 선택되었을 때
+    
+//셀이 선택되었을 때
 //    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //    }
+    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         if let flowLayout = self.CustomCollectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.invalidateLayout() // 현재 layout을 무효화하고 layout 업데이트를 작동
         }
     }
     override func viewDidAppear(_ animated: Bool) {
-        questionStore.readQuestionFolder()
+        UICollectionView.performWithoutAnimation {
+            self.CustomCollectionView.reloadSections([0])
+            print("1")
+        }
         self.CustomCollectionView.reloadData()
-        // viewWillAppear에서 호출시 크래쉬가 자주 날수 있다. View 생성전에 호출시 문제가 생길 수 있다.
+//         viewWillAppear에서 호출시 크래쉬가 자주 날수 있다. View 생성전에 호출시 문제가 생길 수 있다.
     }
     
     @objc func tapMenuBtn() {
@@ -105,9 +127,13 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
         self.navigationItem.rightBarButtonItem = self.menuBtn
         self.navigationItem.leftBarButtonItem = nil
         self.editMode = .view
+        self.CustomCollectionView.reloadSections([0])
     }
     @objc func tapDeleteBtn(){
+        self.navigationItem.rightBarButtonItem = self.menuBtn
+        self.navigationItem.leftBarButtonItem = nil
         self.editMode = .view
+        self.CustomCollectionView.reloadSections([0])
     }
     
     func showActionSheet() {
@@ -123,6 +149,11 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
             self.navigationItem.rightBarButtonItem = self.cancleBtn
             self.navigationItem.leftBarButtonItem = self.deleteBtn
             self.editMode = .select
+            self.selectDelegate?.setSelectMode()
+//            UICollectionView.performWithoutAnimation {
+                self.CustomCollectionView.reloadSections([0])
+                print("1")
+//            }
         }
         let cancel = UIAlertAction(title: "취소", style: .cancel) { action in }
         actionSheet.addAction(first)
@@ -159,6 +190,7 @@ class CustomCardListCell: UICollectionViewCell {
     
     var moveToListMethod: (() -> Void)?
     var moveToQuizMethod: (() -> Void)?
+    var selecteDelegate: SelectModeDelegate? = nil
     
     override var isSelected: Bool {
         didSet {

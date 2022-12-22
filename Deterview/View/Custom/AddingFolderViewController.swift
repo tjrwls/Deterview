@@ -60,7 +60,9 @@ class AddingFolderViewController: UIViewController {
         self.dismiss(animated: true) {
 //            vc.CustomCollectionView.reloadData()
 //            print("3")
-            self.viewController?.CustomCollectionView.reloadData()
+            UICollectionView.performWithoutAnimation {
+                self.viewController?.CustomCollectionView.reloadSections([0])
+            }
         }
     }
     
