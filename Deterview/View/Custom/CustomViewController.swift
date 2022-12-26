@@ -29,20 +29,20 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
         didSet{
             switch editMode {
             case .view:
-                self.CustomCollectionView.allowsMultipleSelection = false
+                self.customCollectionView.allowsMultipleSelection = false
             case .select:
-                self.CustomCollectionView.allowsMultipleSelection = true
+                self.customCollectionView.allowsMultipleSelection = true
             }
         }
     }
-    // TODO: 소문자로 수정
-    @IBOutlet weak var CustomCollectionView: UICollectionView!
+    
+    @IBOutlet weak var customCollectionView: UICollectionView!
     lazy var menuBtn: UIBarButtonItem = {
         UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .done, target: self, action: #selector(tapMenuBtn))
     }()
     
-    lazy var cancleBtn: UIBarButtonItem = {
-        UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(tapCancleBtn))
+    lazy var cancelBtn: UIBarButtonItem = {
+        UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(tapCancelBtn))
     }()
     
     lazy var deleteBtn: UIBarButtonItem = {
@@ -52,28 +52,29 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.systemGray6
-        CustomCollectionView.delegate = self
-        CustomCollectionView.dataSource = self
-        CustomCollectionView.backgroundColor = UIColor.systemGray6
-        self.navigationItem.rightBarButtonItem = self.menuBtn
-        menuBtn.tintColor = .black
-        CustomCollectionView.allowsMultipleSelection = true
-        questionStore.readQuestionFolder()
-        self.CustomCollectionView.allowsMultipleSelection = false
-        print("viewDidLoad")
+        customCollectionView.delegate = self
+        customCollectionView.dataSource = self
+        customCollectionView.backgroundColor = UIColor.systemGray6
+        customCollectionView.allowsMultipleSelection = true
+        customCollectionView.allowsMultipleSelection = false
         
+        menuBtn.tintColor = .black
+        self.navigationItem.rightBarButtonItem = self.menuBtn
+        
+        questionStore.readQuestionFolder()
     }
+    
     // 섹션에 표시 할 셀 갯수를 묻는 메서드
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return questionStore.questionFolderStore.count
     }
     // 콜렉션 뷰의 특정 인덱스에서 표시할 셀을 요청하는 메서드
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCardListCell", for: indexPath) as?
                 CustomCardListCell else {
             return UICollectionViewCell()
         }
+        
         cell.layer.cornerRadius = 5
         cell.moveToListMethod = {
             let index = indexPath.row
@@ -82,15 +83,18 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
             vc.folderName = self.questionStore.questionFolderStore[index].folderName
             self.navigationController?.pushViewController(vc, animated: true)
         }
+        
         cell.moveToQuizMethod = {
-            let index = indexPath.row
-            guard let vc = self.storyboard?.instantiateViewController(identifier: "QuizViewController") as? QuizViewController else { return }
+//            let index = indexPath.row
+//            guard let vc = self.storyboard?.instantiateViewController(identifier: "QuizViewController") as? QuizViewController else { return }
             //            vc.questionList = self.questionFolders[index].questionList
             //            vc.folderName = self.questionFolders[index].folderName
-            self.navigationController?.pushViewController(vc, animated: true)
+//            self.navigationController?.pushViewController(vc, animated: true)
         }
+        
         let cellInfo = questionStore.questionFolderStore[indexPath.row]
         cell.update(info: cellInfo)
+        
         switch editMode {
         case .view :
             cell.checkMark.isHidden = true
@@ -99,6 +103,7 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
             cell.editView.isHidden = false
             cell.checkMark.isHidden = false
         }
+        
         return cell
     }
     
@@ -107,33 +112,34 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
 //    }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        if let flowLayout = self.CustomCollectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+        if let flowLayout = self.customCollectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.invalidateLayout() // 현재 layout을 무효화하고 layout 업데이트를 작동
         }
     }
     override func viewDidAppear(_ animated: Bool) {
         UICollectionView.performWithoutAnimation {
-            self.CustomCollectionView.reloadSections([0])
-            print("1")
+            self.customCollectionView.reloadSections([0])
         }
-        self.CustomCollectionView.reloadData()
+        self.customCollectionView.reloadData()
 //         viewWillAppear에서 호출시 크래쉬가 자주 날수 있다. View 생성전에 호출시 문제가 생길 수 있다.
     }
     
     @objc func tapMenuBtn() {
         showActionSheet()
     }
-    @objc func tapCancleBtn(){
+    @objc func tapCancelBtn(){
         self.navigationItem.rightBarButtonItem = self.menuBtn
         self.navigationItem.leftBarButtonItem = nil
         self.editMode = .view
-        self.CustomCollectionView.reloadSections([0])
+        UIView.performWithoutAnimation {   
+            self.customCollectionView.reloadSections([0])
+        }
     }
     @objc func tapDeleteBtn(){
         self.navigationItem.rightBarButtonItem = self.menuBtn
         self.navigationItem.leftBarButtonItem = nil
         self.editMode = .view
-        self.CustomCollectionView.reloadSections([0])
+        self.customCollectionView.reloadSections([0])
     }
     
     func showActionSheet() {
@@ -146,14 +152,13 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
             self.present(vc,animated: true)
         }
         let second = UIAlertAction(title: "편집하기", style: .default) { action in
-            self.navigationItem.rightBarButtonItem = self.cancleBtn
+            self.navigationItem.rightBarButtonItem = self.cancelBtn
             self.navigationItem.leftBarButtonItem = self.deleteBtn
             self.editMode = .select
             self.selectDelegate?.setSelectMode()
-//            UICollectionView.performWithoutAnimation {
-                self.CustomCollectionView.reloadSections([0])
-                print("1")
-//            }
+            UIView.performWithoutAnimation {
+                self.customCollectionView.reloadSections([0])
+            }
         }
         let cancel = UIAlertAction(title: "취소", style: .cancel) { action in }
         actionSheet.addAction(first)

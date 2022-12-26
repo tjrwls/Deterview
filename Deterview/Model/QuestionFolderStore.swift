@@ -23,11 +23,8 @@ class QuestionFolderStore {
     }
     
     func readQuestionFolder(){
-        //        var readData: Results<QuestionFolder2>
         let folderData = self.realm.objects(QuestionFolder2.self)
         questionFolderStore = Array(folderData)
-        print(questionFolderStore)
-        print("readQuestionFolder")
     }
     
     func updateQuestionFolder(){

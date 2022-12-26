@@ -20,15 +20,11 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.systemGray6
-        print("여기에요")
-        print(getDocumentsDirectory())
-        
     }
-    override func viewWillAppear(_ animated: Bool) {
-        QuestionFolderStore().updateQuestionFolder()
+//    override func viewWillAppear(_ animated: Bool) {
+//        QuestionFolderStore().updateQuestionFolder()
 //        self.collectionView.reloadData()
-        print("11")
-    }
+//    }
     func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documentsDirectory = paths[0]
@@ -70,8 +66,8 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     //셀이 선택되었을 때
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.row)
     }
+    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         if let flowLayout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.invalidateLayout() // 현재 layout을 무효화하고 layout 업데이트를 작동
@@ -112,8 +108,6 @@ class MainCardListCell: UICollectionViewCell {
 
         cardBtn.backgroundColor = UIColor.white
         cardBtn.layer.cornerRadius = 5
-        
-//        cardBtn.layer.shadowOffset = CGSize(width: 0.5, height: 0.1)
         cardBtn.layer.shadowOpacity = 0.3
         cardBtn.layer.shadowRadius = 20
         countofQuestion.text = "\(info.questionList.count)개의 질문"
