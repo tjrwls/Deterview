@@ -12,19 +12,8 @@ enum Mode {
     case select
 }
 
-protocol SelectModeDelegate {
-    func setSelectMode()
-}
-
-extension CustomCardListCell : SelectModeDelegate {
-    func setSelectMode() {
-        checkMark.isHidden = false
-    }
-}
-
 class CustomViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     var questionStore: QuestionFolderStore = QuestionFolderStore()
-    var selectDelegate: SelectModeDelegate?
     var dictionarySelectedIndexPath: [IndexPath : Bool] = [:]
     var editMode: Mode = .view {
         didSet{
@@ -171,7 +160,6 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
             self.navigationItem.rightBarButtonItem = self.cancelBtn
             self.navigationItem.leftBarButtonItem = self.deleteBtn
             self.editMode = .select
-            self.selectDelegate?.setSelectMode()
             UIView.performWithoutAnimation {
                 self.customCollectionView.reloadSections([0])
             }
@@ -212,7 +200,6 @@ class CustomCardListCell: UICollectionViewCell {
 
     var moveToListMethod: (() -> Void)?
     var moveToQuizMethod: (() -> Void)?
-    var selecteDelegate: SelectModeDelegate? = nil
     
     override var isSelected: Bool {
         didSet {

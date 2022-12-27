@@ -29,7 +29,6 @@
 		61513F8429350A5300ABE647 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61513F8329350A5300ABE647 /* Assets.xcassets */; };
 		61513F8729350A5300ABE647 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61513F8529350A5300ABE647 /* LaunchScreen.storyboard */; };
 		618370C129366BF3002D36A7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618370C029366BF3002D36A7 /* MainViewController.swift */; };
-		619798BB2959F98300526DA7 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619798BA2959F98300526DA7 /* UITextView.swift */; };
 		E6B763C4C2EEC9929E1929BB /* Pods_Deterview.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F291B2AACAA19A5F1DC413DC /* Pods_Deterview.framework */; };
 /* End PBXBuildFile section */
 
@@ -59,7 +58,6 @@
 		61513F8629350A5300ABE647 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		61513F8829350A5300ABE647 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		618370C029366BF3002D36A7 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		619798BA2959F98300526DA7 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		7A0F561E213315B14B92D828 /* Pods-Deterview.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Deterview.debug.xcconfig"; path = "Target Support Files/Pods-Deterview/Pods-Deterview.debug.xcconfig"; sourceTree = "<group>"; };
 		F291B2AACAA19A5F1DC413DC /* Pods_Deterview.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Deterview.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -93,7 +91,6 @@
 				2385C6122945C95500B661FC /* UIButtonExtension.swift */,
 				2385C6102945C87C00B661FC /* UILabelExtension.swift */,
 				233FAE2A293A67440045521A /* colorExtension.swift */,
-				619798BA2959F98300526DA7 /* UITextView.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -314,7 +311,6 @@
 				2385C6112945C87C00B661FC /* UILabelExtension.swift in Sources */,
 				2385C6132945C95500B661FC /* UIButtonExtension.swift in Sources */,
 				61513F7D29350A5200ABE647 /* SceneDelegate.swift in Sources */,
-				619798BB2959F98300526DA7 /* UITextView.swift in Sources */,
 				233FAE25293A498D0045521A /* Question.swift in Sources */,
 				618370C129366BF3002D36A7 /* MainViewController.swift in Sources */,
 			);
