@@ -25,10 +25,12 @@ extension CustomCardListCell : SelectModeDelegate {
 class CustomViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     var questionStore: QuestionFolderStore = QuestionFolderStore()
     var selectDelegate: SelectModeDelegate?
+    var dictionarySelectedIndexPath: [IndexPath : Bool] = [:]
     var editMode: Mode = .view {
         didSet{
             switch editMode {
             case .view:
+                dictionarySelectedIndexPath.removeAll()
                 self.customCollectionView.allowsMultipleSelection = false
             case .select:
                 self.customCollectionView.allowsMultipleSelection = true
@@ -108,8 +110,14 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
     }
     
 //셀이 선택되었을 때
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch editMode {
+        case .view:
+            break
+        case .select:
+            dictionarySelectedIndexPath[indexPath] = true
+        }
+    }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         if let flowLayout = self.customCollectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -136,9 +144,17 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
         }
     }
     @objc func tapDeleteBtn(){
+        for (key,value) in dictionarySelectedIndexPath {
+            if value {
+                let id: String = questionStore.questionFolderStore[key.row].id
+                questionStore.deleteQuestionFolder(id)
+            }
+        }
         self.navigationItem.rightBarButtonItem = self.menuBtn
         self.navigationItem.leftBarButtonItem = nil
         self.editMode = .view
+        self.dictionarySelectedIndexPath.removeAll()
+        self.questionStore.readQuestionFolder()
         self.customCollectionView.reloadSections([0])
     }
     
@@ -192,7 +208,8 @@ class CustomCardListCell: UICollectionViewCell {
     @IBAction func tapQuizBtn(_ sender: Any) {
         moveToQuizMethod?()
     }
-    
+    @IBOutlet weak var editFolderNameImage: UIImageView!
+
     var moveToListMethod: (() -> Void)?
     var moveToQuizMethod: (() -> Void)?
     var selecteDelegate: SelectModeDelegate? = nil
@@ -210,17 +227,18 @@ class CustomCardListCell: UICollectionViewCell {
     func update(info: QuestionFolder2) {
         cardBtn.setTitle("\(info.folderName)", for: .normal)
         cardBtn.titleLabel?.font = .systemFont(ofSize: 30)
-
         cardBtn.backgroundColor = UIColor.white
         cardBtn.layer.cornerRadius = 5
 //        cardBtn.layer.shadowOffset = CGSize(width: 0.5, height: 0.1)
         cardBtn.layer.shadowOpacity = 0.3
         cardBtn.layer.shadowRadius = 20
+        
         countofQuestion.text = "\(info.questionList.count)개의 질문"
         
         checkMark.image = UIImage(systemName: "circle")
         checkMark.tintColor = .gray
         
         editView.layer.opacity = 0.1
+        editFolderNameImage.image = UIImage(systemName: "square.and.pencil")
     }
 }

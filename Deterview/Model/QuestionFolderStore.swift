@@ -38,8 +38,8 @@ class QuestionFolderStore {
         }
     }
     
-    func deleteQuestionFolder(){
-        if let questionFolder = realm.objects(QuestionFolder2.self).filter(NSPredicate(format: "id = %@", "E0C3CC28-12C4-411D-AF20-56A89B158713")).first{
+    func deleteQuestionFolder(_ id: String){
+        if let questionFolder = realm.objects(QuestionFolder2.self).filter(NSPredicate(format: "id = %@", id)).first{
             try! realm.write {
                 realm.delete(questionFolder)
             }
