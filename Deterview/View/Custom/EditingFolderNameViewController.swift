@@ -1,19 +1,20 @@
 //
-//  AddingFolderViewController.swift
+//  EditingFolderNameViewController.swift
 //  Deterview
 //
-//  Created by MIJU on 2022/12/15.
+//  Created by 조석진 on 2022/12/29.
 //
 
 import UIKit
 
-class AddingFolderViewController: UIViewController {
+class EditingFolderNameViewController: UIViewController {
     var questionStore: QuestionFolderStore? = nil
     var viewController: CustomViewController? = nil
+    var questionFolder: QuestionFolder2? = nil
     var folderNameTextLength: Int {
         folderNameTextField.text?.count ?? 0
     }
-    
+
     @IBOutlet weak var folderNameTextField: UITextField!
     @IBOutlet weak var cancleBtn: UIButton!
     @IBOutlet weak var modalView: UIView!
@@ -21,7 +22,9 @@ class AddingFolderViewController: UIViewController {
     @IBOutlet weak var guideText: UILabel!
     @IBOutlet weak var limitTextLengthMessage: UILabel!
     
+    
     override func viewDidLoad() {
+        super.viewDidLoad()
         super.viewDidLoad()
         modalView.layer.cornerRadius = CGFloat(10)
         guideText.text = "폴더 이름을 입력해주세요"
@@ -33,9 +36,9 @@ class AddingFolderViewController: UIViewController {
         limitTextLengthMessage.text = "1~9자 이내로 입력해주세요."
         limitTextLengthMessage.font = .systemFont(ofSize: 14)
         limitTextLengthMessage.textColor = .gray
+        folderNameTextField.text = questionFolder?.folderName
     }
     
-    // MARK: 뷰생성시 키보드 밑 View 올리기
     override func viewWillAppear(_ animated: Bool) {
         self.folderNameTextField.becomeFirstResponder()
         UIView.animate( // 키보드 올라올 때
@@ -58,7 +61,8 @@ class AddingFolderViewController: UIViewController {
     }
 
     @IBAction func tapSaveBtn(_ sender: Any) {
-        questionStore?.createdQuestionFolder(QuestionFolder(folderName: "\(folderNameTextField!.text ?? "")", questionList: []))
+        questionStore?.updateQuestionFolder(id: questionFolder?.id ?? ""
+                                            , name: folderNameTextField.text ?? "")
         questionStore?.readQuestionFolder()
         
         self.dismiss(animated: true) {
@@ -86,8 +90,14 @@ class AddingFolderViewController: UIViewController {
         } else { saveFolderNameBtn.isEnabled = false }
     }
     
-//    @objc func textFieldDidChange(_ textField: UITextField) {
-//
-//    }
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
 
 }

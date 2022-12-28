@@ -82,6 +82,19 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
             //            vc.folderName = self.questionFolders[index].folderName
 //            self.navigationController?.pushViewController(vc, animated: true)
         }
+        cell.editFolderNameMethod = {
+            let index = indexPath.row
+            guard let vc = self.storyboard?.instantiateViewController(identifier: "EditingFolderNameViewController") as? EditingFolderNameViewController else { return }
+            
+            vc.questionFolder = self.questionStore.questionFolderStore[index]
+            vc.questionStore = self.questionStore
+            vc.viewController = self
+            self.present(vc, animated: true)
+        }
+        
+        cell.editFolderNameBtn.setImage(UIImage(systemName: "square.and.pencil"), for: .normal)
+        cell.editFolderNameBtn.tintColor = UIColor(named: "AccentColor")
+        cell.editFolderNameBtn.imageView?.contentMode = .scaleAspectFit
         
         let cellInfo = questionStore.questionFolderStore[indexPath.row]
         cell.update(info: cellInfo)
@@ -90,9 +103,11 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
         case .view :
             cell.checkMark.isHidden = true
             cell.editView.isHidden = true
+            cell.editFolderNameBtn.isHidden = true
         case .select :
             cell.editView.isHidden = false
             cell.checkMark.isHidden = false
+            cell.editFolderNameBtn.isHidden = false
         }
         
         return cell
@@ -171,6 +186,9 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
         
         present(actionSheet, animated: true, completion: nil)
     }
+    @IBAction func tapEditImage(_ sender: Any) {
+        print("tap")
+    }
 }
 
 extension CustomViewController: UICollectionViewDelegateFlowLayout {
@@ -187,20 +205,24 @@ class CustomCardListCell: UICollectionViewCell {
     @IBOutlet weak var cardBtn: UIButton!
     @IBOutlet weak var movequizBtn: UIButton!
     @IBOutlet weak var countofQuestion: UILabel!
-    
+    @IBOutlet weak var forderNameText: UILabel!
     @IBOutlet weak var checkMark: UIImageView!
     @IBOutlet weak var editView: UIView!
+    @IBOutlet weak var editFolderNameImage: UIImageView!
+    
     @IBAction func tapCardBtn(_ sender: Any) {
         moveToListMethod?()
     }
     @IBAction func tapQuizBtn(_ sender: Any) {
         moveToQuizMethod?()
     }
-    @IBOutlet weak var editFolderNameImage: UIImageView!
-
+    @IBOutlet weak var editFolderNameBtn: UIButton!
+    @IBAction func tapEditFolderNameBtn(_ sender: Any) {
+        editFolderNameMethod?()
+    }
     var moveToListMethod: (() -> Void)?
     var moveToQuizMethod: (() -> Void)?
-    
+    var editFolderNameMethod: (() -> Void)?
     override var isSelected: Bool {
         didSet {
             if isSelected {
@@ -212,8 +234,8 @@ class CustomCardListCell: UICollectionViewCell {
     }
     
     func update(info: QuestionFolder2) {
-        cardBtn.setTitle("\(info.folderName)", for: .normal)
-        cardBtn.titleLabel?.font = .systemFont(ofSize: 30)
+        forderNameText.text = info.folderName
+        forderNameText.font = .systemFont(ofSize: 30)
         cardBtn.backgroundColor = UIColor.white
         cardBtn.layer.cornerRadius = 5
 //        cardBtn.layer.shadowOffset = CGSize(width: 0.5, height: 0.1)
@@ -226,6 +248,12 @@ class CustomCardListCell: UICollectionViewCell {
         checkMark.tintColor = .gray
         
         editView.layer.opacity = 0.1
-        editFolderNameImage.image = UIImage(systemName: "square.and.pencil")
+        
+//        editFolderNameBtn.setImage(UIImage(systemName: "square.and.pencil"), for: .normal)
+//        editFolderNameBtn.frame = CGRectMake(0, 0, 100, 100)
+
+//        editFolderNameBtn.imageView.fo = true
+        
+        
     }
 }

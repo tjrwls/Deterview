@@ -27,13 +27,10 @@ class QuestionFolderStore {
         questionFolderStore = Array(folderData)
     }
     
-    func updateQuestionFolder(){
-        if let questionFolder = realm.objects(QuestionFolder2.self).filter(NSPredicate(format: "id = %@", "64B1B0AD-4826-4D08-9060-3F049711ECEA")).first{
-            let question = Question2()
+    func updateQuestionFolder(id: String, name: String){
+        if let questionFolder = realm.objects(QuestionFolder2.self).filter(NSPredicate(format: "id = %@", id)).first{
             try! realm.write{
-                questionFolder.folderName = ""
-                questionFolder.questionList.append(question)
-                self.questionFolderStore.append(questionFolder)
+                questionFolder.folderName = name
             }
         }
     }
