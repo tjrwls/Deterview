@@ -53,6 +53,7 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
         self.navigationItem.rightBarButtonItem = self.menuBtn
         
         questionStore.readQuestionFolder()
+        print(questionStore.questionFolderStore)
     }
     
     // 섹션에 표시 할 셀 갯수를 묻는 메서드
@@ -70,17 +71,18 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
         cell.moveToListMethod = {
             let index = indexPath.row
             guard let vc = self.storyboard?.instantiateViewController(identifier: "CustomListViewController") as? CustomListViewController else { return }
-            vc.questionList = Array(self.questionStore.questionFolderStore[index].questionList)
-            vc.folderName = self.questionStore.questionFolderStore[index].folderName
+//            vc.questionList = Array(self.questionStore.questionFolderStore[index].questionList)
+            vc.questionStore = self.questionStore
+            vc.questionFolder = self.questionStore.questionFolderStore[index]
             self.navigationController?.pushViewController(vc, animated: true)
         }
         
         cell.moveToQuizMethod = {
-//            let index = indexPath.row
-//            guard let vc = self.storyboard?.instantiateViewController(identifier: "QuizViewController") as? QuizViewController else { return }
-            //            vc.questionList = self.questionFolders[index].questionList
-            //            vc.folderName = self.questionFolders[index].folderName
-//            self.navigationController?.pushViewController(vc, animated: true)
+            let index = indexPath.row
+            guard let vc = self.storyboard?.instantiateViewController(identifier: "QuizViewController") as? QuizViewController else { return }
+            vc.questionList = self.questionStore.questionFolderStore[index].questionList
+            vc.folderName = self.questionStore.questionFolderStore[index].folderName
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         cell.editFolderNameMethod = {
             let index = indexPath.row
@@ -233,7 +235,7 @@ class CustomCardListCell: UICollectionViewCell {
         }
     }
     
-    func update(info: QuestionFolder2) {
+    func update(info: QuestionFolder) {
         forderNameText.text = info.folderName
         forderNameText.font = .systemFont(ofSize: 30)
         cardBtn.backgroundColor = UIColor.white

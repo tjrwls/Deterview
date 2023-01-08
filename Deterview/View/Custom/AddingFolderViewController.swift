@@ -10,6 +10,8 @@ import UIKit
 class AddingFolderViewController: UIViewController {
     var questionStore: QuestionFolderStore? = nil
     var viewController: CustomViewController? = nil
+    var customListViewController: CustomListViewController? = nil
+    var folderId: String = ""
     var folderNameTextLength: Int {
         folderNameTextField.text?.count ?? 0
     }
@@ -24,15 +26,22 @@ class AddingFolderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         modalView.layer.cornerRadius = CGFloat(10)
-        guideText.text = "폴더 이름을 입력해주세요"
+        if viewController != nil{
+            guideText.text = "폴더 이름을 입력해주세요"
+            limitTextLengthMessage.text = "1~9자 이내로 입력해주세요."
+            limitTextLengthMessage.font = .systemFont(ofSize: 14)
+            limitTextLengthMessage.textColor = .gray
+            saveFolderNameBtn.isEnabled = false
+        } else {
+            guideText.text = "질문을 입력해주세요."
+            limitTextLengthMessage.text = ""
+            saveFolderNameBtn.isEnabled = false
+        }
         guideText.textAlignment = .center
         cancleBtn.setTitle("취소", for: .normal)
         saveFolderNameBtn.setTitle("완료", for: .normal)
         saveFolderNameBtn.tintColor = UIColor(.mainColor)
-        saveFolderNameBtn.isEnabled = false
-        limitTextLengthMessage.text = "1~9자 이내로 입력해주세요."
-        limitTextLengthMessage.font = .systemFont(ofSize: 14)
-        limitTextLengthMessage.textColor = .gray
+        
     }
     
     // MARK: 뷰생성시 키보드 밑 View 올리기
@@ -56,16 +65,27 @@ class AddingFolderViewController: UIViewController {
             self.view.transform = CGAffineTransform(translationX: 0, y: -300)
         }
     }
-
+    
     @IBAction func tapSaveBtn(_ sender: Any) {
-        questionStore?.createdQuestionFolder(QuestionFolder(folderName: "\(folderNameTextField!.text ?? "")", questionList: []))
-        questionStore?.readQuestionFolder()
-        
-        self.dismiss(animated: true) {
-            UICollectionView.performWithoutAnimation {
-                self.viewController?.customCollectionView.reloadSections([0])
+        if viewController != nil {
+            let questionFolder: QuestionFolder = QuestionFolder()
+            questionFolder.folderName = folderNameTextField.text ?? ""
+            questionFolder.category = "Custom"
+            questionStore?.createdQuestionFolder(questionFolder)
+            self.dismiss(animated: true) {
+                UICollectionView.performWithoutAnimation {
+                    self.viewController?.customCollectionView.reloadSections([0])
+                }
+            }
+        } else {
+            questionStore?.createdQuestion(id: folderId, addQuestion: folderNameTextField.text ?? "")
+            self.dismiss(animated: true) {
+                UITableView.performWithoutAnimation {
+                    self.customListViewController?.customListView.reloadData()
+                }
             }
         }
+        questionStore?.readQuestionFolder()
     }
     
     @IBAction func tabCancleBtn(_ sender: Any) {
@@ -81,9 +101,16 @@ class AddingFolderViewController: UIViewController {
     }
     */
     @IBAction func textFieldEditingChanged(_ sender: Any) {
-        if folderNameTextLength > 0 && folderNameTextLength < 10 {
-            saveFolderNameBtn.isEnabled = true
-        } else { saveFolderNameBtn.isEnabled = false }
+        if viewController != nil {
+            if folderNameTextLength > 0 && folderNameTextLength < 10 {
+                saveFolderNameBtn.isEnabled = true
+            } else { saveFolderNameBtn.isEnabled = false }
+        } else {
+            if folderNameTextLength > 0  {
+                saveFolderNameBtn.isEnabled = true
+            } else { saveFolderNameBtn.isEnabled = false }
+        }
+        
     }
     
 //    @objc func textFieldDidChange(_ textField: UITextField) {

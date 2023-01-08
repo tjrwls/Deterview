@@ -9,8 +9,7 @@ import UIKit
 import RealmSwift
 
 class MainViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
-    var templateData: [QuestionFolder] = TemplateData().templateData
-    var itemArray: Results<Question2>?
+    var questionStore: QuestionFolderStore = QuestionFolderStore()
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -20,6 +19,9 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.systemGray6
+        questionStore.readQuestionFolder()
+        print("## realm file dir -> \(Realm.Configuration.defaultConfiguration.fileURL!)")
+
     }
 //    override func viewWillAppear(_ animated: Bool) {
 //        QuestionFolderStore().updateQuestionFolder()
@@ -32,7 +34,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     // 섹션에 표시 할 셀 갯수를 묻는 메서드
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return templateData.count
+        return questionStore.questionFolderStore.count
     }
     // 콜렉션 뷰의 특정 인덱스에서 표시할 셀을 요청하는 메서드
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -47,27 +49,28 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
             let index = indexPath.row
             guard let vc = self.storyboard?.instantiateViewController(identifier: "MainListViewController") as? MainListViewController else { return }
             
-            vc.questionList = self.templateData[index].questionList
-            vc.folderName = self.templateData[index].folderName
+//            vc.questionList = self.templateData[index].questionList
+            vc.folderName = self.questionStore.questionFolderStore[index].folderName
             self.navigationController?.pushViewController(vc, animated: true)
         }
+        
         cell.moveToQuizMethod = {
             let index = indexPath.row
             guard let vc = self.storyboard?.instantiateViewController(identifier: "QuizViewController") as? QuizViewController else { return }
             
-            vc.questionList = self.templateData[index].questionList
-            vc.folderName = self.templateData[index].folderName
+//            vc.questionList = self.templateData[index].questionList
+            vc.folderName = self.questionStore.questionFolderStore[index].folderName
             self.navigationController?.pushViewController(vc, animated: true)
         }
         
-        let cellInfo = templateData[indexPath.item]
+        let cellInfo = questionStore.questionFolderStore[indexPath.item]
         cell.update(info: cellInfo)
         return cell
     }
     //셀이 선택되었을 때
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     }
-    
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         if let flowLayout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.invalidateLayout() // 현재 layout을 무효화하고 layout 업데이트를 작동

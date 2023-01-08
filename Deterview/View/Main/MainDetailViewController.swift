@@ -68,6 +68,7 @@ class MainDetailViewController: UIViewController {
 //                self.view.transform = CGAffineTransform(translationX: 0, y: -150) // view 위로 밀림
 //            }
 //        )
+        
     }
     
     @objc func tapSaveBtn() {

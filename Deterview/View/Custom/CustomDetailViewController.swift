@@ -11,13 +11,13 @@ class CustomDetailViewController: UIViewController {
 
     @IBOutlet weak var answerText: UILabel!
     @IBOutlet weak var questionText: UILabel!
-    
+    @IBOutlet weak var questionTextField: UITextField!
     @IBOutlet weak var answerTextField: UITextView!
 
-    
+    var questionStore: QuestionFolderStore? = nil
     var isShowingAnswerTextField: Bool = false
     var isShowingAnswerText: Bool = false
-    var question: Question2? = nil
+    var question: Question? = nil
     
     lazy var editButton: UIBarButtonItem = {
         UIBarButtonItem(title: "편집", style: .done, target: self, action: #selector(tapEditBtn))
@@ -30,9 +30,13 @@ class CustomDetailViewController: UIViewController {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = self.editButton
         
-        questionText.numberOfLines = 0
         questionText.text = question?.question
         questionText.font = .systemFont(ofSize: 24)
+        questionText.setLineSpacing(spacing: 4)
+
+        questionTextField.font = .systemFont(ofSize: 24)
+        questionTextField.isHidden = true
+        questionTextField.borderStyle = .none
         
         answerText.numberOfLines = 0
         answerText.sizeToFit()
@@ -54,6 +58,15 @@ class CustomDetailViewController: UIViewController {
         answerTextField.layer.isHidden.toggle()
         answerTextField.becomeFirstResponder()
         self.navigationItem.rightBarButtonItem = self.saveButton
+        
+        questionText.isHidden.toggle()
+        questionTextField.text = questionText.text
+        questionTextField.isHidden.toggle()
+        if !(UIDevice.current.orientation.isLandscape) {
+            answerTextField.textContainerInset = UIEdgeInsets(top: 13, left: 20, bottom: 160, right: 20)
+        } else {
+            answerTextField.textContainerInset = UIEdgeInsets(top: 8, left: 20, bottom: 8, right: 20)
+        }
 //        UIView.animate( // 키보드 올라올 때
 //            withDuration: 0.4
 //            , animations: {
@@ -67,6 +80,9 @@ class CustomDetailViewController: UIViewController {
         answerTextField.layer.isHidden.toggle()
         answerText.text = answerTextField.text
         self.navigationItem.rightBarButtonItem = self.editButton
+        questionText.text = questionTextField.text
+        questionText.isHidden.toggle()
+        questionTextField.isHidden.toggle()
         answerTextField.resignFirstResponder()
         UIView.animate( // 키보드 내려올 때
             withDuration: 0.1

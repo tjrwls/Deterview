@@ -10,7 +10,7 @@ import UIKit
 class EditingFolderNameViewController: UIViewController {
     var questionStore: QuestionFolderStore? = nil
     var viewController: CustomViewController? = nil
-    var questionFolder: QuestionFolder2? = nil
+    var questionFolder: QuestionFolder? = nil
     var folderNameTextLength: Int {
         folderNameTextField.text?.count ?? 0
     }
