@@ -22,6 +22,10 @@ class CustomListViewController: UIViewController, UITableViewDelegate, UITableVi
         customListView.delegate = self
         customListView.dataSource = self
         
+        questionFolder = questionStore?.customQuestionFolders.filter {
+            $0.id == questionFolder?.id
+        }.first ?? QuestionFolder()
+        
         menuBtn.tintColor = .black
         self.navigationItem.rightBarButtonItem = self.menuBtn
         // Do any additional setup after loading the view.
@@ -55,8 +59,9 @@ class CustomListViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let vc = self.storyboard?.instantiateViewController(identifier: "CustomDetailViewController") as? CustomDetailViewController else { return }
-        vc.question = self.questionFolder?.questionList[indexPath.item]
         vc.questionStore = questionStore
+        vc.question = self.questionFolder?.questionList[indexPath.item]
+        
         self.navigationController?.pushViewController(vc, animated: true)
         customListView.deselectRow(at: indexPath, animated: true)
     }
@@ -70,9 +75,13 @@ class CustomListViewController: UIViewController, UITableViewDelegate, UITableVi
 //           }
 //       }
     
+    override func viewDidAppear(_ animated: Bool) {
+        customListView.reloadData()
+    }
+    
     func showActionSheet() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let first = UIAlertAction(title: "폴더 추가하기", style: .default) { action in
+        let first = UIAlertAction(title: "질문 추가하기", style: .default) { action in
             guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddingFolderViewController") as? AddingFolderViewController else { return }
             vc.modalPresentationStyle = .formSheet
             vc.customListViewController = self
@@ -80,13 +89,13 @@ class CustomListViewController: UIViewController, UITableViewDelegate, UITableVi
             vc.folderId = self.questionFolder?.id ?? ""
             self.present(vc,animated: true)
         }
-        let second = UIAlertAction(title: "편집하기", style: .default) { action in
-//            self.navigationItem.rightBarButtonItem = self.cancelBtn
-//            self.navigationItem.leftBarButtonItem = self.deleteBtn
-//            self.editMode = .select
-//            UIView.performWithoutAnimation {
-//                self.customCollectionView.reloadSections([0])
-//            }
+        let second = UIAlertAction(title: "질문 불러오기", style: .default) { action in
+            guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "SelectedQuestionFolderViewController") as? SelectedQuestionFolderViewController else { return }
+            vc.questionStore = self.questionStore
+            vc.addToFolderId = self.questionFolder?.id ?? ""
+            let navigationController = UINavigationController(rootViewController: vc)
+            navigationController.modalPresentationStyle = .fullScreen
+            self.present(navigationController,animated: true)
         }
         let cancel = UIAlertAction(title: "취소", style: .cancel) { action in }
         actionSheet.addAction(first)

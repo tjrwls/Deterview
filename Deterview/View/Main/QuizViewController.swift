@@ -36,7 +36,7 @@ class QuizViewController: UIViewController {
         nextQuizBtn.setFontStyle(size: 20, weight: .bold)
         
         questionArr = Array(questionList)
-        
+        print("questionList \(questionList)")
         navigationItem.title = folderName
         navigationItem.largeTitleDisplayMode = .never
 

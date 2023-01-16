@@ -30,6 +30,8 @@
 		61513F8429350A5300ABE647 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61513F8329350A5300ABE647 /* Assets.xcassets */; };
 		61513F8729350A5300ABE647 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61513F8529350A5300ABE647 /* LaunchScreen.storyboard */; };
 		618370C129366BF3002D36A7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618370C029366BF3002D36A7 /* MainViewController.swift */; };
+		61850B52296C5A50008B8B89 /* SelectedQuestionFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61850B51296C5A50008B8B89 /* SelectedQuestionFolderViewController.swift */; };
+		61A8D92D296C6B7700A4F8AC /* SelectedListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A8D92C296C6B7700A4F8AC /* SelectedListViewController.swift */; };
 		E6B763C4C2EEC9929E1929BB /* Pods_Deterview.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F291B2AACAA19A5F1DC413DC /* Pods_Deterview.framework */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +62,8 @@
 		61513F8629350A5300ABE647 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		61513F8829350A5300ABE647 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		618370C029366BF3002D36A7 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		61850B51296C5A50008B8B89 /* SelectedQuestionFolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedQuestionFolderViewController.swift; sourceTree = "<group>"; };
+		61A8D92C296C6B7700A4F8AC /* SelectedListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedListViewController.swift; sourceTree = "<group>"; };
 		7A0F561E213315B14B92D828 /* Pods-Deterview.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Deterview.debug.xcconfig"; path = "Target Support Files/Pods-Deterview/Pods-Deterview.debug.xcconfig"; sourceTree = "<group>"; };
 		F291B2AACAA19A5F1DC413DC /* Pods_Deterview.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Deterview.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -170,6 +174,8 @@
 				239537E529476041006CAB9D /* CustomDetailViewController.swift */,
 				230236F8294B649A00CB282B /* AddingFolderViewController.swift */,
 				6109A6D4295CA3B400EA85DC /* EditingFolderNameViewController.swift */,
+				61850B51296C5A50008B8B89 /* SelectedQuestionFolderViewController.swift */,
+				61A8D92C296C6B7700A4F8AC /* SelectedListViewController.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -299,6 +305,7 @@
 			files = (
 				239537E629476041006CAB9D /* CustomDetailViewController.swift in Sources */,
 				611C4E0A2937C97B002F14D4 /* MainListViewController.swift in Sources */,
+				61A8D92D296C6B7700A4F8AC /* SelectedListViewController.swift in Sources */,
 				239537E22947600B006CAB9D /* CustomViewController.swift in Sources */,
 				230236F9294B649A00CB282B /* AddingFolderViewController.swift in Sources */,
 				6109A6D5295CA3B400EA85DC /* EditingFolderNameViewController.swift in Sources */,
@@ -309,6 +316,7 @@
 				230243A0293E3DEE00015082 /* QuizViewController.swift in Sources */,
 				233FAE23293A49880045521A /* QuestionFolder.swift in Sources */,
 				61513F7B29350A5200ABE647 /* AppDelegate.swift in Sources */,
+				61850B52296C5A50008B8B89 /* SelectedQuestionFolderViewController.swift in Sources */,
 				233FAE29293A55330045521A /* MainDetailViewController.swift in Sources */,
 				239537E429476022006CAB9D /* CustomListViewController.swift in Sources */,
 				23AC8C032947732D003B3D62 /* MenuViewController.swift in Sources */,

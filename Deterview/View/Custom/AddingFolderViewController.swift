@@ -41,7 +41,6 @@ class AddingFolderViewController: UIViewController {
         cancleBtn.setTitle("취소", for: .normal)
         saveFolderNameBtn.setTitle("완료", for: .normal)
         saveFolderNameBtn.tintColor = UIColor(.mainColor)
-        
     }
     
     // MARK: 뷰생성시 키보드 밑 View 올리기
@@ -72,6 +71,7 @@ class AddingFolderViewController: UIViewController {
             questionFolder.folderName = folderNameTextField.text ?? ""
             questionFolder.category = "Custom"
             questionStore?.createdQuestionFolder(questionFolder)
+            questionStore?.readQuestionFolder()
             self.dismiss(animated: true) {
                 UICollectionView.performWithoutAnimation {
                     self.viewController?.customCollectionView.reloadSections([0])
@@ -85,7 +85,6 @@ class AddingFolderViewController: UIViewController {
                 }
             }
         }
-        questionStore?.readQuestionFolder()
     }
     
     @IBAction func tabCancleBtn(_ sender: Any) {

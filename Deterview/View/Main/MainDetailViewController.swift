@@ -10,12 +10,12 @@ import UIKit
 class MainDetailViewController: UIViewController {
     @IBOutlet weak var answerText: UILabel!
     @IBOutlet weak var questionText: UILabel!
-    
     @IBOutlet weak var answerTextField: UITextView!
 
     
     var isShowingAnswerTextField: Bool = false
     var isShowingAnswerText: Bool = false
+    var questionStore: QuestionFolderStore? = nil
     var question: Question? = nil
     
     lazy var editButton: UIBarButtonItem = {
@@ -43,8 +43,6 @@ class MainDetailViewController: UIViewController {
         answerTextField.font = .systemFont(ofSize: 17)
         self.navigationItem.title = "Question"
         navigationItem.largeTitleDisplayMode = .never
-        
-
     }
     
     @objc func tapEditBtn() {
@@ -54,14 +52,14 @@ class MainDetailViewController: UIViewController {
         answerTextField.becomeFirstResponder()
         self.navigationItem.rightBarButtonItem = self.saveButton
         if !(UIDevice.current.orientation.isLandscape) {
-            answerTextField.textContainerInset = UIEdgeInsets(top: 13, left: 20, bottom: 160, right: 20)
+            answerTextField.textContainerInset = UIEdgeInsets(top: 13, left: 17, bottom: 260, right: 20)
+        } else {
+            answerTextField.textContainerInset = UIEdgeInsets(top: 13, left: 17, bottom: 180, right: 20)
+        }
 //  heightAnchor: 세로 넓이를 강제로 조절하는 것으로 추정됨
 //            answerTextField.heightAnchor.constraint(equalToConstant: 300).isActive = true
 //            answerTextField.layoutIfNeeded()
-        } else {
-            answerTextField.textContainerInset = UIEdgeInsets(top: 8, left: 20, bottom: 8, right: 20)
 //            answerTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        }
 //        UIView.animate( // 키보드 올라올 때
 //            withDuration: 0.4
 //            , animations: {
@@ -77,6 +75,14 @@ class MainDetailViewController: UIViewController {
         answerText.text = answerTextField.text
         self.navigationItem.rightBarButtonItem = self.editButton
         answerTextField.resignFirstResponder()
+        
+        let updateQuestion = Question()
+        updateQuestion.id = question?.id ?? ""
+        updateQuestion.answer = answerTextField.text ?? ""
+        updateQuestion.question = questionText.text ?? ""
+        questionStore?.updateQuestion(updateQuestion: updateQuestion)
+
+        
 //        UIView.animate( // 키보드 내려올 때
 //            withDuration: 0.1
 //            , animations: {
@@ -87,9 +93,9 @@ class MainDetailViewController: UIViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
 //        self.view.transform = CGAffineTransform(translationX: 0, y: 0)
         if !(UIDevice.current.orientation.isLandscape) {
-            answerTextField.textContainerInset = UIEdgeInsets(top: 8, left: 20, bottom: 140, right: 20)
+            answerTextField.textContainerInset = UIEdgeInsets(top: 13, left: 17, bottom: 260, right: 20)
         } else {
-            answerTextField.textContainerInset = UIEdgeInsets(top: 8, left: 20, bottom: 8, right: 20)
+            answerTextField.textContainerInset = UIEdgeInsets(top: 13, left: 17, bottom: 180, right: 20)
         }
     }
     

@@ -49,7 +49,6 @@ class CustomDetailViewController: UIViewController {
      
         self.navigationItem.title = "Question"
         navigationItem.largeTitleDisplayMode = .never
-        
     }
     
     @objc func tapEditBtn() {
@@ -63,9 +62,9 @@ class CustomDetailViewController: UIViewController {
         questionTextField.text = questionText.text
         questionTextField.isHidden.toggle()
         if !(UIDevice.current.orientation.isLandscape) {
-            answerTextField.textContainerInset = UIEdgeInsets(top: 13, left: 20, bottom: 160, right: 20)
+            answerTextField.textContainerInset = UIEdgeInsets(top: 13, left: 17, bottom: 260, right: 20)
         } else {
-            answerTextField.textContainerInset = UIEdgeInsets(top: 8, left: 20, bottom: 8, right: 20)
+            answerTextField.textContainerInset = UIEdgeInsets(top: 13, left: 17, bottom: 180, right: 20)
         }
 //        UIView.animate( // 키보드 올라올 때
 //            withDuration: 0.4
@@ -84,6 +83,12 @@ class CustomDetailViewController: UIViewController {
         questionText.isHidden.toggle()
         questionTextField.isHidden.toggle()
         answerTextField.resignFirstResponder()
+        
+        let updateQuestion = Question()
+        updateQuestion.id = question?.id ?? ""
+        updateQuestion.answer = answerTextField.text ?? ""
+        updateQuestion.question = questionTextField.text ?? ""
+        questionStore?.updateQuestion(updateQuestion: updateQuestion)
         UIView.animate( // 키보드 내려올 때
             withDuration: 0.1
             , animations: {
@@ -93,6 +98,11 @@ class CustomDetailViewController: UIViewController {
     }
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         self.view.transform = CGAffineTransform(translationX: 0, y: 0)
+        if !(UIDevice.current.orientation.isLandscape) {
+            answerTextField.textContainerInset = UIEdgeInsets(top: 13, left: 17, bottom: 260, right: 20)
+        } else {
+            answerTextField.textContainerInset = UIEdgeInsets(top: 13, left: 17, bottom: 180, right: 20)
+        }
     }
     
     /*

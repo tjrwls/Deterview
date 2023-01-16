@@ -14,6 +14,7 @@ enum Mode {
 
 class CustomViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     var questionStore: QuestionFolderStore = QuestionFolderStore()
+
     var dictionarySelectedIndexPath: [IndexPath : Bool] = [:]
     var editMode: Mode = .view {
         didSet{
@@ -46,19 +47,16 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
         customCollectionView.delegate = self
         customCollectionView.dataSource = self
         customCollectionView.backgroundColor = UIColor.systemGray6
-        customCollectionView.allowsMultipleSelection = true
         customCollectionView.allowsMultipleSelection = false
         
         menuBtn.tintColor = .black
         self.navigationItem.rightBarButtonItem = self.menuBtn
-        
         questionStore.readQuestionFolder()
-        print(questionStore.questionFolderStore)
     }
     
     // 섹션에 표시 할 셀 갯수를 묻는 메서드
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return questionStore.questionFolderStore.count
+        return questionStore.customQuestionFolders.count
     }
     // 콜렉션 뷰의 특정 인덱스에서 표시할 셀을 요청하는 메서드
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -73,22 +71,29 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
             guard let vc = self.storyboard?.instantiateViewController(identifier: "CustomListViewController") as? CustomListViewController else { return }
 //            vc.questionList = Array(self.questionStore.questionFolderStore[index].questionList)
             vc.questionStore = self.questionStore
-            vc.questionFolder = self.questionStore.questionFolderStore[index]
+            vc.questionFolder = self.questionStore.customQuestionFolders[index]
             self.navigationController?.pushViewController(vc, animated: true)
         }
         
         cell.moveToQuizMethod = {
             let index = indexPath.row
-            guard let vc = self.storyboard?.instantiateViewController(identifier: "QuizViewController") as? QuizViewController else { return }
-            vc.questionList = self.questionStore.questionFolderStore[index].questionList
-            vc.folderName = self.questionStore.questionFolderStore[index].folderName
-            self.navigationController?.pushViewController(vc, animated: true)
+            if self.questionStore.customQuestionFolders[index].questionList.isEmpty {
+                let alert = UIAlertController(title: "문제풀기", message: "풀 수 있는 문제가 없습니다.\n문제를 추가해주세요.", preferredStyle: .alert)
+                let retry = UIAlertAction(title: "확인", style: .default)
+                alert.addAction(retry)
+                self.present(alert, animated: false)
+            } else {
+                guard let vc = self.storyboard?.instantiateViewController(identifier: "QuizViewController") as? QuizViewController else { return }
+                vc.questionList = self.questionStore.customQuestionFolders[index].questionList
+                vc.folderName = self.questionStore.customQuestionFolders[index].folderName
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
         }
         cell.editFolderNameMethod = {
             let index = indexPath.row
             guard let vc = self.storyboard?.instantiateViewController(identifier: "EditingFolderNameViewController") as? EditingFolderNameViewController else { return }
             
-            vc.questionFolder = self.questionStore.questionFolderStore[index]
+            vc.questionFolder = self.questionStore.customQuestionFolders[index]
             vc.questionStore = self.questionStore
             vc.viewController = self
             self.present(vc, animated: true)
@@ -98,7 +103,7 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
         cell.editFolderNameBtn.tintColor = UIColor(named: "AccentColor")
         cell.editFolderNameBtn.imageView?.contentMode = .scaleAspectFit
         
-        let cellInfo = questionStore.questionFolderStore[indexPath.row]
+        let cellInfo = questionStore.customQuestionFolders[indexPath.row]
         cell.update(info: cellInfo)
         
         switch editMode {
@@ -122,6 +127,11 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
             break
         case .select:
             dictionarySelectedIndexPath[indexPath] = true
+//            if dictionarySelectedIndexPath[indexPath] ?? false {
+//                dictionarySelectedIndexPath[indexPath] = false
+//            } else {
+//                dictionarySelectedIndexPath[indexPath] = true
+//            }
         }
     }
     
@@ -130,12 +140,20 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
             flowLayout.invalidateLayout() // 현재 layout을 무효화하고 layout 업데이트를 작동
         }
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         UICollectionView.performWithoutAnimation {
             self.customCollectionView.reloadSections([0])
         }
         self.customCollectionView.reloadData()
 //         viewWillAppear에서 호출시 크래쉬가 자주 날수 있다. View 생성전에 호출시 문제가 생길 수 있다.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("land \(UIDevice.current.orientation.isPortrait)")
+        print("land \(UIDevice.current.orientation.isLandscape)")
+        print("custom Land2 \(UIDevice.current.orientation)")
+
     }
     
     @objc func tapMenuBtn() {
@@ -150,18 +168,28 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
         }
     }
     @objc func tapDeleteBtn(){
-        for (key,value) in dictionarySelectedIndexPath {
-            if value {
-                let id: String = questionStore.questionFolderStore[key.row].id
-                questionStore.deleteQuestionFolder(id)
-            }
+        let alert = UIAlertController(title: "완료", message: "문풀완", preferredStyle: .alert)
+        let close = UIAlertAction(title: "취소", style: .default) {_ in
+            self.navigationController?.popViewController(animated: true)
         }
-        self.navigationItem.rightBarButtonItem = self.menuBtn
-        self.navigationItem.leftBarButtonItem = nil
-        self.editMode = .view
-        self.dictionarySelectedIndexPath.removeAll()
-        self.questionStore.readQuestionFolder()
-        self.customCollectionView.reloadSections([0])
+        let retry = UIAlertAction(title: "삭제", style: .destructive) {_ in
+            for (key,value) in self.dictionarySelectedIndexPath {
+                if value {
+                    let id: String = self.questionStore.customQuestionFolders[key.row].id
+                    self.questionStore.deleteQuestionFolder(id)
+                }
+            }
+            self.dictionarySelectedIndexPath.removeAll()
+            self.questionStore.readQuestionFolder()
+            self.customCollectionView.reloadSections([0])
+            
+            self.navigationItem.rightBarButtonItem = self.menuBtn
+            self.navigationItem.leftBarButtonItem = nil
+            self.editMode = .view
+        }
+        alert.addAction(close)
+        alert.addAction(retry)
+        self.present(alert, animated: false)
     }
     
     func showActionSheet() {
@@ -218,6 +246,7 @@ class CustomCardListCell: UICollectionViewCell {
     @IBAction func tapQuizBtn(_ sender: Any) {
         moveToQuizMethod?()
     }
+    
     @IBOutlet weak var editFolderNameBtn: UIButton!
     @IBAction func tapEditFolderNameBtn(_ sender: Any) {
         editFolderNameMethod?()
@@ -225,6 +254,8 @@ class CustomCardListCell: UICollectionViewCell {
     var moveToListMethod: (() -> Void)?
     var moveToQuizMethod: (() -> Void)?
     var editFolderNameMethod: (() -> Void)?
+    var questionCount: Int = 0
+    
     override var isSelected: Bool {
         didSet {
             if isSelected {
@@ -250,7 +281,7 @@ class CustomCardListCell: UICollectionViewCell {
         checkMark.tintColor = .gray
         
         editView.layer.opacity = 0.1
-        
+        questionCount = info.questionList.count
 //        editFolderNameBtn.setImage(UIImage(systemName: "square.and.pencil"), for: .normal)
 //        editFolderNameBtn.frame = CGRectMake(0, 0, 100, 100)
 

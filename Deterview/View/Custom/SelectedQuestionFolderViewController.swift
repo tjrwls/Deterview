@@ -1,16 +1,21 @@
 //
-//  MainViewController.swift
+//  SelectedQuestionFolderViewController.swift
 //  Deterview
 //
-//  Created by 조석진 on 2022/11/30.
+//  Created by 조석진 on 2023/01/09.
 //
 
 import UIKit
-import RealmSwift
 
-class MainViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
-    var questionStore: QuestionFolderStore = QuestionFolderStore()
+class SelectedQuestionFolderViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+    var questionStore: QuestionFolderStore? = nil
+    var addToFolderId: String = ""
     @IBOutlet weak var collectionView: UICollectionView!
+
+    lazy var cancelBtn: UIBarButtonItem = {
+        UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(tapCancelBtn))
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,14 +23,19 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.systemGray6
-        questionStore.readQuestionFolder()
-        print("## realm file dir -> \(Realm.Configuration.defaultConfiguration.fileURL!)")
-        print("main orientation \(UIDevice.current.orientation)")
+        
+        self.title = "폴더 선택"
+        self.view.backgroundColor = .white
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationItem.leftBarButtonItem = self.cancelBtn
     }
+    
 //    override func viewWillAppear(_ animated: Bool) {
 //        QuestionFolderStore().updateQuestionFolder()
 //        self.collectionView.reloadData()
 //    }
+    
     func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documentsDirectory = paths[0]
@@ -33,35 +43,29 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     // 섹션에 표시 할 셀 갯수를 묻는 메서드
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return questionStore.mainQuestionFolders.count
+        return questionStore?.mainQuestionFolders.count ?? 0
     }
     // 콜렉션 뷰의 특정 인덱스에서 표시할 셀을 요청하는 메서드
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainCardListCell", for: indexPath) as?
-                MainCardListCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SeletedCardListCell", for: indexPath) as?
+                SeletedCardListCell else {
             return UICollectionViewCell()
         }
         cell.layer.cornerRadius = 5
         
         cell.moveToListMethod = {
             let index = indexPath.row
-            guard let vc = self.storyboard?.instantiateViewController(identifier: "MainListViewController") as? MainListViewController else { return }
-            vc.questionStore = self.questionStore
-            vc.questionFolder = self.questionStore.mainQuestionFolders[index]
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
-        
-        cell.moveToQuizMethod = {
-            let index = indexPath.row
-            guard let vc = self.storyboard?.instantiateViewController(identifier: "QuizViewController") as? QuizViewController else { return }
+            guard let vc = self.storyboard?.instantiateViewController(identifier: "SelectedListViewController") as? SelectedListViewController else { return }
             
-            vc.questionList = self.questionStore.mainQuestionFolders[index].questionList
-            vc.folderName = self.questionStore.mainQuestionFolders[index].folderName
+            vc.questionStore = self.questionStore
+            vc.questionFolder = self.questionStore?.mainQuestionFolders[index]
+            vc.addToFolderId = self.addToFolderId
             self.navigationController?.pushViewController(vc, animated: true)
+            
         }
         
-        let cellInfo = questionStore.mainQuestionFolders[indexPath.item]
+        let cellInfo = questionStore?.mainQuestionFolders[indexPath.item] ?? QuestionFolder()
         cell.update(info: cellInfo)
         return cell
     }
@@ -74,15 +78,14 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
             flowLayout.invalidateLayout() // 현재 layout을 무효화하고 layout 업데이트를 작동
         }
     }
-    override func viewWillAppear(_ animated: Bool) {
-        print("main Land1 \(UIDevice.current.orientation.isPortrait)")
-        print("main Land1 \(UIDevice.current.orientation.isLandscape)")
-        print("main orientation \(UIDevice.current.orientation)")
+    
+    @objc func tapCancelBtn() {
+        self.dismiss(animated: true)
     }
-
+    
 }
 
-extension MainViewController: UICollectionViewDelegateFlowLayout {
+extension SelectedQuestionFolderViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if (UIDevice.current.orientation.isLandscape) {
             return CGSize(width: collectionView.bounds.width / 2 - 20, height: 100)
@@ -92,21 +95,16 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-class MainCardListCell: UICollectionViewCell {
+class SeletedCardListCell: UICollectionViewCell {
     @IBOutlet weak var cardBtn: UIButton!
-    @IBOutlet weak var movequizBtn: UIButton!
     @IBOutlet weak var countofQuestion: UILabel!
     
-    var moveToListMethod: (() -> Void)?
-    var moveToQuizMethod: (() -> Void)?
-    
-    @IBAction func tapCardBtn(_ sender: Any) {
+    @IBAction func tabCardBtn(_ sender: Any) {
         moveToListMethod?()
     }
-    @IBAction func tapQuizBtn(_ sender: Any) {
-        moveToQuizMethod?()
-    }
     
+    var moveToListMethod: (() -> Void)?
+
     func update(info: QuestionFolder) {
         cardBtn.setTitle("\(info.folderName)", for: .normal)
         cardBtn.titleLabel?.font = .systemFont(ofSize: 30
