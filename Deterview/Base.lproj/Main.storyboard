@@ -321,8 +321,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" contentInsetAdjustmentBehavior="scrollableAxes" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2cO-Zp-dp9">
-                                <rect key="frame" x="0.0" y="156" width="393" height="538.33333333333394"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="scrollableAxes" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2cO-Zp-dp9">
+                                <rect key="frame" x="0.0" y="119.66666666666669" width="393" height="574.66666666666652"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <attributedString key="attributedText">
                                     <fragment content="텍스트필드">
@@ -346,6 +346,7 @@
                         <viewLayoutGuide key="safeArea" id="zCC-Pg-7ig"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="2cO-Zp-dp9" firstAttribute="top" secondItem="xkY-Yf-Axt" secondAttribute="top" id="3u9-9C-K05"/>
                             <constraint firstItem="xkY-Yf-Axt" firstAttribute="bottom" secondItem="zRX-pr-ggM" secondAttribute="bottom" constant="10" id="8qm-PH-Mod"/>
                             <constraint firstItem="zCC-Pg-7ig" firstAttribute="trailing" secondItem="2cO-Zp-dp9" secondAttribute="trailing" id="DGw-kv-8Tj"/>
                             <constraint firstItem="zRX-pr-ggM" firstAttribute="leading" secondItem="zCC-Pg-7ig" secondAttribute="leading" constant="20" id="Hqy-3k-wBq"/>
