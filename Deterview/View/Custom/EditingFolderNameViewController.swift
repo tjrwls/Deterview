@@ -32,15 +32,17 @@ class EditingFolderNameViewController: UIViewController {
         cancleBtn.setTitle("취소", for: .normal)
         
         saveFolderNameBtn.setTitle("완료", for: .normal)
-        saveFolderNameBtn.isEnabled = false
+        saveFolderNameBtn.layer.cornerRadius = 5
         saveFolderNameBtn.backgroundColor = UIColor(.mainColor)
         saveFolderNameBtn.setTitleColor(.white, for: .normal)
-        saveFolderNameBtn.layer.cornerRadius = 5
+        saveFolderNameBtn.titleLabel?.font = .systemFont(ofSize: 16)
         
         limitTextLengthMessage.text = "1~9자 이내로 입력해주세요."
         limitTextLengthMessage.font = .systemFont(ofSize: 14)
         limitTextLengthMessage.textColor = .gray
         folderNameTextField.text = questionFolder?.folderName
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,12 +82,27 @@ class EditingFolderNameViewController: UIViewController {
         self.dismiss(animated: true)
     }
     @IBAction func textFieldEditingChanged(_ sender: Any) {
-        if folderNameTextLength > 0 && folderNameTextLength < 10 {
-            
-            saveFolderNameBtn.isEnabled = true
-        } else {
-            saveFolderNameBtn.isEnabled = false
-            saveFolderNameBtn.tintColor = UIColor(.gray)
+        if viewController != nil { // 폴더 추가일 경우
+            if folderNameTextLength > 0 && folderNameTextLength < 10 {
+                saveFolderNameBtn.isEnabled = true
+                saveFolderNameBtn.backgroundColor = UIColor(.mainColor)
+                saveFolderNameBtn.setTitleColor(.white, for: .normal)
+                
+            } else {
+                saveFolderNameBtn.isEnabled = false
+                saveFolderNameBtn.backgroundColor = UIColor(.customGray)
+                saveFolderNameBtn.setTitleColor(.systemGray3, for: .normal)
+            }
+        } else { // 질문 추가일 경우
+            if folderNameTextLength > 0  {
+                saveFolderNameBtn.isEnabled = true
+                saveFolderNameBtn.backgroundColor = UIColor(.mainColor)
+                saveFolderNameBtn.setTitleColor(.white, for: .normal)
+            } else {
+                saveFolderNameBtn.isEnabled = false
+                saveFolderNameBtn.backgroundColor = UIColor(.customGray)
+                saveFolderNameBtn.setTitleColor(.systemGray3, for: .normal)
+            }
         }
     }
 }

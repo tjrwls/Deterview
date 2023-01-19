@@ -109,24 +109,23 @@ class AddingFolderViewController: UIViewController {
             if folderNameTextLength > 0 && folderNameTextLength < 10 {
                 saveFolderNameBtn.isEnabled = true
                 saveFolderNameBtn.backgroundColor = UIColor(.mainColor)
+                saveFolderNameBtn.setTitleColor(.white, for: .normal)
+                
             } else {
                 saveFolderNameBtn.isEnabled = false
-                saveFolderNameBtn.backgroundColor = .systemGray3
+                saveFolderNameBtn.backgroundColor = UIColor(.customGray)
+                saveFolderNameBtn.setTitleColor(.systemGray3, for: .normal)
             }
         } else { // 질문 추가일 경우
             if folderNameTextLength > 0  {
                 saveFolderNameBtn.isEnabled = true
                 saveFolderNameBtn.backgroundColor = UIColor(.mainColor)
+                saveFolderNameBtn.setTitleColor(.white, for: .normal)
             } else {
                 saveFolderNameBtn.isEnabled = false
-                saveFolderNameBtn.backgroundColor = .systemGray3
+                saveFolderNameBtn.backgroundColor = UIColor(.customGray)
+                saveFolderNameBtn.setTitleColor(.systemGray3, for: .normal)
             }
         }
-        
     }
-    
-//    @objc func textFieldDidChange(_ textField: UITextField) {
-//
-//    }
-
 }
