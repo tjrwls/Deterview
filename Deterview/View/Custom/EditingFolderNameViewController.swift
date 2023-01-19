@@ -30,9 +30,13 @@ class EditingFolderNameViewController: UIViewController {
         guideText.text = "폴더 이름을 입력해주세요"
         guideText.textAlignment = .center
         cancleBtn.setTitle("취소", for: .normal)
+        
         saveFolderNameBtn.setTitle("완료", for: .normal)
-        saveFolderNameBtn.tintColor = UIColor(.mainColor)
         saveFolderNameBtn.isEnabled = false
+        saveFolderNameBtn.backgroundColor = UIColor(.mainColor)
+        saveFolderNameBtn.setTitleColor(.white, for: .normal)
+        saveFolderNameBtn.layer.cornerRadius = 5
+        
         limitTextLengthMessage.text = "1~9자 이내로 입력해주세요."
         limitTextLengthMessage.font = .systemFont(ofSize: 14)
         limitTextLengthMessage.textColor = .gray
@@ -75,29 +79,13 @@ class EditingFolderNameViewController: UIViewController {
     @IBAction func tabCancleBtn(_ sender: Any) {
         self.dismiss(animated: true)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     @IBAction func textFieldEditingChanged(_ sender: Any) {
         if folderNameTextLength > 0 && folderNameTextLength < 10 {
+            
             saveFolderNameBtn.isEnabled = true
-        } else { saveFolderNameBtn.isEnabled = false }
+        } else {
+            saveFolderNameBtn.isEnabled = false
+            saveFolderNameBtn.tintColor = UIColor(.gray)
+        }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

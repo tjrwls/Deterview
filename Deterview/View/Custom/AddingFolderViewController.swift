@@ -37,10 +37,15 @@ class AddingFolderViewController: UIViewController {
             limitTextLengthMessage.text = ""
             saveFolderNameBtn.isEnabled = false
         }
+        
         guideText.textAlignment = .center
         cancleBtn.setTitle("취소", for: .normal)
         saveFolderNameBtn.setTitle("완료", for: .normal)
-        saveFolderNameBtn.tintColor = UIColor(.mainColor)
+        saveFolderNameBtn.backgroundColor = UIColor(.customGray)
+        saveFolderNameBtn.setTitleColor(.systemGray3, for: .normal)
+        saveFolderNameBtn.layer.cornerRadius = 5
+        saveFolderNameBtn.titleLabel?.font = .systemFont(ofSize: 16)
+        
     }
     
     // MARK: 뷰생성시 키보드 밑 View 올리기
@@ -100,14 +105,22 @@ class AddingFolderViewController: UIViewController {
     }
     */
     @IBAction func textFieldEditingChanged(_ sender: Any) {
-        if viewController != nil {
+        if viewController != nil { // 폴더 추가일 경우
             if folderNameTextLength > 0 && folderNameTextLength < 10 {
                 saveFolderNameBtn.isEnabled = true
-            } else { saveFolderNameBtn.isEnabled = false }
-        } else {
+                saveFolderNameBtn.backgroundColor = UIColor(.mainColor)
+            } else {
+                saveFolderNameBtn.isEnabled = false
+                saveFolderNameBtn.backgroundColor = .systemGray3
+            }
+        } else { // 질문 추가일 경우
             if folderNameTextLength > 0  {
                 saveFolderNameBtn.isEnabled = true
-            } else { saveFolderNameBtn.isEnabled = false }
+                saveFolderNameBtn.backgroundColor = UIColor(.mainColor)
+            } else {
+                saveFolderNameBtn.isEnabled = false
+                saveFolderNameBtn.backgroundColor = .systemGray3
+            }
         }
         
     }

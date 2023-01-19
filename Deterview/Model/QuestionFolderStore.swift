@@ -19,7 +19,7 @@ class QuestionFolderStore {
         createFolder.id = UUID().uuidString
          createFolder.folderName = questionFolder.folderName
         createFolder.category = "Custom"
-        try! self.realm.write {
+        try? self.realm.write {
             self.realm.add(createFolder)
         }
     }
@@ -33,9 +33,8 @@ class QuestionFolderStore {
     
     // MARK: 플더 수정하기
     func updateQuestionFolder(id: String, name: String){
-        print("deleteQuestionFolder")
         if let questionFolder = realm.objects(QuestionFolder.self).filter(NSPredicate(format: "id = %@", id)).first{
-            try! realm.write{
+            try? realm.write{
                 questionFolder.folderName = name
             }
         }
@@ -43,9 +42,8 @@ class QuestionFolderStore {
     
     // MARK: 플더 삭제하기
     func deleteQuestionFolder(_ id: String){
-        print("deleteQuestionFolder")
         if let questionFolder = realm.objects(QuestionFolder.self).filter(NSPredicate(format: "id = %@", id)).first{
-            try! realm.write {
+            try? realm.write {
                 realm.delete(questionFolder)
             }
         }
@@ -53,12 +51,11 @@ class QuestionFolderStore {
     
     // MARK: 문제 추가하기
     func createdQuestion(id: String, addQuestion: String){
-        print("createdQuestion")
         if let questionFolder = realm.objects(QuestionFolder.self).filter(NSPredicate(format: "id = %@", id)).first{
             let question = Question()
             question.question = addQuestion
             question.id = UUID().uuidString
-            try! realm.write{
+            try? realm.write{
                 questionFolder.questionList.append(question)
             }
         }
@@ -66,9 +63,8 @@ class QuestionFolderStore {
     
     // MARK: 문제 수정하기
     func updateQuestion(updateQuestion: Question) {
-        print("updateQuetion")
         if let question = realm.objects(Question.self).filter(NSPredicate(format: "id = %@", updateQuestion.id)).first{
-            try! realm.write{
+            try? realm.write{
                 question.question = updateQuestion.question
                 question.answer = updateQuestion.answer
             }
@@ -78,7 +74,7 @@ class QuestionFolderStore {
     // MARK: 문제 삭제하기
     func deleteQuestion(_ id: String){
         if let question = realm.objects(Question.self).filter(NSPredicate(format: "id = %@", id)).first{
-            try! realm.write {
+            try? realm.write {
                 realm.delete(question)
             }
         }
@@ -87,21 +83,18 @@ class QuestionFolderStore {
     // MARK: 문제 불러오기
     func loadQuestion(folderId: String, question: String, answer: String) {
         if let questionFolder = realm.objects(QuestionFolder.self).filter(NSPredicate(format: "id = %@", folderId)).first{
-//            if let question = realm.objects(Question.self).filter(NSPredicate(format: "id = %@", questionId)).first{
-//                print("loadQuestion\(question)")
                 let addQuestion = Question()
                 addQuestion.id = UUID().uuidString
                 addQuestion.question = question
                 addQuestion.answer = answer
-                try! realm.write {
+                try? realm.write {
                     questionFolder.questionList.append(addQuestion)
-//                }
             }
         }
     }
     
     func removeAll(){
-        try! realm.write {
+        try? realm.write {
             realm.deleteAll()
         }
     }

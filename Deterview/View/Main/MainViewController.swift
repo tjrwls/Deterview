@@ -19,13 +19,8 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.systemGray6
         questionStore.readQuestionFolder()
-        print("## realm file dir -> \(Realm.Configuration.defaultConfiguration.fileURL!)")
-        print("main orientation \(UIDevice.current.orientation)")
     }
-//    override func viewWillAppear(_ animated: Bool) {
-//        QuestionFolderStore().updateQuestionFolder()
-//        self.collectionView.reloadData()
-//    }
+
     func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documentsDirectory = paths[0]
@@ -71,20 +66,21 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         if let flowLayout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.invalidateLayout() // 현재 layout을 무효화하고 layout 업데이트를 작동
+            flowLayout.invalidateLayout()
         }
     }
     override func viewWillAppear(_ animated: Bool) {
-        print("main Land1 \(UIDevice.current.orientation.isPortrait)")
-        print("main Land1 \(UIDevice.current.orientation.isLandscape)")
-        print("main orientation \(UIDevice.current.orientation)")
+        if let flowLayout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.invalidateLayout()
+        }
     }
 
 }
 
 extension MainViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if (UIDevice.current.orientation.isLandscape) {
+        if (Int(self.view.window?.windowScene?.screen.bounds.width ?? 0) > Int(view.window?.windowScene?.screen.bounds.height ?? 0)) {
+
             return CGSize(width: collectionView.bounds.width / 2 - 20, height: 100)
         } else {
             return CGSize(width: collectionView.bounds.width - 10, height: 100)
@@ -111,11 +107,15 @@ class MainCardListCell: UICollectionViewCell {
         cardBtn.setTitle("\(info.folderName)", for: .normal)
         cardBtn.titleLabel?.font = .systemFont(ofSize: 30
         )
-
         cardBtn.backgroundColor = UIColor.white
         cardBtn.layer.cornerRadius = 5
         cardBtn.layer.shadowOpacity = 0.3
         cardBtn.layer.shadowRadius = 20
         countofQuestion.text = "\(info.questionList.count)개의 질문"
+        movequizBtn.backgroundColor = UIColor(named: "mainColor")
+        movequizBtn.setTitleColor(.white, for: .normal)
+        movequizBtn.layer.cornerRadius = 5
+//        movequizBtn.tintColor = .white
+//        movequizBtn.titleLabel?.size
     }
 }

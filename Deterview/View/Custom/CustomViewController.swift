@@ -137,7 +137,7 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         if let flowLayout = self.customCollectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.invalidateLayout() // 현재 layout을 무효화하고 layout 업데이트를 작동
+            flowLayout.invalidateLayout()
         }
     }
     
@@ -145,15 +145,6 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
         UICollectionView.performWithoutAnimation {
             self.customCollectionView.reloadSections([0])
         }
-        self.customCollectionView.reloadData()
-//         viewWillAppear에서 호출시 크래쉬가 자주 날수 있다. View 생성전에 호출시 문제가 생길 수 있다.
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        print("land \(UIDevice.current.orientation.isPortrait)")
-        print("land \(UIDevice.current.orientation.isLandscape)")
-        print("custom Land2 \(UIDevice.current.orientation)")
-
     }
     
     @objc func tapMenuBtn() {
@@ -223,7 +214,7 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
 
 extension CustomViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if (UIDevice.current.orientation.isLandscape) {
+        if (Int(view.window?.windowScene?.screen.bounds.width ?? 0) > Int(view.window?.windowScene?.screen.bounds.height ?? 0)) {
             return CGSize(width: collectionView.bounds.width / 2 - 20, height: 100)
         } else {
             return CGSize(width: collectionView.bounds.width - 10, height: 100)
@@ -271,7 +262,6 @@ class CustomCardListCell: UICollectionViewCell {
         forderNameText.font = .systemFont(ofSize: 30)
         cardBtn.backgroundColor = UIColor.white
         cardBtn.layer.cornerRadius = 5
-//        cardBtn.layer.shadowOffset = CGSize(width: 0.5, height: 0.1)
         cardBtn.layer.shadowOpacity = 0.3
         cardBtn.layer.shadowRadius = 20
         
@@ -282,11 +272,10 @@ class CustomCardListCell: UICollectionViewCell {
         
         editView.layer.opacity = 0.1
         questionCount = info.questionList.count
-//        editFolderNameBtn.setImage(UIImage(systemName: "square.and.pencil"), for: .normal)
-//        editFolderNameBtn.frame = CGRectMake(0, 0, 100, 100)
-
-//        editFolderNameBtn.imageView.fo = true
         
+        movequizBtn.backgroundColor = UIColor(.mainColor)
+        movequizBtn.setTitleColor(.white, for: .normal)
+        movequizBtn.layer.cornerRadius = 5
         
     }
 }

@@ -34,6 +34,8 @@ class QuizViewController: UIViewController {
         
         nextQuizBtn.layer.cornerRadius = 5
         nextQuizBtn.setFontStyle(size: 20, weight: .bold)
+        nextQuizBtn.backgroundColor = UIColor(named: "mainColor")
+        nextQuizBtn.tintColor = .white
         
         questionArr = Array(questionList)
         print("questionList \(questionList)")
@@ -68,23 +70,13 @@ class QuizViewController: UIViewController {
     }
     
     func generateRandomQuestion() {
-        let question = self.questionArr.randomElement()
-        self.questionText.text = question?.question
-        self.answerText.text = question?.answer
-        self.questionArr.remove(at: questionArr.firstIndex(where: {
-            $0.id == question?.id
-        }) ?? 0)
+        if !questionArr.isEmpty {
+            let question = self.questionArr.randomElement()
+            self.questionText.text = question?.question
+            self.answerText.text = question?.answer
+            self.questionArr.remove(at: questionArr.firstIndex(where: {
+                $0.id == question?.id
+            }) ?? 0)
+        }
     }
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
