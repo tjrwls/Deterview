@@ -31,13 +31,15 @@ class MainDetailViewController: UIViewController {
         
         questionText.numberOfLines = 0
         questionText.text = question?.question
-        questionText.font = .systemFont(ofSize: 24)
+        questionText.font = .systemFont(ofSize: 20)
         
         answerText.numberOfLines = 0
         answerText.sizeToFit()
         answerText.text = question?.answer
         answerText.font = .systemFont(ofSize: 17)
-        answerText.setLineSpacing(spacing: 4)
+        
+        // FIXME: 함수 작동 안됨
+        answerText.setLineSpacing(spacing: 15)
         
         answerTextField.layer.isHidden = true
         answerTextField.font = .systemFont(ofSize: 17)

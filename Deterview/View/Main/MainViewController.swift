@@ -9,16 +9,25 @@ import UIKit
 import RealmSwift
 
 class MainViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
-    var questionStore: QuestionFolderStore = QuestionFolderStore()
+    let questionStore: QuestionFolderStore = QuestionFolderStore()
+    let templateData: TemplateData = TemplateData()
+    
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var navigationCoverView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.systemGray6
+        
+        navigationCoverView.backgroundColor = UIColor.systemGray6
+        questionStore.readQuestionFolder()
+        if questionStore.mainQuestionFolders.isEmpty {
+            templateData.createdTemplateData()
+            questionStore.readQuestionFolder()
+        }
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.systemGray6
-        questionStore.readQuestionFolder()
     }
 
     func getDocumentsDirectory() -> URL {

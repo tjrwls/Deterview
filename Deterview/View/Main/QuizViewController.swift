@@ -52,7 +52,7 @@ class QuizViewController: UIViewController {
     
     @IBAction func nextQuizBtn(_ sender: Any) {
         if questionArr.isEmpty { // 문제 다 풀었으면
-            let alert = UIAlertController(title: "완료", message: "문풀완", preferredStyle: .alert)
+            let alert = UIAlertController(title: "완료", message: "모든 문제를 푸셨습니다.", preferredStyle: .alert)
             let close = UIAlertAction(title: "나가기", style: .cancel) {_ in
                 self.navigationController?.popViewController(animated: true)
             }

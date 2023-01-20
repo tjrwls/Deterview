@@ -13,6 +13,7 @@ enum Mode {
 }
 
 class CustomViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+    @IBOutlet weak var navigationCoverView: UIView!
     var questionStore: QuestionFolderStore = QuestionFolderStore()
 
     var dictionarySelectedIndexPath: [IndexPath : Bool] = [:]
@@ -43,7 +44,9 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationCoverView.backgroundColor = UIColor.systemGray6
         self.view.backgroundColor = UIColor.systemGray6
+        
         customCollectionView.delegate = self
         customCollectionView.dataSource = self
         customCollectionView.backgroundColor = UIColor.systemGray6
@@ -148,7 +151,11 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
     }
     
     @objc func tapMenuBtn() {
-        showActionSheet()
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            
+        } else {
+            showActionSheet()
+        }
     }
     @objc func tapCancelBtn(){
         self.navigationItem.rightBarButtonItem = self.menuBtn
@@ -159,7 +166,7 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
         }
     }
     @objc func tapDeleteBtn(){
-        let alert = UIAlertController(title: "완료", message: "문풀완", preferredStyle: .alert)
+        let alert = UIAlertController(title: "삭제", message: "폴더를 삭제하시겠습니까?", preferredStyle: .alert)
         let close = UIAlertAction(title: "취소", style: .default) {_ in
             self.navigationController?.popViewController(animated: true)
         }

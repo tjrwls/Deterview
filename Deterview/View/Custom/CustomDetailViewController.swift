@@ -11,7 +11,7 @@ class CustomDetailViewController: UIViewController {
 
     @IBOutlet weak var answerText: UILabel!
     @IBOutlet weak var questionText: UILabel!
-    @IBOutlet weak var questionTextField: UITextField!
+    @IBOutlet weak var questionTextField: UITextView!
     @IBOutlet weak var answerTextField: UITextView!
 
     var questionStore: QuestionFolderStore? = nil
@@ -32,11 +32,13 @@ class CustomDetailViewController: UIViewController {
         
         questionText.text = question?.question
         questionText.font = .systemFont(ofSize: 24)
+        questionText.numberOfLines = 0
         questionText.setLineSpacing(spacing: 4)
 
         questionTextField.font = .systemFont(ofSize: 24)
         questionTextField.isHidden = true
-        questionTextField.borderStyle = .none
+        questionTextField.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+//        questionTextField.borderStyle = .none
         
         answerText.numberOfLines = 0
         answerText.sizeToFit()
@@ -46,6 +48,7 @@ class CustomDetailViewController: UIViewController {
         
         answerTextField.layer.isHidden = true
         answerTextField.font = .systemFont(ofSize: 17)
+        
      
         self.navigationItem.title = "Question"
         navigationItem.largeTitleDisplayMode = .never
@@ -55,34 +58,31 @@ class CustomDetailViewController: UIViewController {
         answerText.layer.isHidden.toggle()
         answerTextField.text = answerText.text
         answerTextField.layer.isHidden.toggle()
-        answerTextField.becomeFirstResponder()
+//        answerTextField.becomeFirstResponder()
         self.navigationItem.rightBarButtonItem = self.saveButton
         
         questionText.isHidden.toggle()
         questionTextField.text = questionText.text
+        questionTextField.becomeFirstResponder()
         questionTextField.isHidden.toggle()
         if !(UIDevice.current.orientation.isLandscape) {
             answerTextField.textContainerInset = UIEdgeInsets(top: 13, left: 17, bottom: 260, right: 20)
+            
         } else {
             answerTextField.textContainerInset = UIEdgeInsets(top: 13, left: 17, bottom: 180, right: 20)
         }
-//        UIView.animate( // 키보드 올라올 때
-//            withDuration: 0.4
-//            , animations: {
-//                self.view.transform = CGAffineTransform(translationX: 0, y: -150) // view 위로 밀림
-//            }
-//        )
     }
     
     @objc func tapSaveBtn() {
         answerText.layer.isHidden.toggle()
         answerTextField.layer.isHidden.toggle()
+        answerTextField.resignFirstResponder()
         answerText.text = answerTextField.text
         self.navigationItem.rightBarButtonItem = self.editButton
         questionText.text = questionTextField.text
         questionText.isHidden.toggle()
         questionTextField.isHidden.toggle()
-        answerTextField.resignFirstResponder()
+        questionTextField.resignFirstResponder()
         
         let updateQuestion = Question()
         updateQuestion.id = question?.id ?? ""
