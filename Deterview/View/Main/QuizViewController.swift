@@ -37,11 +37,10 @@ class QuizViewController: UIViewController {
         nextQuizBtn.backgroundColor = UIColor(named: "mainColor")
         nextQuizBtn.tintColor = .white
         
-        questionArr = Array(questionList)
-        print("questionList \(questionList)")
         navigationItem.title = folderName
         navigationItem.largeTitleDisplayMode = .never
 
+        questionArr = Array(questionList)
         generateRandomQuestion()
     }
     
@@ -65,6 +64,8 @@ class QuizViewController: UIViewController {
             
             self.present(alert, animated: false)
         } else {
+            placeholderText.isHidden = false
+            answerText.isHidden = true
             generateRandomQuestion()
         }
     }

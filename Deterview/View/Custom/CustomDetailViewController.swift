@@ -65,9 +65,8 @@ class CustomDetailViewController: UIViewController {
         questionTextField.text = questionText.text
         questionTextField.becomeFirstResponder()
         questionTextField.isHidden.toggle()
-        if !(UIDevice.current.orientation.isLandscape) {
+        if (Int(self.view.window?.windowScene?.screen.bounds.width ?? 0) < Int(view.window?.windowScene?.screen.bounds.height ?? 0)) {
             answerTextField.textContainerInset = UIEdgeInsets(top: 13, left: 17, bottom: 260, right: 20)
-            
         } else {
             answerTextField.textContainerInset = UIEdgeInsets(top: 13, left: 17, bottom: 180, right: 20)
         }
@@ -98,7 +97,7 @@ class CustomDetailViewController: UIViewController {
     }
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         self.view.transform = CGAffineTransform(translationX: 0, y: 0)
-        if !(UIDevice.current.orientation.isLandscape) {
+        if (Int(self.view.window?.windowScene?.screen.bounds.width ?? 0) < Int(view.window?.windowScene?.screen.bounds.height ?? 0)) {
             answerTextField.textContainerInset = UIEdgeInsets(top: 13, left: 17, bottom: 260, right: 20)
         } else {
             answerTextField.textContainerInset = UIEdgeInsets(top: 13, left: 17, bottom: 180, right: 20)

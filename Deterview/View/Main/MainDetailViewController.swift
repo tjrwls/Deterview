@@ -38,8 +38,8 @@ class MainDetailViewController: UIViewController {
         answerText.text = question?.answer
         answerText.font = .systemFont(ofSize: 17)
         
-        // FIXME: 함수 작동 안됨
-        answerText.setLineSpacing(spacing: 15)
+        // MARK: 예의주시
+        answerText.setLineSpacing(spacing: 4)
         
         answerTextField.layer.isHidden = true
         answerTextField.font = .systemFont(ofSize: 17)
@@ -53,7 +53,7 @@ class MainDetailViewController: UIViewController {
         answerTextField.layer.isHidden.toggle()
         answerTextField.becomeFirstResponder()
         self.navigationItem.rightBarButtonItem = self.saveButton
-        if !(UIDevice.current.orientation.isLandscape) {
+        if (Int(self.view.window?.windowScene?.screen.bounds.width ?? 0) < Int(view.window?.windowScene?.screen.bounds.height ?? 0)) {
             answerTextField.textContainerInset = UIEdgeInsets(top: 13, left: 17, bottom: 260, right: 20)
         } else {
             answerTextField.textContainerInset = UIEdgeInsets(top: 13, left: 17, bottom: 180, right: 20)
@@ -83,18 +83,10 @@ class MainDetailViewController: UIViewController {
         updateQuestion.answer = answerTextField.text ?? ""
         updateQuestion.question = questionText.text ?? ""
         questionStore?.updateQuestion(updateQuestion: updateQuestion)
-
-        
-//        UIView.animate( // 키보드 내려올 때
-//            withDuration: 0.1
-//            , animations: {
-//                self.view.transform = CGAffineTransform(translationX: 0, y: 0) // view 제자리
-//            }
-//        )
     }
+    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//        self.view.transform = CGAffineTransform(translationX: 0, y: 0)
-        if !(UIDevice.current.orientation.isLandscape) {
+        if (Int(self.view.window?.windowScene?.screen.bounds.width ?? 0) < Int(view.window?.windowScene?.screen.bounds.height ?? 0)) {
             answerTextField.textContainerInset = UIEdgeInsets(top: 13, left: 17, bottom: 260, right: 20)
         } else {
             answerTextField.textContainerInset = UIEdgeInsets(top: 13, left: 17, bottom: 180, right: 20)

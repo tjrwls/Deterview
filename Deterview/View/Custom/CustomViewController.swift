@@ -214,9 +214,6 @@ class CustomViewController: UIViewController, UICollectionViewDataSource, UIColl
         
         present(actionSheet, animated: true, completion: nil)
     }
-    @IBAction func tapEditImage(_ sender: Any) {
-        print("tap")
-    }
 }
 
 extension CustomViewController: UICollectionViewDelegateFlowLayout {
