@@ -30,7 +30,7 @@ class QuizViewController: UIViewController {
         
         placeholderText.isHidden = false
         placeholderText.font = .systemFont(ofSize: 22)
-        placeholderText.text = "터치시 작성하신 답이 보입니다."
+        placeholderText.text = "터치 시 작성하신 답이 보입니다."
         
         nextQuizBtn.layer.cornerRadius = 5
         nextQuizBtn.setFontStyle(size: 20, weight: .bold)
