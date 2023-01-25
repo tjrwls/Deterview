@@ -18,6 +18,7 @@ class CustomDetailViewController: UIViewController {
     var isShowingAnswerTextField: Bool = false
     var isShowingAnswerText: Bool = false
     var question: Question? = nil
+    var isEmptyAnswerText: Bool = false
     
     lazy var editButton: UIBarButtonItem = {
         UIBarButtonItem(title: "편집", style: .done, target: self, action: #selector(tapEditBtn))
@@ -29,11 +30,12 @@ class CustomDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = self.editButton
+        isEmptyAnswerText = question?.answer == ""
         
         questionText.text = question?.question
         questionText.font = .systemFont(ofSize: 24)
         questionText.numberOfLines = 0
-        questionText.setLineSpacing(spacing: 4)
+        questionText.setLineSpacing(spacing: 4.2)
 
         questionTextField.font = .systemFont(ofSize: 24)
         questionTextField.isHidden = true
@@ -42,8 +44,9 @@ class CustomDetailViewController: UIViewController {
         
         answerText.numberOfLines = 0
         answerText.sizeToFit()
-        answerText.text = question?.answer
+        answerText.text = isEmptyAnswerText ? "답변을 입력해주세요." : question?.answer
         answerText.font = .systemFont(ofSize: 17)
+        answerText.textColor = isEmptyAnswerText ? .lightGray : .black
         answerText.setLineSpacing(spacing: 4)
         
         answerTextField.layer.isHidden = true
@@ -56,7 +59,7 @@ class CustomDetailViewController: UIViewController {
     
     @objc func tapEditBtn() {
         answerText.layer.isHidden.toggle()
-        answerTextField.text = answerText.text
+        answerTextField.text = isEmptyAnswerText ? "" : answerText.text
         answerTextField.layer.isHidden.toggle()
 //        answerTextField.becomeFirstResponder()
         self.navigationItem.rightBarButtonItem = self.saveButton
@@ -73,13 +76,19 @@ class CustomDetailViewController: UIViewController {
     }
     
     @objc func tapSaveBtn() {
+        self.navigationItem.rightBarButtonItem = self.editButton
+        isEmptyAnswerText = answerTextField.text == ""
+        
+        answerText.text = isEmptyAnswerText ? "답변을 입력해주세요." : answerTextField.text
         answerText.layer.isHidden.toggle()
+        answerText.textColor = isEmptyAnswerText ? .lightGray : .black
+        
         answerTextField.layer.isHidden.toggle()
         answerTextField.resignFirstResponder()
-        answerText.text = answerTextField.text
-        self.navigationItem.rightBarButtonItem = self.editButton
+        
         questionText.text = questionTextField.text
         questionText.isHidden.toggle()
+        
         questionTextField.isHidden.toggle()
         questionTextField.resignFirstResponder()
         

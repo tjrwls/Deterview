@@ -11,12 +11,13 @@ class MainDetailViewController: UIViewController {
     @IBOutlet weak var answerText: UILabel!
     @IBOutlet weak var questionText: UILabel!
     @IBOutlet weak var answerTextField: UITextView!
-
+    
     
     var isShowingAnswerTextField: Bool = false
     var isShowingAnswerText: Bool = false
     var questionStore: QuestionFolderStore? = nil
     var question: Question? = nil
+    var isEmptyAnswerText: Bool = false
     
     lazy var editButton: UIBarButtonItem = {
         UIBarButtonItem(title: "편집", style: .done, target: self, action: #selector(tapEditBtn))
@@ -24,10 +25,11 @@ class MainDetailViewController: UIViewController {
     lazy var saveButton: UIBarButtonItem = {
         UIBarButtonItem(title: "저장", style: .done, target: self, action: #selector(tapSaveBtn))
     }()
-  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = self.editButton
+        isEmptyAnswerText = question?.answer == ""
         
         questionText.numberOfLines = 0
         questionText.text = question?.question
@@ -35,11 +37,11 @@ class MainDetailViewController: UIViewController {
         
         answerText.numberOfLines = 0
         answerText.sizeToFit()
-        answerText.text = question?.answer
+        answerText.text = isEmptyAnswerText ? "답변을 입력해주세요." : question?.answer
+        answerText.textColor = isEmptyAnswerText ? .lightGray : .black
         answerText.font = .systemFont(ofSize: 17)
-        
-        // MARK: 예의주시
         answerText.setLineSpacing(spacing: 4)
+        
         
         answerTextField.layer.isHidden = true
         answerTextField.font = .systemFont(ofSize: 17)
@@ -49,7 +51,7 @@ class MainDetailViewController: UIViewController {
     
     @objc func tapEditBtn() {
         answerText.layer.isHidden.toggle()
-        answerTextField.text = answerText.text
+        answerTextField.text = isEmptyAnswerText ? "" : answerText.text
         answerTextField.layer.isHidden.toggle()
         answerTextField.becomeFirstResponder()
         self.navigationItem.rightBarButtonItem = self.saveButton
@@ -58,24 +60,28 @@ class MainDetailViewController: UIViewController {
         } else {
             answerTextField.textContainerInset = UIEdgeInsets(top: 13, left: 17, bottom: 180, right: 20)
         }
-//  heightAnchor: 세로 넓이를 강제로 조절하는 것으로 추정됨
-//            answerTextField.heightAnchor.constraint(equalToConstant: 300).isActive = true
-//            answerTextField.layoutIfNeeded()
-//            answerTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
-//        UIView.animate( // 키보드 올라올 때
-//            withDuration: 0.4
-//            , animations: {
-//                self.view.transform = CGAffineTransform(translationX: 0, y: -150) // view 위로 밀림
-//            }
-//        )
+        //  heightAnchor: 세로 넓이를 강제로 조절하는 것으로 추정됨
+        //            answerTextField.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        //            answerTextField.layoutIfNeeded()
+        //            answerTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        //        UIView.animate( // 키보드 올라올 때
+        //            withDuration: 0.4
+        //            , animations: {
+        //                self.view.transform = CGAffineTransform(translationX: 0, y: -150) // view 위로 밀림
+        //            }
+        //        )
         
     }
     
     @objc func tapSaveBtn() {
-        answerText.layer.isHidden.toggle()
-        answerTextField.layer.isHidden.toggle()
-        answerText.text = answerTextField.text
+        isEmptyAnswerText = answerTextField.text == ""
         self.navigationItem.rightBarButtonItem = self.editButton
+        
+        answerText.layer.isHidden.toggle()
+        answerText.text = isEmptyAnswerText ? "답변을 입력해주세요." : answerTextField.text
+        answerText.textColor = isEmptyAnswerText ? .lightGray : .black
+        
+        answerTextField.layer.isHidden.toggle()
         answerTextField.resignFirstResponder()
         
         let updateQuestion = Question()
@@ -94,13 +100,13 @@ class MainDetailViewController: UIViewController {
     }
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
 }
 
