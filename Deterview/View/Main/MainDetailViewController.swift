@@ -12,7 +12,7 @@ final class MainDetailViewController: UIViewController {
     private var isShowingAnswerText: Bool = false
     var questionStore: QuestionFolderStore?
     var question: Question?
-    
+    var isEmptyAnswerText: Bool = false    
     lazy var editButton: UIBarButtonItem = {
         UIBarButtonItem(title: "편집", style: .done, target: self, action: #selector(tapEditBtn))
     }()
@@ -38,6 +38,7 @@ final class MainDetailViewController: UIViewController {
     }
     
     private func configureUI() {
+        isEmptyAnswerText = question?.answer == ""
         configureQuestionText()
         configureAnswerText()
         configureTextField()
@@ -53,7 +54,8 @@ final class MainDetailViewController: UIViewController {
     private func configureAnswerText() {
         answerText.numberOfLines = 0
         answerText.sizeToFit()
-        answerText.text = question?.answer
+        answerText.text = isEmptyAnswerText ? "답변을 입력해주세요." : question?.answer
+        answerText.textColor = isEmptyAnswerText ? .lightGray : .black
         answerText.font = .systemFont(ofSize: 17)
         answerText.setLineSpacing(spacing: 4)
     }
@@ -73,7 +75,7 @@ final class MainDetailViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = self.saveButton
         
         answerText.layer.isHidden.toggle()
-        answerTextField.text = answerText.text
+        answerTextField.text = isEmptyAnswerText ? "" : answerText.text
         answerTextField.layer.isHidden.toggle()
         answerTextField.becomeFirstResponder()
         
@@ -85,10 +87,13 @@ final class MainDetailViewController: UIViewController {
     }
     
     @objc func tapSaveBtn() {
+        isEmptyAnswerText = answerTextField.text == ""
         self.navigationItem.rightBarButtonItem = self.editButton
-
+        
         answerText.layer.isHidden.toggle()
-        answerText.text = answerTextField.text
+        answerText.text = isEmptyAnswerText ? "답변을 입력해주세요." : answerTextField.text
+        answerText.textColor = isEmptyAnswerText ? .lightGray : .black
+        
         answerTextField.layer.isHidden.toggle()
         answerTextField.resignFirstResponder()
         

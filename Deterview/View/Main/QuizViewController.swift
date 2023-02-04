@@ -77,6 +77,9 @@ class QuizViewController: UIViewController {
             let retry = UIAlertAction(title: "다시 풀기", style: .default) {_ in
                 self.questionArr = Array(self.questionList)
                 self.generateRandomQuestion()
+                self.placeholderText.isHidden = false
+                self.answerText.isHidden = true
+                
             }
             alert.addAction(close)
             alert.addAction(retry)
