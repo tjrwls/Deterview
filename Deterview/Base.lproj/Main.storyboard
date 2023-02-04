@@ -140,9 +140,9 @@
                                         <color key="tintColor" systemColor="systemOrangeColor"/>
                                         <size key="customSize" width="373" height="100"/>
                                         <connections>
-                                            <outlet property="cardBtn" destination="BF7-1h-LaW" id="Jym-Tk-Iba"/>
-                                            <outlet property="countofQuestion" destination="Gwx-Gq-WAx" id="q1t-MN-77J"/>
-                                            <outlet property="movequizBtn" destination="tbt-In-RCH" id="uuP-sk-NyR"/>
+                                            <outlet property="countOfQuestion" destination="Gwx-Gq-WAx" id="q1t-MN-77J"/>
+                                            <outlet property="folderBtn" destination="BF7-1h-LaW" id="Jym-Tk-Iba"/>
+                                            <outlet property="quizBtn" destination="tbt-In-RCH" id="uuP-sk-NyR"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -150,10 +150,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="393" height="20"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionReusableView>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="KGc-bt-tn5"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="6yN-Hh-Syn"/>
-                                </connections>
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

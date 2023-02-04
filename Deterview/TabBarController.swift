@@ -15,4 +15,3 @@ class TabBarController: UITabBarController {
         self.tabBar.tintColor = UIColor(named: "mainColor")
     }
 }
-

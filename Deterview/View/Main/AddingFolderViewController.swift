@@ -12,7 +12,6 @@ class AddingFolderViewController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
 
     /*
     // MARK: - Navigation

@@ -51,7 +51,6 @@ class TemplateData: QuestionFolderStore {
     "Callback을 왜 사용하는지 설명해 주세요.",
     "모듈 패턴과 전통적 상속, 각각의 장단점을 설명해 주세요."]
 
-
     let iosQuesitons: [String] = ["Bounds와 Frame의 차이점을 설명해 주세요.",
     "상태 변화에 따라 다른 동작을 처리하기 위한 앱델리게이트 메서드들을 설명해 주세요.",
     "GCD API 동작 방식과 필요성에 대해 설명해 주세요.",
@@ -164,8 +163,6 @@ class TemplateData: QuestionFolderStore {
     "Android Process와 Thread에 대한 설명해주세요."
     ]
 
-    
-
     func createdTemplateData() {
         let questionFolders: [(String, [String])] = [("CS", csQuestion), ("iOS", iosQuesitons), ("AOS", androidQuestion), ("Front-End", frontEndQuestions)]
         for folder in questionFolders {
@@ -182,11 +179,10 @@ class TemplateData: QuestionFolderStore {
                 let newQuestion = Question()
                 newQuestion.question = question
                 newQuestion.id = UUID().uuidString
-                try? realm.write{
+                try? realm.write {
                     questionFolder.questionList.append(newQuestion)
                 }
             }
         }
     }
 }
-

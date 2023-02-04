@@ -12,6 +12,7 @@ class QuizViewController: UIViewController {
     var questionList: List<Question> = List<Question>()
     var questionArr: [Question] = []
     var folderName: String = ""
+    
     @IBOutlet weak var questionText: UILabel!
     @IBOutlet weak var answerText: UILabel!
     @IBOutlet weak var nextQuizBtn: UIButton!
@@ -20,6 +21,19 @@ class QuizViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNavigationBar()
+        setLayout()
+        
+        questionArr = Array(questionList)
+        generateRandomQuestion()
+    }
+    
+    private func setNavigationBar() {
+        navigationItem.title = folderName
+        navigationItem.largeTitleDisplayMode = .never
+    }
+    
+    private func setLayout() {
         questionText.numberOfLines = 0
         questionText.font = .systemFont(ofSize: 24)
         
@@ -36,12 +50,17 @@ class QuizViewController: UIViewController {
         nextQuizBtn.setFontStyle(size: 20, weight: .bold)
         nextQuizBtn.backgroundColor = UIColor(named: "mainColor")
         nextQuizBtn.tintColor = .white
-        
-        navigationItem.title = folderName
-        navigationItem.largeTitleDisplayMode = .never
-
-        questionArr = Array(questionList)
-        generateRandomQuestion()
+    }
+    
+    private func generateRandomQuestion() {
+        if !questionArr.isEmpty {
+            let question = self.questionArr.randomElement()
+            self.questionText.text = question?.question
+            self.answerText.text = question?.answer
+            self.questionArr.remove(at: questionArr.firstIndex(where: {
+                $0.id == question?.id
+            }) ?? 0)
+        }
     }
     
     @IBAction func tapAnswerView(_ sender: UIGestureRecognizer) {
@@ -70,17 +89,6 @@ class QuizViewController: UIViewController {
             placeholderText.isHidden = false
             answerText.isHidden = true
             generateRandomQuestion()
-        }
-    }
-    
-    func generateRandomQuestion() {
-        if !questionArr.isEmpty {
-            let question = self.questionArr.randomElement()
-            self.questionText.text = question?.question
-            self.answerText.text = question?.answer
-            self.questionArr.remove(at: questionArr.firstIndex(where: {
-                $0.id == question?.id
-            }) ?? 0)
         }
     }
 }
