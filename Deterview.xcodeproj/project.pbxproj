@@ -33,6 +33,7 @@
 		618370C129366BF3002D36A7 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618370C029366BF3002D36A7 /* MainViewController.swift */; };
 		61850B52296C5A50008B8B89 /* SelectedQuestionFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61850B51296C5A50008B8B89 /* SelectedQuestionFolderViewController.swift */; };
 		61A8D92D296C6B7700A4F8AC /* SelectedListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A8D92C296C6B7700A4F8AC /* SelectedListViewController.swift */; };
+		61D12F56298E4757006139A4 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 61D12F55298E4757006139A4 /* .swiftlint.yml */; };
 		E6B763C4C2EEC9929E1929BB /* Pods_Deterview.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F291B2AACAA19A5F1DC413DC /* Pods_Deterview.framework */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +67,7 @@
 		618370C029366BF3002D36A7 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		61850B51296C5A50008B8B89 /* SelectedQuestionFolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedQuestionFolderViewController.swift; sourceTree = "<group>"; };
 		61A8D92C296C6B7700A4F8AC /* SelectedListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedListViewController.swift; sourceTree = "<group>"; };
+		61D12F55298E4757006139A4 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		7A0F561E213315B14B92D828 /* Pods-Deterview.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Deterview.debug.xcconfig"; path = "Target Support Files/Pods-Deterview/Pods-Deterview.debug.xcconfig"; sourceTree = "<group>"; };
 		F291B2AACAA19A5F1DC413DC /* Pods_Deterview.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Deterview.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -122,7 +124,7 @@
 		61513F6E29350A5200ABE647 = {
 			isa = PBXGroup;
 			children = (
-				236B4856298E476100695BF1 /* .swiftlint.yml */,
+				61D12F55298E4757006139A4 /* .swiftlint.yml */,
 				61513F7929350A5200ABE647 /* Deterview */,
 				61513F7829350A5200ABE647 /* Products */,
 				327EA7E748A915469580776D /* Pods */,
@@ -206,7 +208,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 61513F8B29350A5300ABE647 /* Build configuration list for PBXNativeTarget "Deterview" */;
 			buildPhases = (
-				236B4859298E4AC600695BF1 /* SwiftLint Script */,
+				61D12F54298E4626006139A4 /* SwiftLint Script */,
 				A1924007C0739FD712F43E4B /* [CP] Check Pods Manifest.lock */,
 				61513F7329350A5200ABE647 /* Sources */,
 				61513F7429350A5200ABE647 /* Frameworks */,
@@ -260,7 +262,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				236B4857298E476100695BF1 /* .swiftlint.yml in Resources */,
+				61D12F56298E4757006139A4 /* .swiftlint.yml in Resources */,
 				61513F8729350A5300ABE647 /* LaunchScreen.storyboard in Resources */,
 				61513F8429350A5300ABE647 /* Assets.xcassets in Resources */,
 				61513F8229350A5200ABE647 /* Main.storyboard in Resources */,
@@ -271,9 +273,8 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		236B4859298E4AC600695BF1 /* SwiftLint Script */ = {
+		61D12F54298E4626006139A4 /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);

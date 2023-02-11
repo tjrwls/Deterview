@@ -1,18 +1,11 @@
-
 disabled_rules:
-     - force_try
-     - force_cast
-     - trailing_whitespace
-     - line_length
-
+    - force_try
+    - force_cast
+    - trailing_whitespace
+    - line_length
 included:
-    - Deterview/View/Custom
-    
-# SwiftLint 검사에서 제외할 파일 경로
+
 excluded:
     - Pods
-#    - Deterview
-    
-    
-
+    - Deterview/View/Custom
 
