@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SgI-ZQ-tUx">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tab Bar Controller-->
+        <scene sceneID="edv-Ql-gFu">
+            <objects>
+                <tabBarController storyboardIdentifier="TabBarController" id="SgI-ZQ-tUx" customClass="TabBarController" customModule="Deterview" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ajq-yh-WgN">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="bhF-Vz-mff" kind="relationship" relationship="viewControllers" id="GXb-jK-y3h"/>
+                        <segue destination="Ibq-aU-kbu" kind="relationship" relationship="viewControllers" id="v5c-Gk-U1L"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ll2-TP-7Fz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-671" y="-205"/>
+        </scene>
+        <!--main-->
+        <scene sceneID="dYS-2n-P01">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bhF-Vz-mff" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="main" image="rectangle.on.rectangle.angled" catalog="system" selectedImage="rectangle.on.rectangle.angled" id="UDN-jC-Rrj"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" largeTitles="YES" id="rFy-NY-Ok9">
+                        <rect key="frame" x="0.0" y="59" width="393" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" systemColor="tintColor"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <navigationBarAppearance key="standardAppearance">
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </navigationBarAppearance>
+                        <navigationBarAppearance key="scrollEdgeAppearance">
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </navigationBarAppearance>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="920-qj-O98" kind="relationship" relationship="rootViewController" id="vcH-kE-g8u"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lde-Zd-ybO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1144" y="558"/>
+        </scene>
+        <!--MainViewController-->
+        <scene sceneID="YDw-Un-TRw">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MainViewController" referencedIdentifier="MainViewController" id="920-qj-O98" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="g0E-iS-FNj"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yje-B6-bRW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1144" y="983"/>
+        </scene>
+        <!--CustomViewController-->
+        <scene sceneID="Puv-kc-d69">
+            <objects>
+                <viewControllerPlaceholder storyboardName="CustomViewController" referencedIdentifier="CustomViewController" id="ZVy-uM-IYE" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="EXm-uq-N2F"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AqH-62-ZQt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-309" y="982"/>
+        </scene>
+        <!--Custom-->
+        <scene sceneID="SLP-kf-YQX">
+            <objects>
+                <navigationController title="Custom" automaticallyAdjustsScrollViewInsets="NO" id="Ibq-aU-kbu" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="custom" image="folder.badge.person.crop" catalog="system" selectedImage="folder.badge.person.crop" id="l9K-0h-veD"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" largeTitles="YES" id="Va9-Ke-s0Y">
+                        <rect key="frame" x="0.0" y="59" width="393" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" systemColor="tintColor"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <navigationBarAppearance key="standardAppearance">
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </navigationBarAppearance>
+                        <navigationBarAppearance key="scrollEdgeAppearance">
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </navigationBarAppearance>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ZVy-uM-IYE" kind="relationship" relationship="rootViewController" id="6qf-sm-SKv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8ga-dR-6LG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-309" y="558"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="folder.badge.person.crop" catalog="system" width="128" height="92"/>
+        <image name="rectangle.on.rectangle.angled" catalog="system" width="128" height="98"/>
+        <systemColor name="tintColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

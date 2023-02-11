@@ -22,11 +22,9 @@ final class MainViewController: UIViewController {
         configureUI()
         questionStore.readQuestionFolder()
         if questionStore.mainQuestionFolders.isEmpty {
-            print("isEmpty\(questionStore.mainQuestionFolders)")
             templateData.createdTemplateData()
             questionStore.readQuestionFolder()
         }
-        print("no\(questionStore.mainQuestionFolders)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
