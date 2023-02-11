@@ -9,8 +9,8 @@ import Foundation
 import RealmSwift
 
 class QuestionFolder: Object {
-    @objc dynamic var id: String = ""
-    @objc dynamic var folderName: String = ""
-    @objc dynamic var category: String = ""
-    var questionList = List<Question>()
+    @Persisted var id: String = ""
+    @Persisted var folderName: String = ""
+    @Persisted var category: String = ""
+    @Persisted var questionList = List<Question>()
 }

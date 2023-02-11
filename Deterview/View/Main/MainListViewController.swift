@@ -8,36 +8,47 @@
 import UIKit
 
 final class MainListViewController: UIViewController {
+    // MARK: - Properties
+    @IBOutlet weak var questionTableView: UITableView!
+    
     var questionStore: QuestionFolderStore?
     var questionFolder: QuestionFolder?
     
-    @IBOutlet weak var questionTableView: UITableView!
-    
+    // MARK: - Lifecycle Method
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureUI()
+    }
+    
+    // MARK: - Methods
+    private func configureUI() {
+        configureQuestionTableView()
+        self.navigationItem.title = questionFolder?.folderName
+    }
+    
+    private func configureQuestionTableView() {
         questionTableView.delegate = self
         questionTableView.dataSource = self
-        
-        self.navigationItem.title = questionFolder?.folderName
     }
 }
 
+// MARK: - TableView DataSource
 extension MainListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return questionFolder?.questionList.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MainTableCell", for: indexPath) as?
-        MainTableCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MainTableCell", for: indexPath) as? MainTableCell else {
             return UITableViewCell()
         }
-        
         cell.question.text = questionFolder?.questionList[indexPath.item].question
+        
         return cell
     }
 }
 
+// MARK: - TableView Delegate
 extension MainListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let viewController = self.storyboard?.instantiateViewController(identifier: "MainDetailViewController") as? MainDetailViewController else { return }
@@ -50,6 +61,7 @@ extension MainListViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - MainTableCell
 final class MainTableCell: UITableViewCell {
     @IBOutlet weak var question: UILabel!
 }

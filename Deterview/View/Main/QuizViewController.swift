@@ -28,6 +28,7 @@ class QuizViewController: UIViewController {
         generateRandomQuestion()
     }
     
+    // MARK: - Methods
     private func setNavigationBar() {
         navigationItem.title = folderName
         navigationItem.largeTitleDisplayMode = .never
