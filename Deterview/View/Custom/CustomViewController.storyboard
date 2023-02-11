@@ -150,14 +150,14 @@
                                         <gestureRecognizers/>
                                         <size key="customSize" width="373" height="100"/>
                                         <connections>
-                                            <outlet property="cardBtn" destination="hWB-o8-cHV" id="e4S-EC-bUz"/>
                                             <outlet property="checkMark" destination="052-3B-vRe" id="RV0-OO-fJE"/>
-                                            <outlet property="countofQuestion" destination="C4O-DG-FUW" id="4Hf-Xr-Jke"/>
+                                            <outlet property="countOfQuestion" destination="C4O-DG-FUW" id="Rse-zz-uGJ"/>
                                             <outlet property="editFolderNameBtn" destination="f7f-6I-TCw" id="FdD-rB-p7E"/>
                                             <outlet property="editFolderNameImage" destination="ikA-jE-hMI" id="N0m-HQ-ucj"/>
                                             <outlet property="editView" destination="EE8-Zh-cs2" id="xs7-s1-qwQ"/>
-                                            <outlet property="forderNameText" destination="Ek0-vr-ELb" id="ryS-PS-HgT"/>
-                                            <outlet property="movequizBtn" destination="WE5-KO-R7x" id="Cit-VL-OK4"/>
+                                            <outlet property="folderBtn" destination="hWB-o8-cHV" id="wZW-8l-oEd"/>
+                                            <outlet property="folderNameText" destination="Ek0-vr-ELb" id="lwA-pC-0fM"/>
+                                            <outlet property="quizBtn" destination="WE5-KO-R7x" id="A4e-ub-8at"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

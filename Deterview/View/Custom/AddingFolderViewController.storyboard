@@ -42,7 +42,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ruj-ZP-MAG">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ruj-ZP-MAG" userLabel="Cancel Btn">
                                         <rect key="frame" x="0.0" y="8" width="75" height="41"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="rZZ-Zh-3eK"/>
@@ -50,7 +50,7 @@
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                         <connections>
-                                            <action selector="tabCancleBtn:" destination="jgp-3C-5Qi" eventType="touchUpInside" id="orU-ep-z5Y"/>
+                                            <action selector="tabCancelBtn:" destination="jgp-3C-5Qi" eventType="touchUpInside" id="cEa-4A-iKF"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DFO-k1-8a3">
@@ -94,12 +94,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="AQJ-RI-BhW"/>
                     <connections>
-                        <outlet property="cancleBtn" destination="ruj-ZP-MAG" id="NpI-aR-TD4"/>
+                        <outlet property="cancelBtn" destination="ruj-ZP-MAG" id="OFD-Af-94p"/>
+                        <outlet property="folderNameSaveBtn" destination="8QJ-GV-bdc" id="dvl-HZ-YWS"/>
                         <outlet property="folderNameTextField" destination="e0g-HU-VmQ" id="T2P-KN-CPi"/>
                         <outlet property="guideText" destination="5Ef-AX-SZE" id="x2b-QZ-1YE"/>
                         <outlet property="limitTextLengthMessage" destination="DFO-k1-8a3" id="Td8-IS-pqY"/>
                         <outlet property="modalView" destination="CeF-MA-l8n" id="Lyc-OD-hx4"/>
-                        <outlet property="saveFolderNameBtn" destination="8QJ-GV-bdc" id="IxC-iD-aYO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ORL-Hl-HVc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
