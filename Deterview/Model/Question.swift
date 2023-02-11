@@ -9,8 +9,8 @@ import Foundation
 import RealmSwift
 
 class Question: Object {
-    @objc dynamic var id: String = ""
-    @objc dynamic var question: String = ""
-    @objc dynamic var answer: String = ""
+    @Persisted var id: String = ""
+    @Persisted var question: String = ""
+    @Persisted var answer: String = ""
     var parentCategory = LinkingObjects(fromType: QuestionFolder.self, property: "questionList")
 }

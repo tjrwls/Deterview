@@ -8,7 +8,7 @@
 import Foundation
 
 class TemplateData: QuestionFolderStore {
-    
+    // MARK: - Properties
     let frontEndQuestions: [String] = ["브라우저의 동작 원리를 간단하게 설명해 주세요.",
     "CORS가 무엇이며 어떻게 해결을 할 수 있는지 설명해 주세요.",
      "크로스 브라우징이 무엇인가요?",
@@ -162,7 +162,8 @@ class TemplateData: QuestionFolderStore {
     "Android enum을 자제시키는 이유는 무엇일까요?",
     "Android Process와 Thread에 대한 설명해주세요."
     ]
-
+    
+    // MARK: - Methods
     func createdTemplateData() {
         let questionFolders: [(String, [String])] = [("CS", csQuestion), ("iOS", iosQuesitons), ("AOS", androidQuestion), ("Front-End", frontEndQuestions)]
         for folder in questionFolders {

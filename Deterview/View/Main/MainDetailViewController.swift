@@ -8,11 +8,18 @@
 import UIKit
 
 final class MainDetailViewController: UIViewController {
+    // MARK: - Properties
+    @IBOutlet weak var answerText: UILabel!
+    @IBOutlet weak var questionText: UILabel!
+    @IBOutlet weak var answerTextField: UITextView!
+    
     private var isShowingAnswerTextField: Bool = false
     private var isShowingAnswerText: Bool = false
+    private var isEmptyAnswerText: Bool = false
+    
     var questionStore: QuestionFolderStore?
     var question: Question?
-    var isEmptyAnswerText: Bool = false    
+    
     lazy var editButton: UIBarButtonItem = {
         UIBarButtonItem(title: "편집", style: .done, target: self, action: #selector(tapEditBtn))
     }()
@@ -20,15 +27,12 @@ final class MainDetailViewController: UIViewController {
         UIBarButtonItem(title: "저장", style: .done, target: self, action: #selector(tapSaveBtn))
     }()
     
-    @IBOutlet weak var answerText: UILabel!
-    @IBOutlet weak var questionText: UILabel!
-    @IBOutlet weak var answerTextField: UITextView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
     }
     
+    // MARK: - Methods
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         if Int(self.view.window?.windowScene?.screen.bounds.width ?? 0) < Int(view.window?.windowScene?.screen.bounds.height ?? 0) {
             answerTextField.textContainerInset = UIEdgeInsets(top: 13, left: 17, bottom: 260, right: 20)

@@ -9,11 +9,12 @@ import Foundation
 import RealmSwift
 
 class QuestionFolderStore {
+    // MARK: - Properties
     var mainQuestionFolders: [QuestionFolder] = []
     var customQuestionFolders: [QuestionFolder] = []
     let realm = try! Realm()
     
-    // MARK: 폴더 추가하기
+    // MARK: - Methods
     func createdQuestionFolder(_ questionFolder: QuestionFolder) {
         let createFolder = QuestionFolder()
         createFolder.id = UUID().uuidString
@@ -24,14 +25,12 @@ class QuestionFolderStore {
         }
     }
     
-    // MARK: 플더 불러오기
     func readQuestionFolder() {
         let folderData = self.realm.objects(QuestionFolder.self)
         mainQuestionFolders = Array(folderData).filter { $0.category == "Main" }
         customQuestionFolders = Array(folderData).filter { $0.category == "Custom" }
     }
     
-    // MARK: 플더 수정하기
     func updateQuestionFolder(id: String, name: String) {
         if let questionFolder = realm.objects(QuestionFolder.self).filter(NSPredicate(format: "id = %@", id)).first {
             try? realm.write {
@@ -40,7 +39,6 @@ class QuestionFolderStore {
         }
     }
     
-    // MARK: 플더 삭제하기
     func deleteQuestionFolder(_ id: String) {
         if let questionFolder = realm.objects(QuestionFolder.self).filter(NSPredicate(format: "id = %@", id)).first {
             try? realm.write {
@@ -49,7 +47,6 @@ class QuestionFolderStore {
         }
     }
     
-    // MARK: 문제 추가하기
     func createdQuestion(id: String, addQuestion: String) {
         if let questionFolder = realm.objects(QuestionFolder.self).filter(NSPredicate(format: "id = %@", id)).first {
             let question = Question()
@@ -61,7 +58,6 @@ class QuestionFolderStore {
         }
     }
     
-    // MARK: 문제 수정하기
     func updateQuestion(updateQuestion: Question) {
         if let question = realm.objects(Question.self).filter(NSPredicate(format: "id = %@", updateQuestion.id)).first {
             try? realm.write {
@@ -71,7 +67,6 @@ class QuestionFolderStore {
         }
     }
         
-    // MARK: 문제 삭제하기
     func deleteQuestion(_ id: String) {
         if let question = realm.objects(Question.self).filter(NSPredicate(format: "id = %@", id)).first {
             try? realm.write {
@@ -80,7 +75,6 @@ class QuestionFolderStore {
         }
     }
     
-    // MARK: 문제 불러오기
     func loadQuestion(folderId: String, question: String, answer: String) {
         if let questionFolder = realm.objects(QuestionFolder.self).filter(NSPredicate(format: "id = %@", folderId)).first {
                 let addQuestion = Question()

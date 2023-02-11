@@ -11,7 +11,6 @@ import UIKit
 extension UILabel {
     func setLineSpacing(spacing: CGFloat) {
         guard let text = text else { return }
-        
         let attributeString = NSMutableAttributedString(string: text)
         let style = NSMutableParagraphStyle()
         style.lineSpacing = spacing

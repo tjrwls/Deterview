@@ -8,7 +8,8 @@
 import UIKit
 import RealmSwift
 
-final class MainViewController: UIViewController, UICollectionViewDelegate {
+final class MainViewController: UIViewController {
+    // MARK: - Properties
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var navigationCoverView: UIView!
     
@@ -26,18 +27,19 @@ final class MainViewController: UIViewController, UICollectionViewDelegate {
         }
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        if let flowLayout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.invalidateLayout()
-        }
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         if let flowLayout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.invalidateLayout()
         }
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if let flowLayout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.invalidateLayout()
+        }
+    }
+    
+    // MARK: - Methods
     private func configureUI() {
         self.view.backgroundColor = UIColor.systemGray6
         navigationCoverView.backgroundColor = UIColor.systemGray6
@@ -56,7 +58,8 @@ final class MainViewController: UIViewController, UICollectionViewDelegate {
         collectionView.backgroundColor = UIColor.systemGray6
     }
 }
-// MARK: CollectionViewDataSource
+
+// MARK: - CollectionView DataSource
 extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return questionStore.mainQuestionFolders.count
@@ -107,7 +110,12 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - CollectionView Delegate
+extension MainViewController: UICollectionViewDelegate {}
+
+// MARK: - MainCardListCell
 final class MainCardListCell: UICollectionViewCell {
+    // MARK: - Properties
     @IBOutlet weak var folderBtn: UIButton!
     @IBOutlet weak var quizBtn: UIButton!
     @IBOutlet weak var countOfQuestion: UILabel!
@@ -115,6 +123,7 @@ final class MainCardListCell: UICollectionViewCell {
     var moveToListMethod: (() -> Void)?
     var moveToQuizMethod: (() -> Void)?
     
+    // MARK: - Methods
     @IBAction func tapCardBtn(_ sender: Any) {
         moveToListMethod?()
     }
