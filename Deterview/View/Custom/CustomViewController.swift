@@ -30,7 +30,7 @@ final class CustomViewController: UIViewController {
             }
         }
     }
-    
+    // TODO: 질문
     lazy var menuBtn: UIBarButtonItem = {
         UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .done, target: self, action: #selector(tapMenuBtn))
     }()
@@ -94,10 +94,14 @@ final class CustomViewController: UIViewController {
     
     private func configureUI() {
         self.view.backgroundColor = UIColor.systemGray6
+        navigationCoverView.backgroundColor = UIColor.systemGray6
+        configureNavigation()
+        configureCustomCollectionView()
+    }
+    
+    private func configureNavigation() {
         self.navigationItem.rightBarButtonItem = self.menuBtn
         menuBtn.tintColor = .black
-        navigationCoverView.backgroundColor = UIColor.systemGray6
-        configureCustomCollectionView()
     }
     
     private func configureCustomCollectionView() {
@@ -124,27 +128,34 @@ final class CustomViewController: UIViewController {
     }
     
     @objc func tapDeleteBtn() {
-        let alert = UIAlertController(title: "삭제", message: "폴더를 삭제하시겠습니까?", preferredStyle: .alert)
-        let close = UIAlertAction(title: "취소", style: .default) {_ in
-            self.navigationController?.popViewController(animated: true)
-        }
-        let retry = UIAlertAction(title: "삭제", style: .destructive) {_ in
-            for (key, value) in self.dictionarySelectedIndexPath where value {
+        if dictionarySelectedIndexPath.filter({$0.1 == true}).count != 0 {
+            let alert = UIAlertController(title: "삭제", message: "폴더를 삭제하시겠습니까?", preferredStyle: .alert)
+            let close = UIAlertAction(title: "취소", style: .default) {_ in
+                self.navigationController?.popViewController(animated: true)
+            }
+            let retry = UIAlertAction(title: "삭제", style: .destructive) {_ in
+                for (key, value) in self.dictionarySelectedIndexPath where value {
                     let id: String = self.questionStore.customQuestionFolders[key.row].id
                     self.questionStore.deleteQuestionFolder(id)
+                }
+                self.dictionarySelectedIndexPath.removeAll()
+                self.questionStore.readQuestionFolder()
+                self.customCollectionView.reloadSections([0])
+                self.editMode = .view
             }
-            self.dictionarySelectedIndexPath.removeAll()
-            self.questionStore.readQuestionFolder()
-            self.customCollectionView.reloadSections([0])
-            self.editMode = .view
-            self.navigationItem.rightBarButtonItem = self.menuBtn
-            self.navigationItem.leftBarButtonItem = nil
+            alert.addAction(close)
+            alert.addAction(retry)
+            
+            self.present(alert, animated: false)
+        } else {
+            // TODO: alert으로 할지 버튼 비활성화로 할지
+//            let alert = UIAlertController(title: "삭제", message: "삭제할 폴더가 없습니다.", preferredStyle: .alert)
+//            let close = UIAlertAction(title: "확인", style: .default) {_ in
+//                self.navigationController?.popViewController(animated: true)
+//            }
+//            alert.addAction(close)
+//            self.present(alert, animated: false)
         }
-        
-        alert.addAction(close)
-        alert.addAction(retry)
-        
-        self.present(alert, animated: false)
     }
 }
 
@@ -228,13 +239,21 @@ extension CustomViewController: UICollectionViewDataSource {
         return cell
     }
     
-    // 셀이 선택되었을 때
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch editMode {
         case .view:
             break
         case .select:
             dictionarySelectedIndexPath[indexPath] = true
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        switch editMode {
+        case .view:
+            break
+        case .select:
+            dictionarySelectedIndexPath[indexPath] = false
         }
     }
 }
