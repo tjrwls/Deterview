@@ -8,64 +8,50 @@
 import UIKit
 
 class EditingFolderNameViewController: UIViewController {
-    var questionStore: QuestionFolderStore? = nil
-    var viewController: CustomViewController? = nil
-    var questionFolder: QuestionFolder? = nil
-    var folderNameTextLength: Int {
-        folderNameTextField.text?.count ?? 0
-    }
-
+    // MARK: - Properties
     @IBOutlet weak var folderNameTextField: UITextField!
-    @IBOutlet weak var cancleBtn: UIButton!
+    @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var modalView: UIView!
     @IBOutlet weak var saveFolderNameBtn: UIButton!
     @IBOutlet weak var guideText: UILabel!
     @IBOutlet weak var limitTextLengthMessage: UILabel!
     
-    
+    private var folderNameTextLength: Int {
+        folderNameTextField.text?.count ?? 0
+    }
+    var questionStore: QuestionFolderStore?
+    var viewController: CustomViewController?
+    var questionFolder: QuestionFolder?
+
+    // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         super.viewDidLoad()
-        modalView.layer.cornerRadius = CGFloat(10)
-        guideText.text = "폴더 이름을 입력해주세요"
-        guideText.textAlignment = .center
-        cancleBtn.setTitle("취소", for: .normal)
-        
-        saveFolderNameBtn.setTitle("완료", for: .normal)
-        saveFolderNameBtn.layer.cornerRadius = 5
-        saveFolderNameBtn.backgroundColor = UIColor(.mainColor)
-        saveFolderNameBtn.setTitleColor(.white, for: .normal)
-        saveFolderNameBtn.titleLabel?.font = .systemFont(ofSize: 16)
-        
-        limitTextLengthMessage.text = "1~9자 이내로 입력해주세요."
-        limitTextLengthMessage.font = .systemFont(ofSize: 14)
-        limitTextLengthMessage.textColor = .gray
-        folderNameTextField.text = questionFolder?.folderName
-        
-        
+        configureUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.folderNameTextField.becomeFirstResponder()
         UIView.animate( // 키보드 올라올 때
-            withDuration: 0.1
-            , animations: {
-                if UIDevice.current.orientation.isLandscape{
+            withDuration: 0.1,
+            animations: {
+                if UIDevice.current.orientation.isLandscape {
                     self.view.transform = CGAffineTransform(translationX: 0, y: -150) // view 위로 밀림
-                }else{
+                } else {
                     self.view.transform = CGAffineTransform(translationX: 0, y: -300)
                 }
             })
     }
-    // MARK: 뷰회전시 View 위치 재조정
+    /// 뷰회전시 View 위치 재조정
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        if UIDevice.current.orientation.isLandscape{
+        if UIDevice.current.orientation.isLandscape {
             self.view.transform = CGAffineTransform(translationX: 0, y: -150)
-        }else{
+        } else {
             self.view.transform = CGAffineTransform(translationX: 0, y: -300)
         }
     }
 
+    // MARK: - Methods
     @IBAction func tapSaveBtn(_ sender: Any) {
         questionStore?.updateQuestionFolder(id: questionFolder?.id ?? ""
                                             , name: folderNameTextField.text ?? "")
@@ -78,9 +64,10 @@ class EditingFolderNameViewController: UIViewController {
         }
     }
     
-    @IBAction func tabCancleBtn(_ sender: Any) {
+    @IBAction func tabCancelBtn(_ sender: Any) {
         self.dismiss(animated: true)
     }
+    
     @IBAction func textFieldEditingChanged(_ sender: Any) {
         if viewController != nil { // 폴더 추가일 경우
             if folderNameTextLength > 0 && folderNameTextLength < 10 {
@@ -94,7 +81,7 @@ class EditingFolderNameViewController: UIViewController {
                 saveFolderNameBtn.setTitleColor(.systemGray3, for: .normal)
             }
         } else { // 질문 추가일 경우
-            if folderNameTextLength > 0  {
+            if folderNameTextLength > 0 {
                 saveFolderNameBtn.isEnabled = true
                 saveFolderNameBtn.backgroundColor = UIColor(.mainColor)
                 saveFolderNameBtn.setTitleColor(.white, for: .normal)
@@ -105,4 +92,33 @@ class EditingFolderNameViewController: UIViewController {
             }
         }
     }
+    
+    private func configureUI() {
+        modalView.layer.cornerRadius = CGFloat(10)
+        cancelBtn.setTitle("취소", for: .normal)
+        folderNameTextField.text = questionFolder?.folderName
+        configureGuideText()
+        configureSaveFolderNameBtn()
+        configureLimitTextLengthMessage()
+    }
+    
+    private func configureGuideText() {
+        guideText.text = "폴더 이름을 입력해주세요"
+        guideText.textAlignment = .center
+    }
+    
+    private func configureSaveFolderNameBtn() {
+        saveFolderNameBtn.setTitle("완료", for: .normal)
+        saveFolderNameBtn.layer.cornerRadius = 5
+        saveFolderNameBtn.backgroundColor = UIColor(.mainColor)
+        saveFolderNameBtn.setTitleColor(.white, for: .normal)
+        saveFolderNameBtn.titleLabel?.font = .systemFont(ofSize: 16)
+    }
+    
+    private func configureLimitTextLengthMessage() {
+        limitTextLengthMessage.text = "1~9자 이내로 입력해주세요."
+        limitTextLengthMessage.font = .systemFont(ofSize: 14)
+        limitTextLengthMessage.textColor = .gray
+    }
+
 }
