@@ -70,6 +70,9 @@
                                             <constraint firstItem="OBY-Vi-1ow" firstAttribute="top" secondItem="mdM-Op-Zoj" secondAttribute="top" constant="12.999999999999998" id="TgZ-fe-NwE"/>
                                             <constraint firstItem="f6k-4i-HyO" firstAttribute="leading" secondItem="mdM-Op-Zoj" secondAttribute="leading" constant="20" symbolic="YES" id="ku6-zM-bSz"/>
                                         </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="j5z-8F-vNp" appends="YES" id="bQK-H2-WHh"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -113,6 +116,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hxl-pB-KTU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="j5z-8F-vNp">
+                    <connections>
+                        <action selector="tapAnswerView:" destination="MAN-8w-H1Q" id="f4G-Og-pAt"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-1932.06106870229" y="1314.7887323943662"/>
         </scene>
