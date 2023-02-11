@@ -9,11 +9,13 @@
 /* Begin PBXBuildFile section */
 		230236F9294B649A00CB282B /* AddingFolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230236F8294B649A00CB282B /* AddingFolderViewController.swift */; };
 		230243A0293E3DEE00015082 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2302439F293E3DEE00015082 /* QuizViewController.swift */; };
+		230810A629977D940073476A /* Custom.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 230810A529977D940073476A /* Custom.storyboard */; };
 		233FAE23293A49880045521A /* QuestionFolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233FAE22293A49880045521A /* QuestionFolder.swift */; };
 		233FAE25293A498D0045521A /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233FAE24293A498C0045521A /* Question.swift */; };
 		233FAE27293A49920045521A /* TemplateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233FAE26293A49920045521A /* TemplateData.swift */; };
 		233FAE29293A55330045521A /* MainDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233FAE28293A55330045521A /* MainDetailViewController.swift */; };
 		233FAE2B293A67440045521A /* colorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233FAE2A293A67440045521A /* colorExtension.swift */; };
+		236B4857298E476100695BF1 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 236B4856298E476100695BF1 /* .swiftlint.yml */; };
 		2385C6112945C87C00B661FC /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2385C6102945C87C00B661FC /* UILabelExtension.swift */; };
 		2385C6132945C95500B661FC /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2385C6122945C95500B661FC /* UIButtonExtension.swift */; };
 		239537E22947600B006CAB9D /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239537E12947600B006CAB9D /* CustomViewController.swift */; };
@@ -50,11 +52,13 @@
 		0BF9B582937E4492485FE2D1 /* Pods-Deterview.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Deterview.release.xcconfig"; path = "Target Support Files/Pods-Deterview/Pods-Deterview.release.xcconfig"; sourceTree = "<group>"; };
 		230236F8294B649A00CB282B /* AddingFolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingFolderViewController.swift; sourceTree = "<group>"; };
 		2302439F293E3DEE00015082 /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
+		230810A529977D940073476A /* Custom.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Custom.storyboard; sourceTree = "<group>"; };
 		233FAE22293A49880045521A /* QuestionFolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionFolder.swift; sourceTree = "<group>"; };
 		233FAE24293A498C0045521A /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		233FAE26293A49920045521A /* TemplateData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemplateData.swift; sourceTree = "<group>"; };
 		233FAE28293A55330045521A /* MainDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDetailViewController.swift; sourceTree = "<group>"; };
 		233FAE2A293A67440045521A /* colorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = colorExtension.swift; sourceTree = "<group>"; };
+		236B4856298E476100695BF1 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		2385C6102945C87C00B661FC /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		2385C6122945C95500B661FC /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		239537E12947600B006CAB9D /* CustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +117,13 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		236B4858298E479600695BF1 /* Documents */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Documents;
+			sourceTree = "<group>";
+		};
 		2385C60F2945C81F00B661FC /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +171,9 @@
 				233FAE21293A49790045521A /* Model */,
 				61513F9C2935100300ABE647 /* View */,
 				2385C60F2945C81F00B661FC /* Extension */,
+				236B4858298E479600695BF1 /* Documents */,
+				61513F8029350A5200ABE647 /* Main.storyboard */,
+				230810A529977D940073476A /* Custom.storyboard */,
 				61513F8329350A5300ABE647 /* Assets.xcassets */,
 				61513F8529350A5300ABE647 /* LaunchScreen.storyboard */,
 				61513F8829350A5300ABE647 /* Info.plist */,
@@ -297,6 +311,7 @@
 				61647BE72997C83800F4D791 /* SelectedListViewController.storyboard in Resources */,
 				61647BD32997C67400F4D791 /* CustomViewController.storyboard in Resources */,
 				61647BE32997C81E00F4D791 /* EditingFolderNameViewController.storyboard in Resources */,
+				230810A629977D940073476A /* Custom.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

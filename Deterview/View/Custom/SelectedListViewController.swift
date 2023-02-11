@@ -7,33 +7,56 @@
 
 import UIKit
 
-class SelectedListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    var questionStore: QuestionFolderStore? = nil
-    var questionFolder: QuestionFolder? = nil
-    var addToFolderId: String = ""
-    var selectedIndex: [Int:Bool] = [:]
-    lazy var completeBtn: UIBarButtonItem = {
-        UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(tapSaveBtn))
-    }()
-
+final class SelectedListViewController: UIViewController {
+    // MARK: - Properties
     @IBOutlet weak var selectedListView: UITableView!
     
+    private var selectedIndex: [Int: Bool] = [:]
+    var questionStore: QuestionFolderStore?
+    var questionFolder: QuestionFolder?
+    var addToFolderId: String?
+//    lazy var completeBtn: UIBarButtonItem = {
+//        UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(tapSaveBtn))
+//    }()
+
+    // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = questionFolder?.folderName
-        selectedListView.delegate = self
-        selectedListView.dataSource = self
-        selectedListView.allowsMultipleSelection = false
-        
+        configureUI()
         questionFolder = questionStore?.mainQuestionFolders.filter {
             $0.id == questionFolder?.id
         }.first ?? QuestionFolder()
-        
-        completeBtn.isEnabled = false
-        self.navigationItem.rightBarButtonItem = self.completeBtn
-        // Do any additional setup after loading the view.
     }
     
+    // MARK: - Methods
+    private func configureUI() {
+        configureSelectedListView()
+        configureNavigation()
+    }
+    
+    private func configureSelectedListView() {
+        selectedListView.delegate = self
+        selectedListView.dataSource = self
+        selectedListView.allowsMultipleSelection = false
+    }
+    
+    private func configureNavigation() {
+        self.navigationItem.title = questionFolder?.folderName
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(tapSaveBtn))
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
+    }
+    
+    @objc func tapSaveBtn() {
+        for (key, value) in selectedIndex.sorted(by: { $0.key < $1.key}) where value {
+                let question = questionFolder?.questionList[key]
+            questionStore?.loadQuestion(folderId: addToFolderId ?? "", question: question?.question ?? "", answer: question?.answer ?? "")
+        }
+        self.dismiss(animated: true)
+    }
+}
+
+// MARK: - TableView DataSource
+extension SelectedListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return questionFolder?.questionList.count ?? 0
     }
@@ -49,7 +72,6 @@ class SelectedListViewController: UIViewController, UITableViewDelegate, UITable
         return cell
     }
     
-    //셀선택시
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if selectedIndex[indexPath.row] == true {
             selectedIndex[indexPath.row] = false
@@ -59,24 +81,21 @@ class SelectedListViewController: UIViewController, UITableViewDelegate, UITable
         let cell = selectedListView.cellForRow(at: indexPath) as! SelectedTableCell
         cell.isCheked.toggle()
         
-        completeBtn.isEnabled = selectedIndex.filter{ $0.value == true}.count > 0
-    }
-    
-    
-    @objc func tapSaveBtn() {
-        for (key,value) in selectedIndex.sorted(by: { $0.key < $1.key}) {
-            if value {
-                let question = questionFolder?.questionList[key]
-                questionStore?.loadQuestion(folderId: addToFolderId, question: question?.question ?? "", answer: question?.answer ?? "")
-            }
-        }
-        self.dismiss(animated: true)
+        self.navigationItem.rightBarButtonItem?.isEnabled = selectedIndex.filter { $0.value == true }.count > 0
     }
 }
 
-class SelectedTableCell: UITableViewCell {
+// MARK: - TableView Delegate
+extension SelectedListViewController: UITableViewDelegate {
+    
+}
+
+// MARK: - SelectedTable Cell
+final class SelectedTableCell: UITableViewCell {
+    // MARK: - Properties
     @IBOutlet weak var checkMark: UIImageView!
     @IBOutlet weak var question: UILabel!
+    
     var isCheked: Bool = false {
         didSet {
             if isCheked {
