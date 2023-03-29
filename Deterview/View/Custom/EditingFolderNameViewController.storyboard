@@ -42,7 +42,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="clx-oe-ONn">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="clx-oe-ONn" userLabel="Cancel Btn">
                                         <rect key="frame" x="0.0" y="8" width="75" height="41"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="85c-SP-tga"/>
@@ -50,7 +50,7 @@
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                         <connections>
-                                            <action selector="tabCancleBtn:" destination="shk-iE-DaK" eventType="touchUpInside" id="MVA-0B-dxk"/>
+                                            <action selector="tabCancelBtn:" destination="shk-iE-DaK" eventType="touchUpInside" id="xJn-yE-M9V"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CuY-8x-NiI">
@@ -94,7 +94,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="QLU-1e-Abh"/>
                     <connections>
-                        <outlet property="cancleBtn" destination="clx-oe-ONn" id="ZEo-8t-P5i"/>
+                        <outlet property="cancelBtn" destination="clx-oe-ONn" id="jIx-8M-5qp"/>
                         <outlet property="folderNameTextField" destination="3Kp-X6-alB" id="xX1-b8-0FD"/>
                         <outlet property="guideText" destination="H8I-bN-2Ir" id="wIu-Bh-Aqg"/>
                         <outlet property="limitTextLengthMessage" destination="CuY-8x-NiI" id="58T-RP-KSa"/>
